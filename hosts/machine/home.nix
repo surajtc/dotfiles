@@ -49,6 +49,7 @@
   };
 
   programs.git = {
+    enable = true;
     userName = variables.gitUserName;
     userEmail = variables.gitEmail;
   };
