@@ -1,0 +1,108 @@
+{
+  "bar.customModules.updates.pollingInterval": 1440000,
+  "theme.font.name": "Inter",
+  "theme.font.size": "1rem",
+  "theme.font.weight": 500,
+  "theme.bar.buttons.y_margins": "0.3em",
+  "theme.bar.outer_spacing": "1em",
+  "theme.bar.buttons.padding_x": "0.6rem",
+  "theme.bar.buttons.padding_y": "0.1rem",
+  "theme.bar.floating": false,
+  "theme.bar.margin_top": "0.5em",
+  "theme.bar.menus.monochrome": false,
+  "wallpaper.enable": false,
+  "theme.bar.opacity": 100,
+  "theme.bar.buttons.monochrome": false,
+  "bar.customModules.ram.label": true,
+  "bar.launcher.icon": "",
+  "bar.workspaces.show_icons": false,
+  "bar.workspaces.show_numbered": false,
+  "bar.workspaces.workspaces": 10,
+  "bar.layouts": {
+    "0": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "clock",
+        "weather"
+      ],
+      "right": [
+        "media",
+        "network",
+        "netstat",
+        "volume",
+        "bluetooth",
+        "battery",
+        "systray",
+        "notifications"
+      ]
+    },
+    "1": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "clock",
+        "weather"
+      ],
+      "right": [
+        "media",
+        "network",
+        "netstat",
+        "volume",
+        "bluetooth",
+        "battery",
+        "systray",
+        "notifications"
+      ]
+    },
+    "2": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "clock",
+        "weather"
+      ],
+      "right": [
+        "media",
+        "network",
+        "netstat",
+        "volume",
+        "bluetooth",
+        "battery",
+        "systray",
+        "notifications"
+      ]
+    }
+  },
+  "theme.bar.scaling": 100,
+  "theme.bar.menus.menu.power.scaling": 100,
+  "theme.bar.buttons.radius": "0.25em",
+  "bar.workspaces.numbered_active_indicator": "highlight",
+  "bar.workspaces.monitorSpecific": true,
+  "bar.workspaces.workspaceMask": false,
+  "bar.workspaces.hideUnoccupied": false,
+  "bar.windowtitle.icon": true,
+  "bar.clock.format": "%H:%M - %a %b %d",
+  "bar.clock.icon": "󰸗",
+  "bar.clock.showIcon": true,
+  "bar.clock.showTime": true,
+  "bar.customModules.netstat.label": true,
+  "bar.customModules.netstat.rateUnit": "MiB",
+  "bar.customModules.netstat.labelType": "in",
+  "bar.customModules.netstat.round": true,
+  "bar.customModules.weather.unit": "metric",
+  "menus.clock.weather.key": "437e69d2edaf449fa4b10619241609",
+  "menus.clock.weather.unit": "metric",
+  "menus.clock.weather.location": "20740",
+  "theme.bar.menus.border.size": "0.2em",
+  "theme.bar.menus.border.radius": "0.4em"
+}
