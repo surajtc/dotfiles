@@ -55,6 +55,8 @@ in {
 
       exec-once = [
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
         "${pkgs.hyprpanel}/bin/hyprpanel"
       ];
 
@@ -101,6 +103,8 @@ in {
         "${super},0,workspace,10"
         "${super},O,movewindow,mon:-1 silent"
         "${super_shift},O,swapactiveworkspaces, eDP-1 DP-3"
+        "${super},V,exec,cliphist list | rofi -dmenu | cliphist decode | wl-copy"
+        "${super_shift},P,exec,grim -g \"$(slurp -d)\" - | wl-copy"
       ];
 
       workspace = [
@@ -114,6 +118,9 @@ in {
         "float,initialTitle:^(Picture-in-Picture)$"
         "move 70% 8%,initialTitle:^(Picture-in-Picture)$"
         "size 25% 25%,initialTitle:^(Picture-in-Picture)$"
+
+        "float,class:^([Ff]irefox.*|[Bb]rave.*),initialTitle:^(Save File|Enter name of file to save.*|Open File|File Upload)$"
+        "center,class:^([Ff]irefox.*|[Bb]rave.*),initialTitle:^(Save File|Enter name of file to save.*|Open File|File Upload)$"
       ];
 
       misc = {

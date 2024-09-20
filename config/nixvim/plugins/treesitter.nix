@@ -8,7 +8,6 @@
           "bash"
           "c"
           "diff"
-          "html"
           "lua"
           "luadoc"
           "markdown"
@@ -16,22 +15,28 @@
           "query"
           "vim"
           "vimdoc"
+          "python"
+          "javascript"
+          "typescript"
+          "tsx"
+          "json"
+          "csv"
+          "html"
+          "css"
+          "nix"
         ];
 
         highlight = {
           enable = true;
-
-          additional_vim_regex_highlighting = true;
+          additional_vim_regex_highlighting = false;
         };
 
         indent = {
           enable = true;
-          disable = [
-            "ruby"
-          ];
+          disable = [];
         };
-
       };
     };
   };
 }
+

@@ -28,8 +28,7 @@
 
       have_nerd_font = true;
 
-      # disable netrw
-      loaded_netrw = 1;
+      # disable netrw loaded_netrw = 1;
       loaded_netrwPlugin = 1;
     };
 
@@ -48,6 +47,8 @@
       clipboard = {
         providers = {
           wl-copy.enable = true;
+          xclip.enable = true;
+          xclip.package = pkgs.wl-clipboard-x11;
         };
 
         register = "unnamedplus";
@@ -73,7 +74,8 @@
       splitbelow = true;
 
       list = true;
-      listchars.__raw = "{ tab = '⊣ ', trail = '∙', nbsp = '␣', multispace = '∙' }";
+      # listchars.__raw = "{ tab = '⊣ ', trail = '∙', nbsp = '␣', multispace = '∙' }";
+      listchars.__raw = "{ tab = '⊣ ', trail = '∙', nbsp = '␣' }";
 
       # guicursor = "{ 'n-v-c:block-Cursor/lCursor-blinkwait1000-blinkon0-blinkoff0', 'i-ci:block-Cursor/lCursor-blinkwait1000-blinkon100-blinkoff100', 'r:hor50-Cursor/lCursor-blinkwait100-blinkon100-blinkoff100' }";
 
@@ -143,6 +145,30 @@
           desc = "Move focus to the upper window";
         };
       }
+      {
+        mode = "n";
+        key = "<leader>ee";
+        action = "<cmd>Neotree toggle<CR>";
+        options = {
+          desc = "Neotr[E][E] Toggle";
+        };
+      }
+      {
+        mode = "n";
+        key = "[b";
+        action = "<cmd>bprev<CR>";
+        options = {
+          desc = "Previous buffer";
+        };
+      }
+      {
+        mode = "n";
+        key = "]b";
+        action = "<cmd>bnext<CR>";
+        options = {
+          desc = "Next buffer";
+        };
+      }
     ];
 
     autoGroups = {
@@ -164,24 +190,74 @@
       }
     ];
 
+    colorschemes.catppuccin = {
+      enable = true;
+      settings = {
+        no_italic = true;
+        custom_highlights = ''
+          function(colors)
+              return {
+              TelescopeBorder = {fg = colors.lavender}
+              }
+            end
+        '';
+      };
+    };
+
     plugins = {
       sleuth = {
         enable = true;
       };
 
+      indent-blankline = {
+        enable = true;
+        settings = {
+          indent.char = "▏";
+          scope.enabled = false;
+        };
+      };
+
+      web-devicons = {
+        enable = true;
+        settings = {
+          color_icons = false;
+        };
+      };
+
+      treesitter-context = {
+        enable = false;
+        settings.max_lines = 3;
+      };
+
       todo-comments = {
         enable = true;
-        signs = true;
+        settings.signs = true;
+      };
+
+      neo-tree = {
+        enable = true;
+        window = {
+          position = "right";
+        };
+        filesystem.followCurrentFile.enabled = true;
+      };
+
+      navic = {
+        enable = true;
+      };
+
+      arrow = {
+        enable = true;
       };
     };
+
     extraPlugins = with pkgs.vimPlugins; [
-      nvim-web-devicons # TODO: Figure out how to configure using this with telescope
     ];
 
     extraConfigLuaPre = ''
-      if vim.g.have_nerd_font then
-        require('nvim-web-devicons').setup {}
-      end
+      -- if vim.g.have_nerd_font then
+      --   require('nvim-web-devicons').setup {}
+      -- end
     '';
 
     extraConfigLuaPost = ''

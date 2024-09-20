@@ -81,6 +81,15 @@
         };
       };
       settings = {
+        defaults = {
+          mappings = {
+            i = {
+              "<esc>" = {
+                __raw = "require('telescope.actions').close";
+              };
+            };
+          };
+        };
         extensions.__raw = "{ ['ui-select'] = { require('telescope.themes').get_dropdown() } }";
       };
     };

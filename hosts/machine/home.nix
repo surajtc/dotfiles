@@ -16,6 +16,8 @@
 
   home.stateVersion = "24.05";
 
+  # mytex = pkgs.texlive.withPackages (ps: [ps.fontspec]);
+
   home.packages = with pkgs; [
     # gcc
     # nodejs
@@ -35,6 +37,18 @@
     gtk3
     gtk4
     adwaita-qt
+    # TODO: Move this to devShells
+    python3
+    nodejs
+    pnpm
+    wl-clipboard
+    wl-clipboard-x11
+    wl-clip-persist
+    cliphist
+    # qt6-wayland
+    grim
+    slurp
+    # mytex
   ];
 
   home.file = {
@@ -56,14 +70,31 @@
 
   programs.zsh = {
     enable = true;
+    autocd = true;
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+    history.ignoreDups = true;
+    history.ignoreAllDups = true;
+    history.ignoreSpace = true;
+
+    defaultKeymap = "emacs";
+
+    cdpath = ["$HOME/Documents" "$HOME/Documents/CodeBase"];
 
     shellAliases = {
-      ll = "ls -l";
-      rebuild = "sudo nixos-rebuild switch --show-trace --flake .";
+      ll = "ls -la";
+      ee = "tree -L 3";
+
+      ga = "git add .";
+      gc = "git commit -m";
+      gp = "git push -u origin";
+
+      nix-cfg = "cd $HOME/.dotfiles && nvim";
+      nix-rbs = "sudo nixos-rebuild switch --show-trace --flake .";
     };
+
+    initExtra = "fastfetch";
   };
 
   programs.starship.enable = true;
@@ -73,7 +104,8 @@
     settings = {
       cursor_shape = "block";
       window_padding_width = 10;
-      shell = "zsh";
+      # shell = "zsh";
+      enable_audio_bell = "no";
 
       background = lib.mkForce "${config.lib.stylix.colors.withHashtag.base08}";
       # font_size = "11.0";
@@ -114,6 +146,8 @@
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
     cursor.size = 24;
+
+    targets.nixvim.enable = false;
 
     fonts = {
       sizes = {

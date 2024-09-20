@@ -25,7 +25,7 @@
 
     # https://nix-community.github.io/nixvim/NeovimOptions/autoGroups/index.html
     autoGroups = {
-      "kickstart-lsp-attach" = {
+      "nvim-lsp-attach" = {
         clear = true;
       };
     };
@@ -75,9 +75,9 @@
         # gopls = {
         #  enable = true;
         #}
-        # pyright = {
-        #  enable = true;
-        #}
+        pyright = {
+          enable = true;
+        };
         # rust_analyzer = {
         #  enable = true;
         #}
@@ -87,9 +87,9 @@
         #    `https://nix-community.github.io/nixvim/plugins/typescript-tools/index.html?highlight=typescript-tools#pluginstypescript-toolspackage`
         #
         # But for many setups the LSP (`tsserver`) will work just fine
-        # tsserver = {
-        #  enable = true;
-        #}
+        ts-ls = {
+          enable = true;
+        };
 
         lua-ls = {
           enable = true;

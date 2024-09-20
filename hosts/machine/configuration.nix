@@ -94,6 +94,7 @@
     isNormalUser = true;
     description = variables.userName;
     extraGroups = ["networkmanager" "wheel"];
+    shell = pkgs.zsh;
     packages = with pkgs; [];
   };
 
@@ -101,23 +102,28 @@
     terminus_font
   ];
 
-  environment.systemPackages = with pkgs; [
-    killall
-    greetd.tuigreet
-    git
-    curl
-    wget
-    tree
-    fastfetch
-    fzf
-    ripgrep
-    zip
-    unzip
-    gnutar
-    xz
-    xdg-user-dirs
-    dconf
-  ];
+  environment = {
+    pathsToLink = ["/share/zsh"];
+    systemPackages = with pkgs; [
+      killall
+      greetd.tuigreet
+      git
+      curl
+      wget
+      tree
+      fastfetch
+      fzf
+      ripgrep
+      zip
+      unzip
+      gnutar
+      xz
+      xdg-user-dirs
+      dconf
+    ];
+  };
+
+  programs.zsh.enable = true;
 
   security.polkit.enable = true;
 
