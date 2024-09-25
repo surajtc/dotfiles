@@ -10,7 +10,15 @@
   ];
 
   boot.loader = {
-    systemd-boot.enable = true;
+    # systemd-boot.enable = true;
+
+    grub.enable = true;
+    grub.efiSupport = true;
+    grub.devices = ["nodev"];
+    # grub.device = "/dev/nvme1n1p3";
+    grub.useOSProber = true;
+    grub.default = "saved";
+
     efi.canTouchEfiVariables = true;
   };
 
@@ -44,7 +52,6 @@
   };
 
   services = {
-    # TODO: Check if this is req or move to home-manager
     xserver = {
       enable = true;
       xkb = {
@@ -78,6 +85,10 @@
     upower.enable = true;
     gvfs.enable = true;
     tumbler.enable = true;
+
+    ollama.enable = true;
+    jellyfin.enable = true;
+    jellyfin.openFirewall = true;
   };
 
   hardware = {
@@ -90,10 +101,12 @@
     graphics.enable = true;
   };
 
+  virtualisation.docker.enable = true;
+
   users.users.${variables.userName} = {
     isNormalUser = true;
     description = variables.userName;
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "docker"];
     shell = pkgs.zsh;
     packages = with pkgs; [];
   };
@@ -120,12 +133,17 @@
       xz
       xdg-user-dirs
       dconf
+      jellyfin
+      jellyfin-web
+      jellyfin-ffmpeg
     ];
   };
 
   programs.zsh.enable = true;
 
   security.polkit.enable = true;
+
+  security.pam.services.hyprlock = {};
 
   nixpkgs.config.allowUnfree = true;
 

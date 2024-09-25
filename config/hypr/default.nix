@@ -12,6 +12,8 @@
   super_shift = "SUPER_SHIFT";
   border_color = mkForce "rgb(${stylix.colors.base07})";
 in {
+  programs.hyprlock.enable = true;
+
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -58,6 +60,8 @@ in {
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "${pkgs.hyprpanel}/bin/hyprpanel"
+        "nm-applet &"
+        "blueman-applet &"
       ];
 
       monitor = [
@@ -118,6 +122,7 @@ in {
         "float,initialTitle:^(Picture-in-Picture)$"
         "move 70% 8%,initialTitle:^(Picture-in-Picture)$"
         "size 25% 25%,initialTitle:^(Picture-in-Picture)$"
+        "bordersize 0,initialTitle:^(Picture-in-Picture)$"
 
         "float,class:^([Ff]irefox.*|[Bb]rave.*),initialTitle:^(Save File|Enter name of file to save.*|Open File|File Upload)$"
         "center,class:^([Ff]irefox.*|[Bb]rave.*),initialTitle:^(Save File|Enter name of file to save.*|Open File|File Upload)$"

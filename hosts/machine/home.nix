@@ -9,6 +9,7 @@
   imports = [
     ../../config/nixvim
     ../../config/hypr
+    ../../config/firefox
   ];
 
   home.username = "${variables.userName}";
@@ -45,10 +46,13 @@
     wl-clipboard-x11
     wl-clip-persist
     cliphist
+    networkmanagerapplet
     # qt6-wayland
     grim
     slurp
     # mytex
+    texliveFull
+    open-webui
   ];
 
   home.file = {
@@ -59,7 +63,7 @@
   };
 
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "nvim";
   };
 
   programs.git = {
@@ -104,24 +108,44 @@
     settings = {
       cursor_shape = "block";
       window_padding_width = 10;
-      # shell = "zsh";
       enable_audio_bell = "no";
 
       background = lib.mkForce "${config.lib.stylix.colors.withHashtag.base08}";
-      # font_size = "11.0";
-      # font_falmily = "family=\"JetBrains Mono\"";
-      # bold_font = "auto";
-      # italic_font = "auto";
-      # bold_italic_font = "auto";
     };
   };
 
   programs.vscode = {
     enable = true;
     package = pkgs.vscode.fhs;
-  };
 
-  programs.firefox.enable = true;
+    userSettings = {
+      "workbench.sideBar.location" = "right";
+      "editor.cursorStyle" = "block";
+      "terminal.integrated.defaultProfile.linux" = "zsh";
+      "window.menuBarVisibility" = "toggle";
+      "workbench.startupEditor" = "none";
+    };
+
+    extensions = with pkgs.vscode-extensions; [
+      ms-python.python
+      ms-toolsai.jupyter
+      dbaeumer.vscode-eslint
+      zainchen.json
+      ritwickdey.liveserver
+      ms-azuretools.vscode-docker
+      eamodio.gitlens
+      esbenp.prettier-vscode
+      formulahendry.auto-rename-tag
+      formulahendry.auto-close-tag
+      formulahendry.code-runner
+      ms-vscode-remote.remote-ssh
+      christian-kohler.path-intellisense
+      yzhang.markdown-all-in-one
+      bbenoist.nix
+      kamadorueda.alejandra
+      supermaven.supermaven
+    ];
+  };
 
   programs.home-manager.enable = true;
 
