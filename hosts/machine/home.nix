@@ -52,7 +52,7 @@
     slurp
     # mytex
     texliveFull
-    open-webui
+    # open-webui
   ];
 
   home.file = {

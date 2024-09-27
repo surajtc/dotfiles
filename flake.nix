@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
     stylix.url = "github:danth/stylix";
 
     hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
@@ -22,6 +24,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixos-hardware,
     home-manager,
     nixvim,
     stylix,
@@ -41,6 +44,8 @@
       system = "x86_64-linux";
       modules = [
         ./hosts/${hostName}/configuration.nix
+
+        nixos-hardware.nixosModules.dell-xps-15-9520-nvidia
 
         home-manager.nixosModules.home-manager
         {

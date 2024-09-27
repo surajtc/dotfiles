@@ -10,14 +10,13 @@
   ];
 
   boot.loader = {
-    # systemd-boot.enable = true;
+    systemd-boot.enable = true;
 
-    grub.enable = true;
-    grub.efiSupport = true;
-    grub.devices = ["nodev"];
-    # grub.device = "/dev/nvme1n1p3";
-    grub.useOSProber = true;
-    grub.default = "saved";
+    # grub.enable = true;
+    # grub.efiSupport = true;
+    # grub.devices = ["nodev"];
+    # grub.useOSProber = true;
+    # grub.default = "saved";
 
     efi.canTouchEfiVariables = true;
   };
@@ -44,12 +43,12 @@
     };
   };
 
-  console = {
-    earlySetup = true;
-    font = "${pkgs.terminus_font}/share/consolefonts/ter-132n.psf.gz";
-    packages = with pkgs; [terminus_font];
-    keyMap = "us";
-  };
+  # console = {
+  #   earlySetup = true;
+  #   font = "${pkgs.terminus_font}/share/consolefonts/ter-132n.psf.gz";
+  #   packages = with pkgs; [terminus_font];
+  #   keyMap = "us";
+  # };
 
   services = {
     xserver = {
@@ -86,9 +85,12 @@
     gvfs.enable = true;
     tumbler.enable = true;
 
-    ollama.enable = true;
-    jellyfin.enable = true;
-    jellyfin.openFirewall = true;
+    # ollama.enable = true;
+    # open-webui.enable = true;
+    # open-webui.openFirewall = true;
+
+    # jellyfin.enable = true;
+    # jellyfin.openFirewall = true;
   };
 
   hardware = {
@@ -112,7 +114,7 @@
   };
 
   fonts.packages = with pkgs; [
-    terminus_font
+    # terminus_font
   ];
 
   environment = {
