@@ -60,8 +60,8 @@ in {
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "${pkgs.hyprpanel}/bin/hyprpanel"
-        "nm-applet &"
-        "blueman-applet &"
+        "nm-applet"
+        "blueman-tray"
       ];
 
       monitor = [

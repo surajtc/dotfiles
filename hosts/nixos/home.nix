@@ -7,8 +7,6 @@
   ...
 }: {
   imports = [
-    ../../config/nixvim
-    ../../config/hypr
     ../../config/firefox
   ];
 
@@ -17,45 +15,27 @@
 
   home.stateVersion = "24.05";
 
-  # mytex = pkgs.texlive.withPackages (ps: [ps.fontspec]);
-
   home.packages = with pkgs; [
-    # gcc
-    # nodejs
-    # pnpm
-    # yarn
-    # python3
+    neovim
+
     alejandra
-    brave
+
     xfce.thunar
     xfce.thunar-archive-plugin
     xfce.thunar-volman
     xfce.thunar-media-tags-plugin
-    rofi-wayland
-    brightnessctl
+
     gnome-themes-extra
     gtk-engine-murrine
     gtk3
     gtk4
     adwaita-qt
-    # TODO: Move this to devShells
-    python3
-    nodejs
-    pnpm
-    wl-clipboard
-    wl-clipboard-x11
-    wl-clip-persist
-    cliphist
+
     networkmanagerapplet
     networkmanager-openconnect
-    # qt6-wayland
-    grim
-    slurp
+
     zoom-us
     slack
-    # mytex
-    texliveFull
-    # open-webui
   ];
 
   home.file = {
@@ -137,7 +117,6 @@
       zainchen.json
       ritwickdey.liveserver
       ms-azuretools.vscode-docker
-      eamodio.gitlens
       esbenp.prettier-vscode
       formulahendry.auto-rename-tag
       formulahendry.auto-close-tag
@@ -147,7 +126,6 @@
       yzhang.markdown-all-in-one
       bbenoist.nix
       kamadorueda.alejandra
-      supermaven.supermaven
     ];
   };
 
