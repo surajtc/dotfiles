@@ -53,7 +53,7 @@ vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
 
 -- Set scrolloffset
-vim.o.scrolloff = 999
+vim.o.scrolloff = 4
 
 vim.opt.cmdheight = 0
 vim.opt.expandtab = true
@@ -61,7 +61,7 @@ vim.opt.smartindent = true
 
 -- Show list chars
 vim.opt.list = true
-vim.opt.listchars = { tab = "⊣ ", trail = "∙", nbsp = "␣", multispace = "∙" }
+vim.opt.listchars = { tab = "⊣ ", trail = "∙", nbsp = "␣"}
 
 -- Set cursor to block
 vim.opt.guicursor = {

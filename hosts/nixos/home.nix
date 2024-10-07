@@ -29,6 +29,9 @@
     pnpm
     yarn
 
+    libgccjit
+    fzf
+
     # glib
     # gtk3
     # libnotify
@@ -42,10 +45,10 @@
   ];
 
   home.file = {
-    # ".config/nvim" = {
-    #     source = ../../config/nvim;
-    #     recursive = true;
-    #   };
+    ".config/nvim" = {
+        source = ../../home/nvim;
+        recursive = true;
+      };
   };
 
   home.sessionVariables = {
@@ -100,6 +103,13 @@
   };
 
   programs.starship.enable = true;
+
+  programs.neovim = {
+      enable = true;
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
+    };
 
   programs.kitty = {
     enable = true;
@@ -160,8 +170,7 @@
     xset -dpms
     xset s noblank
   '';
-
-  services.picom = {
+services.picom = {
     enable = true;
     backend = "glx";
     vSync = true;
