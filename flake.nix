@@ -9,6 +9,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # For git version of AwesomeWM
+    nixpkgs-f2k = {
+      url = "github:fortuneteller2k/nixpkgs-f2k";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     stylix.url = "github:danth/stylix";
 
     # hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
@@ -23,82 +29,60 @@
     self,
     nixpkgs,
     home-manager,
-    stylix,
-    # nixvim,
     ...
   } @ inputs: let
-    default = "nixos";
-    variables = import ./hosts/${default}/variables.nix;
-
-    hostName = variables.hostName;
-    userName = variables.userName;
-  in {
-    # nixosConfigurations.${hostName} = nixpkgs.lib.nixosSystem {
-    #   specialArgs = {
-    #     inherit variables;
-    #     inherit inputs;
-    #   };
-    #   system = "x86_64-linux";
-    #   modules = [
-    #     ./hosts/${hostName}/configuration.nix
-
-    #     home-manager.nixosModules.home-manager
-    #     {
-    #       home-manager.extraSpecialArgs = {
-    #         inherit variables;
-    #         inherit inputs;
-    #       };
-    #       home-manager.useGlobalPkgs = true;
-    #       home-manager.useUserPackages = true;
-
-    #       home-manager.sharedModules = [
-    #         nixvim.homeManagerModules.nixvim
-    #         stylix.homeManagerModules.stylix
-    #       ];
-
-    #       home-manager.backupFileExtension = "backup";
-
-    #       home-manager.users.${userName} = import ./hosts/${hostName}/home.nix;
-    #     }
-
-    #     {
-    #       nixpkgs.overlays = [inputs.hyprpanel.overlay];
-    #       _module.args = {inherit inputs;};
-    #     }
-    #   ];
-    # };
-
-    nixosConfigurations.${hostName} = nixpkgs.lib.nixosSystem {
-      specialArgs = {
-        inherit variables;
-        inherit inputs;
+    
+    mkSystem = {
+      hostName,
+      vars,
+      extraModules ? [],
+    }:
+      nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit vars inputs;
+        };
+        system = "x86_64-linux";
+        modules =
+          [
+            ./hosts/${hostName}/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.extraSpecialArgs = {
+                inherit vars inputs;
+              };
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.sharedModules = [
+                inputs.stylix.homeManagerModules.stylix
+                # inputs.nixvim.homeManagerModules.nixvim
+              ];
+              home-manager.backupFileExtension = "backup";
+              home-manager.users.${vars.userName} = import ./hosts/${hostName}/home.nix;
+            }
+          ]
+          ++ extraModules;
       };
-
-      system = "x86_64-linux";
-
-      modules = [
-        ./hosts/${hostName}/configuration.nix
-
-        home-manager.nixosModules.home-manager
-
-        {
-          home-manager.extraSpecialArgs = {
-            inherit variables;
-            inherit inputs;
-          };
-
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-
-          home-manager.sharedModules = [
-            stylix.homeManagerModules.stylix
-          ];
-
-          home-manager.backupFileExtension = "backup";
-
-          home-manager.users.${userName} = import ./hosts/${hostName}/home.nix;
-        }
-      ];
+  in {
+    nixosConfigurations = {
+      # machine = mkSystem {
+        # hostName = (import ./hosts/machine/vars.nix).hostName;
+        # vars = import ./hosts/machine/vars.nix;
+        # extraModules = [
+        #   {
+        #     nixpkgs.overlays = [inputs.hyprpanel.overlay];
+        #     _module.args = {inherit inputs;};
+        #   }
+        # ];
+      # };
+      nixos = mkSystem {
+        hostName = (import ./hosts/nixos/vars.nix).hostName;
+        vars = import ./hosts/nixos/vars.nix;
+	extraModules = [
+	{
+	nixpkgs.overlays = [inputs.nixpkgs-f2k.overlays.window-managers];
+	}
+	];
+      };
     };
   };
 }

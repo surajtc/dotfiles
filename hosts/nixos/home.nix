@@ -3,39 +3,42 @@
   inputs,
   pkgs,
   lib,
-  variables,
+  vars,
   ...
 }: {
   imports = [
-    ../../config/firefox
+    # ../../config/firefox
   ];
 
-  home.username = "${variables.userName}";
-  home.homeDirectory = "/home/${variables.userName}";
+  home.username = "${vars.userName}";
+  home.homeDirectory = "/home/${vars.userName}";
 
   home.stateVersion = "24.05";
 
   home.packages = with pkgs; [
-    neovim
-
-    alejandra
-
-    xfce.thunar
-    xfce.thunar-archive-plugin
-    xfce.thunar-volman
-    xfce.thunar-media-tags-plugin
-
-    gnome-themes-extra
-    gtk-engine-murrine
-    gtk3
-    gtk4
-    adwaita-qt
-
-    networkmanagerapplet
-    networkmanager-openconnect
-
-    zoom-us
+  stow
     slack
+    zoom-us
+    microsoft-edge
+    vlc
+    flameshot
+
+    # TODO: Move this to devShells
+    python3
+    nodejs
+    pnpm
+    yarn
+
+    # glib
+    # gtk3
+    # libnotify
+    # nss
+    # alsa-lib
+    # xorg.libXScrnSaver
+    # xorg.libXtst
+    # xorg.libxcb
+
+    steam-run
   ];
 
   home.file = {
@@ -47,14 +50,21 @@
 
   home.sessionVariables = {
     EDITOR = "nvim";
-    NIXOS_OZONE_WL = "1";
   };
+
+  programs.home-manager.enable = true;
 
   programs.git = {
     enable = true;
-    userName = variables.gitUserName;
-    userEmail = variables.gitEmail;
+    userName = vars.gitUserName;
+    userEmail = vars.gitEmail;
   };
+
+  programs.chromium.enable = true;
+  programs.firefox.enable = true;
+  
+  programs.mpv.enable = true;
+  programs.btop.enable = true;
 
   programs.zsh = {
     enable = true;
@@ -78,8 +88,12 @@
       gc = "git commit -m";
       gp = "git push -u origin";
 
-      nix-cfg = "cd $HOME/.dotfiles && nvim";
-      nix-rbs = "sudo nixos-rebuild switch --show-trace --flake .";
+      nixedit = "cd /etc/dotfiles && nvim";
+      nixrebuild = "sudo nixos-rebuild switch --show-trace --flake .";
+      
+      cy = "steam-run npx cypress open --env configFile=";
+
+      cattlabvpn = "sudo OPENSSL_CONF=/etc/openconnect/openssl.conf openconnect --user=stelugar --csd-wrapper=/etc/openconnect/csd-post.sh vpn.cattlab.umd.edu";
     };
 
     initExtra = "fastfetch";
@@ -93,8 +107,9 @@
       cursor_shape = "block";
       window_padding_width = 10;
       enable_audio_bell = "no";
+      shell = "zsh";
 
-      background = lib.mkForce "${config.lib.stylix.colors.withHashtag.base08}";
+      # background = lib.mkForce "${config.lib.stylix.colors.withHashtag.base08}";
     };
   };
 
@@ -117,6 +132,7 @@
       zainchen.json
       ritwickdey.liveserver
       ms-azuretools.vscode-docker
+      eamodio.gitlens
       esbenp.prettier-vscode
       formulahendry.auto-rename-tag
       formulahendry.auto-close-tag
@@ -129,7 +145,35 @@
     ];
   };
 
-  programs.home-manager.enable = true;
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      # wlrobs
+      # obs-backgroundremoval
+      obs-pipewire-audio-capture
+      input-overlay
+    ];
+  };
+
+  xsession.initExtra = ''
+    xset s off
+    xset -dpms
+    xset s noblank
+  '';
+
+  services.picom = {
+    enable = true;
+    backend = "glx";
+    vSync = true;
+    settings = {
+      shadow = false;
+      detect-rounded-corners = true;
+      detect-client-opacity = true;
+      detect-transient = true;
+      transparent-clipping = true;
+      corner-radius = 4;
+    };
+  };
 
   gtk = {
     enable = true;
@@ -147,14 +191,11 @@
 
   stylix = {
     enable = true;
-    image = ../../config/wallpapers/default.png;
+    image = ../../home/wallpapers/default.svg;
     polarity = "dark";
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
     cursor.size = 24;
-
-    targets.nixvim.enable = false;
-
     fonts = {
       sizes = {
         applications = 9;
