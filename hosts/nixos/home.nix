@@ -8,6 +8,8 @@
 }: {
   imports = [
     # ../../config/firefox
+    ../../home/nvim
+    ../../home/tmux
   ];
 
   home.username = "${vars.userName}";
@@ -16,12 +18,14 @@
   home.stateVersion = "24.05";
 
   home.packages = with pkgs; [
-  stow
+    stow
     slack
     zoom-us
     microsoft-edge
     vlc
     flameshot
+
+    xdotool
 
     # TODO: Move this to devShells
     python3
@@ -45,10 +49,10 @@
   ];
 
   home.file = {
-    ".config/nvim" = {
-        source = ../../home/nvim;
-        recursive = true;
-      };
+    # ".config/nvim" = {
+    #     source = ../../home/nvim;
+    #     recursive = true;
+    #   };
   };
 
   home.sessionVariables = {
@@ -65,7 +69,7 @@
 
   programs.chromium.enable = true;
   programs.firefox.enable = true;
-  
+
   programs.mpv.enable = true;
   programs.btop.enable = true;
 
@@ -93,7 +97,7 @@
 
       nixedit = "cd /etc/dotfiles && nvim";
       nixrebuild = "sudo nixos-rebuild switch --show-trace --flake .";
-      
+
       cy = "steam-run npx cypress open --env configFile=";
 
       cattlabvpn = "sudo OPENSSL_CONF=/etc/openconnect/openssl.conf openconnect --user=stelugar --csd-wrapper=/etc/openconnect/csd-post.sh vpn.cattlab.umd.edu";
@@ -104,12 +108,12 @@
 
   programs.starship.enable = true;
 
-  programs.neovim = {
-      enable = true;
-      defaultEditor = true;
-      viAlias = true;
-      vimAlias = true;
-    };
+  # programs.neovim = {
+  # enable = true;
+  # defaultEditor = true;
+  # viAlias = true;
+  # vimAlias = true;
+  # };
 
   programs.kitty = {
     enable = true;
@@ -133,6 +137,9 @@
       "terminal.integrated.defaultProfile.linux" = "zsh";
       "window.menuBarVisibility" = "toggle";
       "workbench.startupEditor" = "none";
+      "[javascript]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
     };
 
     extensions = with pkgs.vscode-extensions; [
@@ -170,7 +177,7 @@
     xset -dpms
     xset s noblank
   '';
-services.picom = {
+  services.picom = {
     enable = true;
     backend = "glx";
     vSync = true;
@@ -205,6 +212,7 @@ services.picom = {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
     cursor.size = 24;
+
     fonts = {
       sizes = {
         applications = 9;

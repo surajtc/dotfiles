@@ -68,6 +68,9 @@
         '';
       };
       displayManager.sessionCommands = ''
+        xset s off
+        xset -dpms
+        xset s noblank
         ${pkgs.autorandr}/bin/autorandr --change
       '';
 
@@ -271,12 +274,12 @@
   };
   programs.xfconf.enable = true;
 
-  programs.neovim= {
-      enable = true;
-      defaultEditor = true;
-vimAlias = true;
-viAlias = true;
-    };
+  # programs.neovim = {
+  #   enable = true;
+  #   defaultEditor = true;
+  #   vimAlias = true;
+  #   viAlias = true;
+  # };
 
   environment.variables = {
     LUA_PATH = "${pkgs.luajitPackages.lgi}/share/lua/5.1/?.lua;${pkgs.luajitPackages.lgi}/share/lua/5.1/?/init.lua";

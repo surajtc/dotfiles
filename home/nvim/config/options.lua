@@ -53,15 +53,15 @@ vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
 
 -- Set scrolloffset
-vim.o.scrolloff = 4
+vim.o.scrolloff = 999
 
-vim.opt.cmdheight = 0
+-- vim.opt.cmdheight = 0
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 
 -- Show list chars
 vim.opt.list = true
-vim.opt.listchars = { tab = "⊣ ", trail = "∙", nbsp = "␣"}
+vim.opt.listchars = { tab = "⊣ ", trail = "∙", nbsp = "␣" }
 
 -- Set cursor to block
 vim.opt.guicursor = {
@@ -85,24 +85,5 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.api.nvim_create_augroup("nvim-highlight-yank", { clear = true }),
 	callback = function()
 		vim.highlight.on_yank()
-	end,
-})
-
--- MasonToolInstaller
-vim.api.nvim_create_autocmd("User", {
-	pattern = "MasonToolsStartingInstall",
-	callback = function()
-		vim.schedule(function()
-			print("mason-tool-installer is starting")
-		end)
-	end,
-})
-
-vim.api.nvim_create_autocmd("User", {
-	pattern = "MasonToolsUpdateCompleted",
-	callback = function(e)
-		vim.schedule(function()
-			print(vim.inspect(e.data)) -- print the table that lists the programs that were installed
-		end)
 	end,
 })
