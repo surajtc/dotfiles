@@ -1,3 +1,5 @@
+local colors = require("base16-colorscheme").colors
+
 require("lualine").setup({
 	options = {
 		component_separators = "",
@@ -12,7 +14,14 @@ require("lualine").setup({
 				return str:sub(1, 1)
 			end,
 		} },
-		lualine_c = { { "buffers", hide_filename_extension = false, icons_enabled = false } },
+		lualine_c = {
+			{
+				"buffers",
+				hide_filename_extension = false,
+				icons_enabled = false,
+				buffers_color = { active = { bg = colors.base04 } },
+			},
+		},
 		lualine_x = { { "filetype", icons_enabled = false } },
 	},
 })
