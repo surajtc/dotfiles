@@ -35,6 +35,9 @@
 
     libgccjit
     fzf
+    xclip
+    xsel
+    fd
 
     # glib
     # gtk3
@@ -147,6 +150,15 @@
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
       "[typescriptreact]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
+      "[json]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
+      "[css]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
+      "[html]" = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
     };

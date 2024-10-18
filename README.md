@@ -1,21 +1,5 @@
 TODO:
 
-- Setup git
-- Fix screen sharing (not working for external display)
-- Screenshot utils
-- Firefox customization
-- Neovim customization
-
-Hyprland:
-
-- Lockscreen
-- Idle Config
-- GPU?
-- Alt + Tab
-- Open windows overview (pyprland)
-- swapactiveworkspace better solution
--
-
 Garbage collection:
 
 ```
@@ -32,4 +16,16 @@ sudo nix-collect-garbage -d
 sudo /run/current-system/bin/switch-to-configuration boot
 ```
 
+Update flake:
+
+```
+nix-channel --update
+
+nix flake update
+```
+
+Neovim format current buffer
+
+```
 :%!alejandra -qq
+```

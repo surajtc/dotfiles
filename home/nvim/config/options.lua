@@ -39,6 +39,8 @@ vim.o.smartcase = true
 -- Keep signcolumn on by default
 vim.wo.signcolumn = "yes"
 
+vim.o.cursorline = true
+
 -- Decrease update time
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300
@@ -53,7 +55,7 @@ vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
 
 -- Set scrolloffset
-vim.o.scrolloff = 999
+vim.o.scrolloff = 4
 
 -- vim.opt.cmdheight = 0
 vim.opt.expandtab = true
@@ -87,28 +89,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
-
-function print_r(t)
-	local print_r_cache = {}
-	local function sub_print_r(t, indent)
-		if print_r_cache[tostring(t)] then
-			print(indent .. "*" .. tostring(t))
-		else
-			print_r_cache[tostring(t)] = true
-			if type(t) == "table" then
-				for pos, val in pairs(t) do
-					if type(val) == "table" then
-						print(indent .. "[" .. pos .. "] => " .. tostring(t) .. " {")
-						sub_print_r(val, indent .. string.rep(" ", string.len(pos) + 8))
-						print(indent .. string.rep(" ", string.len(pos) + 6) .. "}")
-					else
-						print(indent .. "[" .. pos .. "] => " .. tostring(val))
-					end
-				end
-			else
-				print(indent .. tostring(t))
-			end
-		end
-	end
-	sub_print_r(t, "  ")
-end

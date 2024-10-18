@@ -24,6 +24,8 @@ lsp_zero.extend_lspconfig({
 })
 
 require("lspconfig").lua_ls.setup({})
+require("lspconfig").ts_ls.setup({})
+require("lspconfig").tailwindcss.setup({})
 require("lspconfig").pyright.setup({})
 
 local cmp = require("cmp")
@@ -31,6 +33,9 @@ local cmp = require("cmp")
 cmp.setup({
 	sources = {
 		{ name = "nvim_lsp" },
+		{ name = "luasnip", keyword_length = 2 },
+		{ name = "buffer", keyword_length = 3 },
+		{ name = "path" },
 	},
 	snippet = {
 		expand = function(args)
@@ -38,5 +43,16 @@ cmp.setup({
 			vim.snippet.expand(args.body)
 		end,
 	},
-	mapping = cmp.mapping.preset.insert({}),
+	mapping = cmp.mapping.preset.insert({
+		["<C-Space>"] = cmp.mapping.complete(),
+		["<C-u>"] = cmp.mapping.scroll_docs(-4),
+		["<C-d>"] = cmp.mapping.scroll_docs(4),
+	}),
+})
+
+require("nvim-treesitter.configs").setup({
+	highlight = {
+		enable = true,
+		additional_vim_regex_highlighting = false,
+	},
 })

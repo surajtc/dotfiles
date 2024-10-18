@@ -41,6 +41,11 @@
 
       nvim-cmp
       cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
+      luasnip
+      cmp_luasnip
+      friendly-snippets
       nvim-lspconfig
       {
         plugin = lsp-zero-nvim;
@@ -59,6 +64,20 @@
         config = builtins.readFile config/plugins/indent-blankline.lua;
         type = "lua";
       }
+
+      {
+        plugin = arrow-nvim;
+        config = builtins.readFile config/plugins/arrow.lua;
+        type = "lua";
+      }
+
+      {
+        plugin = nvim-highlight-colors;
+        config = ''
+          require('nvim-highlight-colors').setup({})
+        '';
+        type = "lua";
+      }
     ];
 
     extraLuaConfig = ''
@@ -67,6 +86,8 @@
     '';
 
     extraPackages = with pkgs; [
+      gcc
+
       stylua
       lua-language-server
 
@@ -75,6 +96,8 @@
 
       nodePackages.prettier
       prettierd
+      nodePackages.typescript-language-server
+      tailwindcss-language-server
 
       alejandra
 

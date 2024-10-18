@@ -2,9 +2,9 @@ local colors = require("base16-colorscheme").colors
 
 require("lualine").setup({
 	options = {
+		theme = "base16",
 		component_separators = "",
 		section_separators = "",
-		disabled_filetypes = { "neo-tree" },
 		globalstatus = true,
 	},
 	sections = {
@@ -14,14 +14,28 @@ require("lualine").setup({
 				return str:sub(1, 1)
 			end,
 		} },
+		lualine_b = { "branch" },
 		lualine_c = {
 			{
 				"buffers",
-				hide_filename_extension = false,
 				icons_enabled = false,
-				buffers_color = { active = { bg = colors.base04 } },
+				symbols = { alternate_file = "" },
+				buffers_color = {
+					active = { fg = colors.base05, bg = colors.base03 },
+					inactive = { fg = colors.base04 },
+				},
 			},
 		},
-		lualine_x = { { "filetype", icons_enabled = false } },
+		lualine_x = { "diff", "diagnostics", "searchcount", "selectioncount" },
+	},
+	winbar = {
+		lualine_b = { { "filename", path = 1, newfile_status = true } },
+	},
+	inactive_winbar = {
+		lualine_c = { { "filename", path = 1, newfile_status = true } },
 	},
 })
+
+-- vim.cmd("highlight MsgArea guifg=" .. colors.base04)
+vim.api.nvim_set_hl(0, "MsgArea", { fg = colors.base04 })
+vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.base07 })
