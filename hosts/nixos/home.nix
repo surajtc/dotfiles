@@ -10,6 +10,7 @@
     # ../../config/firefox
     ../../home/nvim
     ../../home/tmux
+    ../../home/firefox
   ];
 
   home.username = "${vars.userName}";
@@ -49,6 +50,8 @@
     # xorg.libxcb
 
     steam-run
+    noto-fonts
+    (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
   ];
 
   home.file = {
@@ -85,6 +88,7 @@
     history.ignoreDups = true;
     history.ignoreAllDups = true;
     history.ignoreSpace = true;
+    prezto.tmux.autoStartLocal = true;
 
     defaultKeymap = "emacs";
 
@@ -244,12 +248,12 @@
 
       serif = {
         package = pkgs.inter;
-        name = "Inter";
+        name = "Inter, Symbols Nerd Font";
       };
 
       sansSerif = {
         package = pkgs.inter;
-        name = "Inter";
+        name = "Inter, Symbols Nerd Font";
       };
 
       monospace = {

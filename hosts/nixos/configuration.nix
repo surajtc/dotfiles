@@ -247,7 +247,7 @@
     luajitPackages.luarocks
     (luajit.withPackages (ps: with ps; [lgi]))
 
-    (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
+    # (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
 
     volumeicon
     pavucontrol

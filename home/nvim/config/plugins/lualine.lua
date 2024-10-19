@@ -6,6 +6,9 @@ require("lualine").setup({
 		component_separators = "",
 		section_separators = "",
 		globalstatus = true,
+		disabled_filetypes = {
+			winbar = { "neo-tree" },
+		},
 	},
 	sections = {
 		lualine_a = { {
@@ -39,3 +42,4 @@ require("lualine").setup({
 -- vim.cmd("highlight MsgArea guifg=" .. colors.base04)
 vim.api.nvim_set_hl(0, "MsgArea", { fg = colors.base04 })
 vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.base07 })
+vim.api.nvim_set_hl(0, "WinSeparator", { fg = colors.base03 })

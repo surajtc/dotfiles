@@ -10,6 +10,8 @@
     plugins = with pkgs.vimPlugins; [
       nvim-treesitter.withAllGrammars
 
+      vim-tmux-navigator
+
       {
         plugin = nvim-web-devicons;
         config = ''
