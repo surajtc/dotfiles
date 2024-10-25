@@ -8,6 +8,7 @@
 }: {
   imports = [
     # ../../config/firefox
+    ../../home/awesome
     ../../home/nvim
     ../../home/tmux
     ../../home/firefox
@@ -19,12 +20,13 @@
   home.stateVersion = "24.05";
 
   home.packages = with pkgs; [
-    stow
     slack
     zoom-us
     microsoft-edge
     vlc
     flameshot
+    brightnessctl
+    bc
 
     xdotool
 
@@ -33,6 +35,7 @@
     nodejs
     pnpm
     yarn
+    cypress
 
     libgccjit
     fzf
@@ -52,17 +55,21 @@
     steam-run
     noto-fonts
     (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
+
+    # (pkgs.callPackage ../../home/patched-inter.nix {})
   ];
 
-  home.file = {
-    # ".config/nvim" = {
-    #     source = ../../home/nvim;
-    #     recursive = true;
-    #   };
-  };
+  # home.file = {
+  #   ".config/awesome" = {
+  #     source = ../../home/awesome;
+  #     recursive = true;
+  #   };
+  # };
 
   home.sessionVariables = {
     EDITOR = "nvim";
+    CYPRESS_INSTALL_BINARY = 0;
+    CYPRESS_RUN_BINARY = "${pkgs.cypress}/bin/Cypress";
   };
 
   programs.home-manager.enable = true;
@@ -234,7 +241,7 @@
     enable = true;
     image = ../../home/wallpapers/default.svg;
     polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/classic-dark.yaml";
 
     cursor.size = 24;
 
@@ -247,13 +254,13 @@
       };
 
       serif = {
-        package = pkgs.inter;
-        name = "Inter, Symbols Nerd Font";
+        package = pkgs.noto-fonts;
+        name = "Noto Serif";
       };
 
       sansSerif = {
         package = pkgs.inter;
-        name = "Inter, Symbols Nerd Font";
+        name = "Inter";
       };
 
       monospace = {
@@ -265,6 +272,16 @@
         package = pkgs.noto-fonts-emoji;
         name = "Noto Color Emoji";
       };
+    };
+  };
+
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts = {
+      serif = ["Noto Serif" "Symbols Nerd Font"];
+      sansSerif = ["Inter" "Symbols Nerd Font"];
+      monospace = ["JetBrainsMono Nerd Font"];
+      emoji = ["Noto Color Emoji"];
     };
   };
 }

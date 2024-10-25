@@ -60,6 +60,18 @@ awful.keyboard.append_global_keybindings({
 		description = "take screenshot and copy to clipboard",
 		group = "utils",
 	}),
+	awful.key({}, "XF86MonBrightnessUp", function()
+		awful.spawn("brightnessctl set 5%+")
+	end, {
+		description = "increase laptop brightness by 5%",
+		group = "utils",
+	}),
+	awful.key({}, "XF86MonBrightnessDown", function()
+		awful.spawn("brightnessctl set 5%-")
+	end, {
+		description = "decrease laptop brightness by 5%",
+		group = "utils",
+	}),
 })
 
 -- Focus

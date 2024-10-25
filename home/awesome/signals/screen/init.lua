@@ -9,7 +9,7 @@ local widgets = require("widgets")
 screen.connect_signal("request::wallpaper", function(s)
     awful.wallpaper {
         screen = s,
-        bg = beautiful.colors.crust.hex,
+        bg = beautiful.colors.base01,
         widget = {
             {
                 image = beautiful.wallpaper,

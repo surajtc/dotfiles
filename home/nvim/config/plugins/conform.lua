@@ -10,6 +10,8 @@ require("conform").setup({
 		scss = { "prettierd", "prettier" },
 		less = { "prettierd", "prettier" },
 		html = { "prettierd", "prettier" },
+		svg = { "prettierd", "prettier" },
+		xml = { "prettierd", "prettier" },
 		json = { "prettierd", "prettier" },
 		jsonc = { "prettierd", "prettier" },
 		yaml = { "prettierd", "prettier" },

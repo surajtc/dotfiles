@@ -17,24 +17,25 @@ local theme = {}
 theme.colors = colors
 theme.dpi = dpi
 
--- theme.font = "sans 9"
+-- theme.font = "sans 8"
+-- theme.font = "Inter 9"
 
-theme.bg_normal = colors.mantle.hex
-theme.bg_focus = colors.surface0.hex
-theme.bg_urgent = colors.red.hex
-theme.bg_minimize = colors.crust.hex
+theme.bg_normal = colors.base01
+theme.bg_focus = colors.base02
+theme.bg_urgent = colors.base09
+theme.bg_minimize = colors.base01
 theme.bg_systray = theme.bg_normal
 
-theme.fg_normal = colors.lavender.hex
-theme.fg_focus = colors.blue.hex
-theme.fg_urgent = colors.green.hex
-theme.fg_minimize = colors.surface0.hex
+theme.fg_normal = colors.base04
+theme.fg_focus = colors.base0D
+theme.fg_urgent = colors.base09
+theme.fg_minimize = colors.base04
 
 theme.useless_gap = dpi(2)
 theme.border_width = dpi(2)
-theme.border_color_normal = colors.mantle.hex
-theme.border_color_active = colors.lavender.hex
-theme.border_color_marked = colors.green.hex
+theme.border_color_normal = colors.base03
+theme.border_color_active = colors.base0D
+theme.border_color_marked = colors.base08
 
 theme.systray_icon_spacing = dpi(6)
 
@@ -102,8 +103,8 @@ theme.titlebar_maximized_button_normal_active = themes_path .. "default/titlebar
 theme.titlebar_maximized_button_focus_active = themes_path .. "default/titlebar/maximized_focus_active.png"
 
 theme.wallpaper = gfs.get_xdg_config_home() .. "awesome/theme/background.svg"
-theme.wallpaper_bg = colors.crust.hex
-theme.arch_icon = gfs.get_xdg_config_home() .. "awesome/theme/arch_icon.svg"
+theme.wallpaper_bg = colors.base01
+theme.menu_icon = gfs.get_xdg_config_home() .. "awesome/theme/icons/nix.svg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path .. "default/layouts/fairhw.png"

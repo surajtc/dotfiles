@@ -13,6 +13,8 @@ local ram_widget = require("widgets.ram_widget")
 local cpu_widget = require("widgets.cpu_widget")
 local speed_widget = require("widgets.speed_widget")
 
+local config_dir = gears.filesystem.get_configuration_dir()
+
 _m.awesomemenu = {
 	{
 		"hotkeys",
@@ -31,15 +33,21 @@ _m.awesomemenu = {
 	},
 }
 
+local nix_icon = wibox.widget({
+	image = config_dir .. "theme/icons/nix.svg",
+	stylesheet = "svg { fill: " .. beautiful.colors.base0D .. "; }", -- Makes the SVG red
+	widget = wibox.widget.imagebox,
+})
+
 _m.mainmenu = awful.menu({
 	items = {
-		{ "awesome", _m.awesomemenu, beautiful.arch_icon },
+		{ "awesome", _m.awesomemenu, gears.color.recolor_image(beautiful.menu_icon, beautiful.colors.base0D) },
 		{ "open terminal", apps.terminal },
 	},
 })
 
 _m.launcher = awful.widget.launcher({
-	image = beautiful.arch_icon,
+	image = gears.color.recolor_image(beautiful.menu_icon, beautiful.colors.base0D),
 	menu = _m.mainmenu,
 })
 
@@ -52,8 +60,8 @@ function _m.widget_container(widget)
 			margins = 2,
 			widget = wibox.container.margin,
 		},
-		bg = beautiful.colors.lavender.hex,
-		fg = beautiful.colors.crust.hex,
+		bg = beautiful.colors.base05,
+		fg = beautiful.colors.base00,
 		shape = function(cr, width, height)
 			gears.shape.rounded_rect(cr, width, height, 2)
 		end,
@@ -167,6 +175,7 @@ function _m.create_wibox(s)
 					_m.widget_container(_m.textclock),
 					_m.widget_container(wibox.widget.systray()),
 					s.layoutbox,
+					nix_icon,
 				},
 			},
 		},

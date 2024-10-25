@@ -39,7 +39,6 @@ ruled.client.connect_signal("request::rules", function()
 				"AlarmWindow", -- Thunderbird's calendar.
 				"ConfigManager", -- Thunderbird's about:config.
 				"pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
-				"PictureInPicture",
 			},
 		},
 		properties = { floating = true },
@@ -50,6 +49,17 @@ ruled.client.connect_signal("request::rules", function()
 		id = "titlebars",
 		rule_any = { type = { "normal", "dialog" } },
 		properties = { titlebars_enabled = false },
+	})
+
+	ruled.client.append_rule({
+		id = "picture_in_picture",
+		rule_any = { role = { "PictureInPicture" }, name = { "Picture-in-Picture", "Picture in picture" } },
+		properties = {
+			floating = true,
+			sticky = true,
+			ontop = true,
+			border_width = 0,
+		},
 	})
 
 	-- Set Firefox to always map on the tag named "2" on screen 1.

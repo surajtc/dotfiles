@@ -31,7 +31,6 @@
     home-manager,
     ...
   } @ inputs: let
-    
     mkSystem = {
       hostName,
       vars,
@@ -65,23 +64,23 @@
   in {
     nixosConfigurations = {
       # machine = mkSystem {
-        # hostName = (import ./hosts/machine/vars.nix).hostName;
-        # vars = import ./hosts/machine/vars.nix;
-        # extraModules = [
-        #   {
-        #     nixpkgs.overlays = [inputs.hyprpanel.overlay];
-        #     _module.args = {inherit inputs;};
-        #   }
-        # ];
+      # hostName = (import ./hosts/machine/vars.nix).hostName;
+      # vars = import ./hosts/machine/vars.nix;
+      # extraModules = [
+      #   {
+      #     nixpkgs.overlays = [inputs.hyprpanel.overlay];
+      #     _module.args = {inherit inputs;};
+      #   }
+      # ];
       # };
       nixos = mkSystem {
         hostName = (import ./hosts/nixos/vars.nix).hostName;
         vars = import ./hosts/nixos/vars.nix;
-	extraModules = [
-	{
-	nixpkgs.overlays = [inputs.nixpkgs-f2k.overlays.window-managers];
-	}
-	];
+        extraModules = [
+          {
+            nixpkgs.overlays = [inputs.nixpkgs-f2k.overlays.window-managers];
+          }
+        ];
       };
     };
   };
