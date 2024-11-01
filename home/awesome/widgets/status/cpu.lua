@@ -3,19 +3,17 @@ local watch = require("awful.widget.watch")
 
 local M = {}
 
-function M.create_widget(widget_container)
-	local cpu_widget = wibox.widget({
+function M.cpu_widget()
+	local widget = wibox.widget({
 		{
-			id = "txt",
+			id = "txt_role",
 			widget = wibox.widget.textbox,
 		},
 		layout = wibox.layout.fixed.horizontal,
 	})
 
-	local container = widget_container(cpu_widget)
-
 	-- Function to get CPU usage
-	local function get_cpu_usage()
+	local function get_usage()
 		local file = io.open("/proc/stat", "r")
 
 		if file == nil then
@@ -34,15 +32,15 @@ function M.create_widget(widget_container)
 		return total, idle_total
 	end
 
-	local total_prev, idle_prev = get_cpu_usage()
+	local total_prev, idle_prev = get_usage()
 
 	local function update_widget()
-		local total_now, idle_now = get_cpu_usage()
+		local total_now, idle_now = get_usage()
 		local total_diff = total_now - total_prev
 		local idle_diff = idle_now - idle_prev
 
 		local cpu_usage = math.floor((1 - (idle_diff / total_diff)) * 100)
-		cpu_widget:get_children_by_id("txt")[1]:set_text(string.format("CPU: %d%%", cpu_usage))
+		widget:get_children_by_id("txt_role")[1]:set_text(string.format("%d%%", cpu_usage))
 
 		total_prev = total_now
 		idle_prev = idle_now
@@ -55,7 +53,7 @@ function M.create_widget(widget_container)
 		end
 	end)
 
-	return container
+	return widget
 end
 
 return M

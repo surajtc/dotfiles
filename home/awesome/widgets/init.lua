@@ -9,9 +9,8 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 local apps = require("config.apps")
 local mod = require("bindings.mod")
 
-local ram_widget = require("widgets.ram_widget")
-local cpu_widget = require("widgets.cpu_widget")
-local speed_widget = require("widgets.speed_widget")
+local status_widget = require("widgets.utils").status_widget
+local separator = require("widgets.utils").separator()
 
 local config_dir = gears.filesystem.get_configuration_dir()
 
@@ -32,12 +31,6 @@ _m.awesomemenu = {
 		end,
 	},
 }
-
-local nix_icon = wibox.widget({
-	image = config_dir .. "theme/icons/nix.svg",
-	stylesheet = "svg { fill: " .. beautiful.colors.base0D .. "; }", -- Makes the SVG red
-	widget = wibox.widget.imagebox,
-})
 
 _m.mainmenu = awful.menu({
 	items = {
@@ -93,10 +86,41 @@ function _m.create_layoutbox()
 	})
 end
 
+local function update_margins(margin_widget, is_selected)
+	local left_margin = is_selected and beautiful.dpi(10) or beautiful.dpi(4)
+	local right_margin = left_margin
+
+	margin_widget.left = beautiful.dpi(left_margin)
+	margin_widget.right = beautiful.dpi(right_margin)
+end
+
 function _m.create_taglist(s)
 	return awful.widget.taglist({
 		screen = s,
 		filter = awful.widget.taglist.filter.all,
+		widget_template = {
+			{
+				{
+					id = "text_role",
+					halign = "center",
+					valign = "center",
+					widget = wibox.widget.textbox,
+				},
+				id = "margin_role",
+				widget = wibox.container.margin,
+			},
+			id = "background_role",
+			widget = wibox.container.background,
+			create_callback = function(self, tag, index, tags)
+				local margin_widget = self:get_children_by_id("margin_role")[1]
+				update_margins(margin_widget, tag.selected)
+			end,
+
+			update_callback = function(self, tag, index, tags)
+				local margin_widget = self:get_children_by_id("margin_role")[1]
+				update_margins(margin_widget, tag.selected)
+			end,
+		},
 		buttons = {
 			awful.button({}, 1, function(t)
 				t:view_only()
@@ -122,10 +146,48 @@ function _m.create_taglist(s)
 	})
 end
 
+local function update_marker(widget, is_active)
+	widget.color = is_active and beautiful.fg_focus or beautiful.bg_focus
+end
+
 function _m.create_tasklist(s)
 	return awful.widget.tasklist({
 		screen = s,
 		filter = awful.widget.tasklist.filter.currenttags,
+		widget_template = {
+			{
+				{
+					{
+						id = "marker_role",
+						orientation = "vertical",
+						thickness = beautiful.dpi(5),
+						forced_width = beautiful.dpi(5),
+						-- shape = gears.shape.circle,
+						widget = wibox.widget.separator,
+					},
+					left = beautiful.dpi(0),
+					right = beautiful.dpi(4),
+					widget = wibox.container.margin,
+				},
+				{
+					id = "text_role",
+					widget = wibox.widget.textbox,
+				},
+				layout = wibox.layout.fixed.horizontal,
+			},
+			id = "background_role",
+			widget = wibox.container.background,
+
+			create_callback = function(self, c, index, objects)
+				local marker = self:get_children_by_id("marker_role")[1]
+				update_marker(marker, c.active)
+			end,
+
+			update_callback = function(self, c, index, objects)
+				local marker = self:get_children_by_id("marker_role")[1]
+				update_marker(marker, c.active)
+			end,
+		},
 		buttons = {
 			awful.button({}, 1, function(c)
 				c:activate({ context = "tasklist", action = "toggle_minimization" })
@@ -142,6 +204,10 @@ function _m.create_tasklist(s)
 		},
 	})
 end
+
+local cpu = require("widgets.status.cpu").cpu_widget()
+local memory = require("widgets.status.memory").memory_widget()
+local netspeed = require("widgets.status.netspeed").netspeed_widget()
 
 function _m.create_wibox(s)
 	return awful.wibar({
@@ -167,15 +233,17 @@ function _m.create_wibox(s)
 				},
 				s.tasklist, -- Middle widget
 				{ -- Right widgets
-					layout = wibox.layout.fixed.horizontal,
-					spacing = beautiful.dpi(6),
-					ram_widget.create_widget(_m.widget_container),
-					cpu_widget.create_widget(_m.widget_container),
-					speed_widget.create_widget(_m.widget_container),
-					_m.widget_container(_m.textclock),
-					_m.widget_container(wibox.widget.systray()),
+					separator,
+					status_widget(_m.textclock, "clock"),
+					status_widget(cpu, "cpu"),
+					status_widget(memory, "memory"),
+					status_widget(netspeed, "netspeed"),
+					separator,
+					wibox.widget.systray(),
+					separator,
 					s.layoutbox,
-					nix_icon,
+					layout = wibox.layout.fixed.horizontal,
+					spacing = beautiful.dpi(4),
 				},
 			},
 		},

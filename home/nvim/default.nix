@@ -10,6 +10,8 @@
     plugins = with pkgs.vimPlugins; [
       nvim-treesitter.withAllGrammars
 
+      mini-base16
+
       vim-tmux-navigator
 
       {
@@ -85,6 +87,7 @@
     extraLuaConfig = ''
       ${builtins.readFile config/options.lua}
       ${builtins.readFile config/mappings.lua}
+      ${builtins.readFile config/debug.lua}
     '';
 
     extraPackages = with pkgs; [

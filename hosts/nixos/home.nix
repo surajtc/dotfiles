@@ -7,10 +7,10 @@
   ...
 }: {
   imports = [
-    # ../../config/firefox
     ../../home/awesome
     ../../home/nvim
-    ../../home/tmux
+    # ../../home/tmux
+    ../../home/zellij
     ../../home/firefox
   ];
 
@@ -42,6 +42,7 @@
     xclip
     xsel
     fd
+    yazi
 
     # glib
     # gtk3
@@ -95,7 +96,7 @@
     history.ignoreDups = true;
     history.ignoreAllDups = true;
     history.ignoreSpace = true;
-    prezto.tmux.autoStartLocal = true;
+    # prezto.tmux.autoStartLocal = true;
 
     defaultKeymap = "emacs";
 
@@ -213,13 +214,81 @@
     enable = true;
     backend = "glx";
     vSync = true;
+
+    fade = true;
+    fadeDelta = 5;
+    fadeSteps = [0.03 0.03];
+
+    shadow = false;
+
+    activeOpacity = 1.0;
+    inactiveOpacity = 1.0;
+
     settings = {
-      shadow = false;
+      # shadow = false;
+      # detect-rounded-corners = true;
+      # detect-client-opacity = true;
+      # detect-transient = true;
+      # transparent-clipping = true;
+
+      mark-wmwin-focused = true;
+      mark-ovredir-focused = true;
       detect-rounded-corners = true;
       detect-client-opacity = true;
       detect-transient = true;
-      transparent-clipping = true;
+      glx-no-stencil = true;
+      use-damage = true;
+
       corner-radius = 4;
+      rounded-corners-exclude = [
+        "window_type = 'dock'"
+        "window_type = 'desktop'"
+      ];
+
+      blur-background = false;
+      blur-background-frame = false;
+      blur-background-fixed = false;
+
+      blur = {
+        method = "gaussian";
+        size = 10;
+        deviation = 5.0;
+      };
+
+      blur-background-exclude = [
+        "window_type = 'dock'"
+        "window_type = 'desktop'"
+        "_GTK_FRAME_EXTENTS@:c"
+      ];
+
+      wintypes = {
+        tooltip = {
+          fade = true;
+          shadow = false;
+          blur-background = false;
+          opacity = 1.0;
+        };
+        dock = {
+          shadow = false;
+          blur-background = false;
+          clip-shadow-above = true;
+        };
+        dnd = {
+          opacity = 1.0;
+          shadow = false;
+          blur-background = false;
+        };
+        popup_menu = {
+          opacity = 1.0;
+          shadow = false;
+          blur-background = false;
+        };
+        dropdown_menu = {
+          opacity = 1.0;
+          shadow = false;
+          blur-background = false;
+        };
+      };
     };
   };
 
@@ -241,7 +310,8 @@
     enable = true;
     image = ../../home/wallpapers/default.svg;
     polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/classic-dark.yaml";
+    # base16Scheme = "${pkgs.base16-schemes}/share/themes/classic-dark.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
     cursor.size = 24;
 
@@ -273,6 +343,13 @@
         name = "Noto Color Emoji";
       };
     };
+
+    targets = {
+      neovim.transparentBackground = {
+        main = true;
+        signColumn = true;
+      };
+    };
   };
 
   fonts.fontconfig = {
@@ -284,4 +361,6 @@
       emoji = ["Noto Color Emoji"];
     };
   };
+
+  xdg.enable = true;
 }

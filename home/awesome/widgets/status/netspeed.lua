@@ -4,7 +4,7 @@ local beautiful = require("beautiful")
 
 local M = {}
 
-function M.create_widget(widget_container)
+function M.netspeed_widget()
 	local speed_widget = wibox.widget({
 		{
 			id = "txt",
@@ -12,8 +12,6 @@ function M.create_widget(widget_container)
 		},
 		layout = wibox.layout.fixed.horizontal,
 	})
-
-	local container = widget_container(speed_widget)
 
 	local function get_network_traffic(interface)
 		local rx_path = "/sys/class/net/" .. interface .. "/statistics/rx_bytes"
@@ -49,7 +47,7 @@ function M.create_widget(widget_container)
 	local interface = get_active_interface()
 	if not interface then
 		speed_widget:get_children_by_id("txt")[1]:set_text("No active interface")
-		return container
+		return speed_widget
 	end
 
 	local rx_prev, tx_prev = get_network_traffic(interface)
@@ -83,7 +81,7 @@ function M.create_widget(widget_container)
 		end
 
 		local formatted_speed = format_speed(speed)
-		widget:get_children_by_id("txt")[1]:set_text(string.format("%s %s", direction, formatted_speed))
+		widget:get_children_by_id("txt")[1]:set_text(string.format("%s %s", formatted_speed, direction))
 
 		rx_prev, tx_prev = rx_now, tx_now
 	end
@@ -102,7 +100,7 @@ function M.create_widget(widget_container)
 		speed_widget
 	)
 
-	return container
+	return speed_widget
 end
 
 return M

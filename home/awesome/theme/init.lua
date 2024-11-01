@@ -7,10 +7,13 @@ local xresources = require("beautiful.xresources")
 local rnotification = require("ruled.notification")
 local dpi = xresources.apply_dpi
 
+local gears = require("gears")
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
 
-local colors = require("theme.colors")
+-- local colors = require("theme.colors")
+
+local colors = dofile(gfs.get_xdg_config_home() .. "stylix/palette.lua")
 
 local theme = {}
 
@@ -18,7 +21,7 @@ theme.colors = colors
 theme.dpi = dpi
 
 -- theme.font = "sans 8"
--- theme.font = "Inter 9"
+theme.font = "Inter 8"
 
 theme.bg_normal = colors.base01
 theme.bg_focus = colors.base02
@@ -53,9 +56,27 @@ theme.systray_icon_spacing = dpi(6)
 --theme.taglist_bg_focus = "#ff0000"
 
 -- Generate taglist squares:
-local taglist_square_size = dpi(4)
-theme.taglist_squares_sel = theme_assets.taglist_squares_sel(taglist_square_size, theme.fg_normal)
-theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(taglist_square_size, theme.fg_normal)
+-- local taglist_square_size = dpi(4)
+-- theme.taglist_squares_sel = theme_assets.taglist_squares_sel(taglist_square_size, theme.fg_normal)
+-- theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(taglist_square_size, theme.fg_normal)
+
+theme.taglist_fg_focus = theme.bg_focus
+theme.taglist_bg_focus = theme.fg_focus
+theme.taglist_bg_occupied = theme.bg_focus
+theme.taglist_fg_empty = theme.bg_focus
+theme.taglist_spacing = dpi(2)
+
+theme.taglist_shape = function(cr, width, height)
+	gears.shape.rounded_rect(cr, width, height, 2)
+end
+
+theme.tasklist_bg_normal = theme.bg_focus
+theme.tasklist_disable_icon = true
+theme.tasklist_spacing = dpi(4)
+
+theme.tasklist_shape = function(cr, width, height)
+	gears.shape.rounded_rect(cr, width, height, 2)
+end
 
 -- Variables set for theming notifications:
 -- notification_font

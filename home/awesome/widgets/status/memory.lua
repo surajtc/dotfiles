@@ -3,18 +3,16 @@ local watch = require("awful.widget.watch")
 
 local M = {}
 
-function M.create_widget(widget_container)
-	local ram_widget = wibox.widget({
+function M.memory_widget()
+	local widget = wibox.widget({
 		{
-			id = "txt",
+			id = "text_role",
 			widget = wibox.widget.textbox,
 		},
 		layout = wibox.layout.fixed.horizontal,
 	})
 
-	local container = widget_container(ram_widget)
-
-	local function update_widget(widget, stdout)
+	local function update_widget(w, stdout)
 		local total, used, free, shared, buff_cache, available =
 			stdout:match("(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)")
 
@@ -30,12 +28,12 @@ function M.create_widget(widget_container)
 			used_formatted = string.format("%.2f MB", used)
 		end
 
-		widget:get_children_by_id("txt")[1]:set_text(string.format(" %s", used_formatted))
+		w:get_children_by_id("text_role")[1]:set_text(string.format("%s", used_formatted))
 	end
 
-	watch("free -m", 5, update_widget, ram_widget)
+	watch("free -m", 5, update_widget, widget)
 
-	return container
+	return widget
 end
 
 return M
