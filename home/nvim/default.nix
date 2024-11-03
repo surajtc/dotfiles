@@ -17,7 +17,9 @@
       {
         plugin = nvim-web-devicons;
         config = ''
-          require("nvim-web-devicons").setup({})
+          require("nvim-web-devicons").setup({
+            color_icons = false,
+            })
         '';
         type = "lua";
       }

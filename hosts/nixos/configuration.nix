@@ -57,8 +57,6 @@
   };
 
   services = {
-    jenkins.enable = true;
-
     xserver = {
       enable = true;
       xkb.layout = "us";
@@ -194,11 +192,11 @@
   };
 
   powerManagement.enable = true;
-  # virtualisation.docker.enable = true;
+  virtualisation.docker.enable = true;
   virtualisation.containers.enable = true;
-  virtualisation.podman.enable = true;
-  virtualisation.podman.dockerCompat = true;
-  virtualisation.podman.defaultNetwork.settings.dns_enabled = true;
+  # virtualisation.podman.enable = true;
+  # virtualisation.podman.dockerCompat = true;
+  # virtualisation.podman.defaultNetwork.settings.dns_enabled = true;
 
   users.users.${vars.userName} = {
     isNormalUser = true;

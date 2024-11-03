@@ -21,13 +21,13 @@ theme.colors = colors
 theme.dpi = dpi
 
 -- theme.font = "sans 8"
-theme.font = "Inter 8"
+theme.font = "Inter 9"
 
 theme.bg_normal = colors.base01
 theme.bg_focus = colors.base02
 theme.bg_urgent = colors.base09
 theme.bg_minimize = colors.base01
-theme.bg_systray = theme.bg_normal
+theme.bg_systray = colors.base02
 
 theme.fg_normal = colors.base04
 theme.fg_focus = colors.base0D
@@ -40,7 +40,7 @@ theme.border_color_normal = colors.base03
 theme.border_color_active = colors.base0D
 theme.border_color_marked = colors.base08
 
-theme.systray_icon_spacing = dpi(6)
+theme.systray_icon_spacing = dpi(4)
 
 -- theme.wibar_margins = { left = dpi(8), right = dpi(8), top = dpi(2) }
 -- There are other variable sets
@@ -124,7 +124,7 @@ theme.titlebar_maximized_button_normal_active = themes_path .. "default/titlebar
 theme.titlebar_maximized_button_focus_active = themes_path .. "default/titlebar/maximized_focus_active.png"
 
 theme.wallpaper = gfs.get_xdg_config_home() .. "awesome/theme/background.svg"
-theme.wallpaper_bg = colors.base01
+theme.wallpaper_bg = colors.base02
 theme.menu_icon = gfs.get_xdg_config_home() .. "awesome/theme/icons/nix.svg"
 
 -- You can use your own layout icons like this:

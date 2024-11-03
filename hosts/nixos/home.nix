@@ -9,9 +9,10 @@
   imports = [
     ../../home/awesome
     ../../home/nvim
-    # ../../home/tmux
-    ../../home/zellij
+    ../../home/tmux
+    # ../../home/zellij
     ../../home/firefox
+    # ../../home/yazi
   ];
 
   home.username = "${vars.userName}";
@@ -42,7 +43,6 @@
     xclip
     xsel
     fd
-    yazi
 
     # glib
     # gtk3
@@ -310,8 +310,7 @@
     enable = true;
     image = ../../home/wallpapers/default.svg;
     polarity = "dark";
-    # base16Scheme = "${pkgs.base16-schemes}/share/themes/classic-dark.yaml";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/classic-dark.yaml";
 
     cursor.size = 24;
 

@@ -12,8 +12,6 @@ local mod = require("bindings.mod")
 local status_widget = require("widgets.utils").status_widget
 local separator = require("widgets.utils").separator()
 
-local config_dir = gears.filesystem.get_configuration_dir()
-
 _m.awesomemenu = {
 	{
 		"hotkeys",
@@ -209,6 +207,25 @@ local cpu = require("widgets.status.cpu").cpu_widget()
 local memory = require("widgets.status.memory").memory_widget()
 local netspeed = require("widgets.status.netspeed").netspeed_widget()
 
+local systray_container = wibox.widget({
+	{
+		{
+			wibox.widget.systray(),
+			top = beautiful.dpi(2),
+			bottom = beautiful.dpi(2),
+			left = beautiful.dpi(6),
+			right = beautiful.dpi(6),
+			widget = wibox.container.margin,
+		},
+		bg = beautiful.bg_focus, -- Green background color
+		shape = function(cr, width, height)
+			gears.shape.rounded_rect(cr, width, height, 2) -- 4px corner radius
+		end,
+		widget = wibox.container.background,
+	},
+	widget = wibox.container.place,
+})
+
 function _m.create_wibox(s)
 	return awful.wibar({
 		position = "top",
@@ -239,7 +256,8 @@ function _m.create_wibox(s)
 					status_widget(memory, "memory"),
 					status_widget(netspeed, "netspeed"),
 					separator,
-					wibox.widget.systray(),
+					-- _m.systray,
+					systray_container,
 					separator,
 					s.layoutbox,
 					layout = wibox.layout.fixed.horizontal,

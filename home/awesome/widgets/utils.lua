@@ -13,8 +13,8 @@ function _m.status_widget(textbox, icon)
 				{
 					image = icons_dir .. icon .. ".svg",
 					stylesheet = "svg { fill: " .. beautiful.fg_focus .. "; }",
-					forced_height = beautiful.dpi(11),
-					forced_width = beautiful.dpi(11),
+					forced_height = beautiful.dpi(12),
+					forced_width = beautiful.dpi(12),
 					valign = "center",
 					widget = wibox.widget.imagebox,
 				},
