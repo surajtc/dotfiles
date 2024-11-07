@@ -27,6 +27,7 @@ vim.keymap.set("n", "<leader>ee", "<cmd>Neotree toggle reveal<CR>", { desc = "To
 -- Buffer
 vim.keymap.set("n", "[b", "<cmd>bprev<CR>", { desc = "Previous buffer" })
 vim.keymap.set("n", "]b", "<cmd>bnext<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "<leader>bw", "<cmd>confirm bufdo bwipeout<CR>", { desc = "[B]uffer [W]ipe all" })
 
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })

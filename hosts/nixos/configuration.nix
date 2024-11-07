@@ -59,6 +59,9 @@
   services = {
     xserver = {
       enable = true;
+
+      excludePackages = [pkgs.xterm];
+
       xkb.layout = "us";
 
       displayManager.lightdm = {
@@ -67,10 +70,16 @@
           display-setup-script=${pkgs.autorandr}/bin/autorandr --change
         '';
       };
+
+      dpi = 96;
+
       displayManager.sessionCommands = ''
         xset s off
         xset -dpms
         xset s noblank
+      '';
+
+      displayManager.setupCommands = ''
         ${pkgs.autorandr}/bin/autorandr --change
       '';
 
@@ -83,6 +92,8 @@
           luajitPackages.lgi
         ];
       };
+
+      videoDrivers = ["nvidia"];
     };
 
     displayManager.defaultSession = "none+awesome";
@@ -124,6 +135,41 @@
             };
 
             eDP-1 = {
+              enable = true;
+              mode = "1920x1200";
+              position = "2560x0";
+              rate = "59.95";
+            };
+          };
+        };
+        "laptop-gpu" = {
+          fingerprint = {
+            eDP-1-1 = "00ffffffffffff004d101515000000000d1f0104a52215780ede50a3544c99260f505400000001010101010101010101010101010101283c80a070b023403020360050d210000018203080a070b023403020360050d210000018000000fe00445737584e814c513135364e31000000000002410332001200000a010a202000d1";
+          };
+          config = {
+            eDP-1-1 = {
+              enable = true;
+              mode = "1920x1200";
+              position = "0x0";
+              rate = "59.95";
+            };
+          };
+        };
+        "dock-gpu" = {
+          fingerprint = {
+            DP-1-3 = "00ffffffffffff001c5418270101010116200104b53c2278fb8cb5af4f43ab260e50543fcf0081809500b300d1c0714f81c081400101565e00a0a0a029503020350055502100001a000000fd0c30a505055a010a202020202020000000fc004d32375120500a202020202020000000ff003232323233423030303037380a02ae02032ef1480313042f1f10403f23090707830100006d1a0000020130a5000000000000e305c000e606070160574f09ec00a0a0a067503020350055502100001a6fc200a0a0a055503020350055502100001a5a8780a070384d403020350055502100001a0000000000000000000000000000000000000000000000000000003770127903000301143d110104ff099f002f801f009f0576000200040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007290";
+            eDP-1-1 = "00ffffffffffff004d101515000000000d1f0104a52215780ede50a3544c99260f505400000001010101010101010101010101010101283c80a070b023403020360050d210000018203080a070b023403020360050d210000018000000fe00445737584e814c513135364e31000000000002410332001200000a010a202000d1";
+          };
+          config = {
+            DP-1-3 = {
+              enable = true;
+              primary = true;
+              mode = "2560x1440";
+              position = "0x0";
+              rate = "59.95";
+            };
+
+            eDP-1-1 = {
               enable = true;
               mode = "1920x1200";
               position = "2560x0";
@@ -185,13 +231,29 @@
         vpl-gpu-rt
       ];
     };
+
+    nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
+      open = false;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+      prime = {
+        sync.enable = true;
+
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
+    };
   };
   security = {
     rtkit.enable = true;
     polkit.enable = true;
   };
 
-  powerManagement.enable = true;
+  powerManagement.enable = false;
   virtualisation.docker.enable = true;
   virtualisation.containers.enable = true;
   # virtualisation.podman.enable = true;

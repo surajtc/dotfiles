@@ -10,9 +10,8 @@
     ../../home/awesome
     ../../home/nvim
     ../../home/tmux
-    # ../../home/zellij
     ../../home/firefox
-    # ../../home/yazi
+    ../../home/nnn
   ];
 
   home.username = "${vars.userName}";
@@ -32,7 +31,12 @@
     xdotool
 
     # TODO: Move this to devShells
-    python3
+    # python3
+    (python3.withPackages (ps:
+      with ps; [
+        pip
+        distutils
+      ]))
     nodejs
     pnpm
     yarn
@@ -56,16 +60,7 @@
     steam-run
     noto-fonts
     (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
-
-    # (pkgs.callPackage ../../home/patched-inter.nix {})
   ];
-
-  # home.file = {
-  #   ".config/awesome" = {
-  #     source = ../../home/awesome;
-  #     recursive = true;
-  #   };
-  # };
 
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -96,7 +91,7 @@
     history.ignoreDups = true;
     history.ignoreAllDups = true;
     history.ignoreSpace = true;
-    # prezto.tmux.autoStartLocal = true;
+    historySubstringSearch.enable = true;
 
     defaultKeymap = "emacs";
 
@@ -109,11 +104,10 @@
       ga = "git add .";
       gc = "git commit -m";
       gp = "git push -u origin";
+      gs = "git status";
 
       nixedit = "cd /etc/dotfiles && nvim";
       nixrebuild = "sudo nixos-rebuild switch --show-trace --flake .";
-
-      cy = "steam-run npx cypress open --env configFile=";
 
       cattlabvpn = "sudo OPENSSL_CONF=/etc/openconnect/openssl.conf openconnect --user=stelugar --csd-wrapper=/etc/openconnect/csd-post.sh vpn.cattlab.umd.edu";
     };
@@ -123,13 +117,6 @@
 
   programs.starship.enable = true;
 
-  # programs.neovim = {
-  # enable = true;
-  # defaultEditor = true;
-  # viAlias = true;
-  # vimAlias = true;
-  # };
-
   programs.kitty = {
     enable = true;
     settings = {
@@ -137,8 +124,6 @@
       window_padding_width = 10;
       enable_audio_bell = "no";
       shell = "zsh";
-
-      # background = lib.mkForce "${config.lib.stylix.colors.withHashtag.base08}";
     };
   };
 
@@ -205,11 +190,6 @@
     ];
   };
 
-  xsession.initExtra = ''
-    xset s off
-    xset -dpms
-    xset s noblank
-  '';
   services.picom = {
     enable = true;
     backend = "glx";
