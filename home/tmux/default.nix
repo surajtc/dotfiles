@@ -29,8 +29,7 @@
 
       set -g status-style bg="${colors.base01}"
 
-      set -g status-left-style "fg=${colors.base00} bg=${colors.base0D}"
-      set -g status-left "  #S "
+      set -g status-left "#{?client_prefix,#[bg=${colors.base0A}],#[bg=${colors.base0D}]}#[fg=${colors.base00}]  #S "
 
       setw -g window-status-current-style "fg=${colors.base04} bg=${colors.base02}"
       set-window-option -g window-status-current-format " #I:#W "
@@ -42,6 +41,9 @@
     '';
   };
 }
+
+# set -g status-left "  #S "
+# set -g status-left-style "fg=${colors.base00} bg=${colors.base0A}"
 # set-option -g status-position top
 # bind-key -T copy-mode-vi v send-keys -X begin-selection
 # bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
