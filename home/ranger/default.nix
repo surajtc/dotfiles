@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  programs.nnn = {
+  programs.ranger = {
     enable = true;
   };
 }

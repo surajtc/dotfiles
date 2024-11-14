@@ -11,7 +11,7 @@
     ../../home/nvim
     ../../home/tmux
     ../../home/firefox
-    ../../home/nnn
+    ../../home/ranger
   ];
 
   home.username = "${vars.userName}";
@@ -60,6 +60,8 @@
     steam-run
     noto-fonts
     (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
+
+    postman
   ];
 
   home.sessionVariables = {

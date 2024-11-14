@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   programs.tmux = {
     enable = true;
     shell = "${pkgs.zsh}/bin/zsh";
@@ -14,19 +18,31 @@
       # yank
       vim-tmux-navigator
     ];
-
-    extraConfig = ''
-      set-option -g status-position top
-
+    extraConfig = let
+      colors = config.lib.stylix.colors.withHashtag;
+    in ''
       bind '"' split-window -v -c "#{pane_current_path}"
       bind % split-window -h -c "#{pane_current_path}"
       bind c new-window -c "#{pane_current_path}"
 
       bind -n C-l send-keys C-l
 
+      set -g status-style bg="${colors.base01}"
+
+      set -g status-left-style "fg=${colors.base00} bg=${colors.base0D}"
+      set -g status-left "  #S "
+
+      setw -g window-status-current-style "fg=${colors.base04} bg=${colors.base02}"
+      set-window-option -g window-status-current-format " #I:#W "
+      setw -g window-status-style "fg=${colors.base04}"
+      set-window-option -g window-status-format " #I:#W "
+
+      set -g status-right-style "fg=${colors.base03}"
+      set -g status-right "#{?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,} #{=21:pane_title} "
     '';
   };
 }
+# set-option -g status-position top
 # bind-key -T copy-mode-vi v send-keys -X begin-selection
 # bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
 # bind-key -T comp-mode-vi y send-keys -X copy-selection-and-cancel

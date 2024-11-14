@@ -1,13 +1,66 @@
 local colors = require("mini.base16").config.palette
 
+vim.api.nvim_set_hl(0, "MsgArea", { fg = colors.base03 })
+vim.api.nvim_set_hl(0, "WinSeparator", { fg = colors.base03 })
+vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = colors.base0D })
+vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.base07, bg = colors.base01 })
+vim.api.nvim_set_hl(0, "CursorLine", { bg = colors.base00 })
+vim.api.nvim_set_hl(0, "NeoTreeCursorLine", { bg = colors.base01 })
+
+local lualine_theme = {
+	normal = {
+		a = { fg = colors.base00, bg = colors.base0D, gui = "bold" },
+		b = { fg = colors.base04, bg = colors.base02 },
+		c = { fg = colors.base04, bg = colors.base01 },
+	},
+	insert = {
+		a = { fg = colors.base00, bg = colors.base0B, gui = "bold" },
+		b = { fg = colors.base04, bg = colors.base02 },
+	},
+	visual = {
+		a = { fg = colors.base00, bg = colors.base0E, gui = "bold" },
+		b = { fg = colors.base04, bg = colors.base02 },
+	},
+	replace = {
+		a = { fg = colors.base00, bg = colors.base08, gui = "bold" },
+		b = { fg = colors.base04, bg = colors.base02 },
+	},
+	command = {
+		a = { fg = colors.base00, bg = colors.base0A, gui = "bold" },
+		b = { fg = colors.base04, bg = colors.base02 },
+	},
+	inactive = {
+		a = { fg = colors.base04, bg = colors.base01 },
+		b = { fg = colors.base04, bg = colors.base01 },
+		c = { fg = colors.base04, bg = colors.base01 },
+	},
+}
+
+local arrow_status = require("arrow.statusline")
+
 require("lualine").setup({
 	options = {
-		theme = "auto",
+		theme = lualine_theme,
 		component_separators = "",
 		section_separators = "",
 		globalstatus = true,
 		disabled_filetypes = {
 			winbar = { "neo-tree" },
+		},
+	},
+	tabline = {
+		lualine_a = {
+			{
+				"tabs",
+				use_mode_colors = true,
+			},
+		},
+		lualine_b = {
+			{
+				"buffers",
+				icons_enabled = false,
+				symbols = { alternate_file = "" },
+			},
 		},
 	},
 	sections = {
@@ -20,28 +73,15 @@ require("lualine").setup({
 		lualine_b = { "branch" },
 		lualine_c = {
 			{
-				"buffers",
-				icons_enabled = false,
-				symbols = { alternate_file = "" },
-				buffers_color = {
-					active = { fg = colors.base05, bg = colors.base03 },
-					inactive = { fg = colors.base04 },
-				},
+				"filename",
+				fmt = function(str)
+					if arrow_status.is_on_arrow_file() then
+						return " (" .. arrow_status.text_for_statusline() .. ") " .. str
+					end
+					return str
+				end,
 			},
 		},
 		lualine_x = { "diff", "diagnostics", "searchcount", "selectioncount" },
 	},
-	winbar = {
-		lualine_b = { { "filename", path = 1, newfile_status = true, color = { bg = colors.base01 } } },
-	},
-	inactive_winbar = {
-		lualine_c = { { "filename", path = 1, newfile_status = true, color = { fg = colors.base04, bg = colors.base01 } } },
-	},
 })
-
-vim.api.nvim_set_hl(0, "MsgArea", { fg = colors.base03 })
-vim.api.nvim_set_hl(0, "WinSeparator", { fg = colors.base03 })
-vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = colors.base0D })
-vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.base0D, bg = colors.base01 })
-vim.api.nvim_set_hl(0, "CursorLine", { bg = colors.base00 })
-vim.api.nvim_set_hl(0, "NeoTreeCursorLine", { bg = colors.base01 })
