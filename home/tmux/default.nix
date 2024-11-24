@@ -25,8 +25,6 @@
       bind % split-window -h -c "#{pane_current_path}"
       bind c new-window -c "#{pane_current_path}"
 
-      bind -n C-l send-keys C-l
-
       set -g status-style bg="${colors.base01}"
 
       set -g status-left "#{?client_prefix,#[bg=${colors.base0A}],#[bg=${colors.base0D}]}#[fg=${colors.base00}]  #S "
@@ -41,9 +39,7 @@
     '';
   };
 }
-
-# set -g status-left "  #S "
-# set -g status-left-style "fg=${colors.base00} bg=${colors.base0A}"
+# bind -n C-x-L send-keys C-l
 # set-option -g status-position top
 # bind-key -T copy-mode-vi v send-keys -X begin-selection
 # bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle

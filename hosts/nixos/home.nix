@@ -36,6 +36,21 @@
       with ps; [
         pip
         distutils
+        jupyter
+        ipython
+        numpy
+        pandas
+        tqdm
+        nanoid
+        requests
+        scikit-learn
+        matplotlib
+        seaborn
+        plotly
+        pillow
+        beautifulsoup4
+        black
+        mypy
       ]))
     nodejs
     pnpm
@@ -100,6 +115,7 @@
     cdpath = ["$HOME/Documents" "$HOME/Documents/CodeBase"];
 
     shellAliases = {
+      c = "clear";
       ll = "ls -la";
       ee = "tree -L 3";
 

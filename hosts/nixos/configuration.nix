@@ -57,6 +57,7 @@
   };
 
   services = {
+    libinput.touchpad.naturalScrolling = true;
     xserver = {
       enable = true;
 

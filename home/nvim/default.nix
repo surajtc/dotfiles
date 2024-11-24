@@ -106,6 +106,8 @@
       nodePackages.typescript-language-server
       tailwindcss-language-server
 
+      astro-language-server
+
       alejandra
 
       pyright

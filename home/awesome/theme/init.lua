@@ -23,8 +23,8 @@ theme.dpi = dpi
 -- theme.font = "sans 8"
 theme.font = "Inter 8"
 
-theme.bg_normal = colors.base01
-theme.bg_focus = colors.base02
+theme.bg_normal = colors.base00
+theme.bg_focus = colors.base01
 theme.bg_urgent = colors.base09
 theme.bg_minimize = colors.base01
 theme.bg_systray = colors.base02

@@ -16,6 +16,7 @@ require("conform").setup({
 		jsonc = { "prettierd", "prettier" },
 		yaml = { "prettierd", "prettier" },
 		markdown = { "prettierd", "prettier" },
+		astro = { "prettierd", "prettier" },
 		["markdown.mdx"] = { "prettierd", "prettier" },
 		nix = { "alejandra" },
 	},
