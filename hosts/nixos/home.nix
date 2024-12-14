@@ -78,7 +78,8 @@
 
     steam-run
     noto-fonts
-    (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
+    # (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
+    nerd-fonts.symbols-only
 
     postman
   ];
@@ -335,7 +336,8 @@
       };
 
       monospace = {
-        package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
+        # package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
+        package = pkgs.nerd-fonts.jetbrains-mono;
         name = "JetBrainsMono Nerd Font";
       };
 
