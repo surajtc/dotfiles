@@ -12,6 +12,7 @@
 
   boot = {
     kernelParams = ["i915.force_probe=46a6"];
+    supportedFilesystems = ["ntfs"];
     extraModprobeConfig = ''
       options iwlwifi power_save=1 disable_11ax=1
     '';
@@ -58,6 +59,7 @@
 
   services = {
     libinput.touchpad.naturalScrolling = true;
+    udisks2.enable = true;
     xserver = {
       enable = true;
 

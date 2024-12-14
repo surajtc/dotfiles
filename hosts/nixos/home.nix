@@ -12,6 +12,7 @@
     ../../home/tmux
     ../../home/firefox
     ../../home/ranger
+    ../../home/rofi
   ];
 
   home.username = "${vars.userName}";
@@ -29,6 +30,9 @@
     bc
 
     xdotool
+
+    geeqie
+    zathura
 
     # TODO: Move this to devShells
     # python3
