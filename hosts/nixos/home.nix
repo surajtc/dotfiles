@@ -28,24 +28,29 @@
     flameshot
     brightnessctl
     bc
+    gcc
 
     xdotool
 
     geeqie
     zathura
 
+    remmina
+    pgadmin4-desktopmode
+
+    sass
+
     # TODO: Move this to devShells
     # python3
     (python3.withPackages (ps:
       with ps; [
+        uv
         pip
-        distutils
         jupyter
         ipython
         numpy
         pandas
         tqdm
-        nanoid
         requests
         scikit-learn
         matplotlib
@@ -56,6 +61,7 @@
         black
         mypy
       ]))
+
     nodejs
     pnpm
     yarn
@@ -86,6 +92,9 @@
 
   home.sessionVariables = {
     EDITOR = "nvim";
+
+    CM_LAUNCHER = "rofi";
+
     CYPRESS_INSTALL_BINARY = 0;
     CYPRESS_RUN_BINARY = "${pkgs.cypress}/bin/Cypress";
   };

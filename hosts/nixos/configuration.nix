@@ -60,6 +60,8 @@
   services = {
     libinput.touchpad.naturalScrolling = true;
     udisks2.enable = true;
+    clipmenu.enable = true;
+
     xserver = {
       enable = true;
 

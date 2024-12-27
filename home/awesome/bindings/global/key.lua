@@ -60,6 +60,12 @@ awful.keyboard.append_global_keybindings({
 		description = "take screenshot and copy to clipboard",
 		group = "utils",
 	}),
+	awful.key({ mod.super }, "v", function()
+		awful.spawn("copyq toggle")
+	end, {
+		description = "show clipboard history using copyq",
+		group = "utils",
+	}),
 	awful.key({}, "XF86MonBrightnessUp", function()
 		awful.spawn("brightnessctl set 5%+")
 	end, {

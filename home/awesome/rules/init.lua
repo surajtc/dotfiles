@@ -53,7 +53,11 @@ ruled.client.connect_signal("request::rules", function()
 
 	ruled.client.append_rule({
 		id = "picture_in_picture",
-		rule_any = { role = { "PictureInPicture" }, name = { "Picture-in-Picture", "Picture in picture" } },
+		rule_any = {
+			role = { "PictureInPicture" },
+			name = { "Picture-in-Picture", "Picture in picture" },
+			class = { "mpv" },
+		},
 		properties = {
 			floating = true,
 			sticky = true,
