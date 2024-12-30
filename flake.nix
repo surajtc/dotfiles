@@ -61,6 +61,9 @@
           ]
           ++ extraModules;
       };
+
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
   in {
     nixosConfigurations = {
       # machine = mkSystem {
@@ -81,6 +84,42 @@
             nixpkgs.overlays = [inputs.nixpkgs-f2k.overlays.window-managers];
           }
         ];
+      };
+    };
+
+    devShells.${system} = {
+      default = pkgs.buildFHSEnv {
+        name = "python-dev";
+        packages = with pkgs; [
+          (python3.withPackages (ps:
+            with ps; [
+              pandas
+              numpy
+              requests
+              pip
+              uv
+            ]))
+        ];
+
+        shellHook = ''
+          echo "Python development environment activated"
+          echo "Python version: $(python --version)"
+        '';
+      };
+
+      cypress = pkgs.buildFHSEnv {
+        name = "cypress-dev";
+        targetPkgs = pkgs:
+          with pkgs; [
+            nodejs
+            pnpm
+            yarn
+          ];
+
+        shellHook = ''
+          echo "Node development environment activated"
+          echo "Node version: $(node --version)"
+        '';
       };
     };
   };
