@@ -17,7 +17,13 @@
       options iwlwifi power_save=1 disable_11ax=1
     '';
     loader = {
-      systemd-boot.enable = true;
+      grub.enable = true;
+      grub.efiSupport = true;
+      grub.devices = ["nodev"];
+      grub.useOSProber = true;
+      grub.default = "saved";
+
+      # systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
   };
