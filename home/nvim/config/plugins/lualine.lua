@@ -8,6 +8,8 @@ vim.api.nvim_set_hl(0, "CursorLine", { bg = colors.base00 })
 vim.api.nvim_set_hl(0, "NeoTreeCursorLine", { bg = colors.base01 })
 vim.api.nvim_set_hl(0, "SnacksIndent", { fg = colors.base02 })
 vim.api.nvim_set_hl(0, "SnacksIndentScope", { fg = colors.base03 })
+vim.api.nvim_set_hl(0, "FloatBorder", { fg = colors.base0D })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = colors.base00 })
 
 local lualine_theme = {
 	normal = {

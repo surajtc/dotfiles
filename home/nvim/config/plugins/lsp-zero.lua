@@ -1,5 +1,9 @@
 local lsp_zero = require("lsp-zero")
 
+vim.keymap.set("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
+vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
+vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
+
 -- lsp_attach is where you enable features that only work
 -- if there is a language server active in the file
 local lsp_attach = function(_, bufnr)
@@ -29,9 +33,29 @@ require("lspconfig").tailwindcss.setup({})
 require("lspconfig").pyright.setup({})
 require("lspconfig").astro.setup({})
 
-local cmp = require("blink.cmp")
+local blink_cmp = require("blink.cmp")
 
-cmp.setup()
+blink_cmp.setup({
+	cmdline = {
+		enabled = false,
+	},
+	completion = {
+		menu = {
+			draw = {
+				columns = {
+					{ "kind_icon" },
+					{ "label", "label_description", gap = 2 },
+					{ "source_name" },
+				},
+				treesitter = { "lsp" },
+			},
+		},
+	},
+	keymap = {
+		preset = "default",
+	},
+	signature = { enabled = true },
+})
 
 require("nvim-treesitter.configs").setup({
 	highlight = {
