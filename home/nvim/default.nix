@@ -94,6 +94,8 @@
 
     extraPackages = with pkgs; [
       gcc
+      ripgrep
+      fzf
 
       stylua
       lua-language-server
