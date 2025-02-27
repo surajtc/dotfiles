@@ -9,20 +9,12 @@
 
     plugins = with pkgs.vimPlugins; [
       nvim-treesitter.withAllGrammars
-
-      mini-base16
-
       vim-tmux-navigator
 
-      {
-        plugin = nvim-web-devicons;
-        config = ''
-          require("nvim-web-devicons").setup({
-            color_icons = false,
-            })
-        '';
-        type = "lua";
-      }
+      mini-base16
+      mini-icons
+
+      snacks-nvim
 
       {
         plugin = lualine-nvim;
@@ -45,14 +37,9 @@
         type = "lua";
       }
 
-      nvim-cmp
-      cmp-nvim-lsp
-      cmp-buffer
-      cmp-path
-      luasnip
-      cmp_luasnip
       friendly-snippets
       nvim-lspconfig
+      blink-cmp
       {
         plugin = lsp-zero-nvim;
         config = builtins.readFile config/plugins/lsp-zero.lua;
@@ -62,12 +49,6 @@
       {
         plugin = conform-nvim;
         config = builtins.readFile config/plugins/conform.lua;
-        type = "lua";
-      }
-
-      {
-        plugin = indent-blankline-nvim;
-        config = builtins.readFile config/plugins/indent-blankline.lua;
         type = "lua";
       }
 
@@ -90,6 +71,7 @@
       ${builtins.readFile config/options.lua}
       ${builtins.readFile config/mappings.lua}
       ${builtins.readFile config/debug.lua}
+      ${builtins.readFile config/plugins/snacks.lua}
     '';
 
     extraPackages = with pkgs; [

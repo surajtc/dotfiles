@@ -2,7 +2,7 @@ local lsp_zero = require("lsp-zero")
 
 -- lsp_attach is where you enable features that only work
 -- if there is a language server active in the file
-local lsp_attach = function(client, bufnr)
+local lsp_attach = function(_, bufnr)
 	local opts = { buffer = bufnr }
 
 	vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
@@ -20,7 +20,7 @@ end
 lsp_zero.extend_lspconfig({
 	sign_text = true,
 	lsp_attach = lsp_attach,
-	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+	capabilities = require("blink.cmp").get_lsp_capabilities(),
 })
 
 require("lspconfig").lua_ls.setup({})
@@ -29,27 +29,9 @@ require("lspconfig").tailwindcss.setup({})
 require("lspconfig").pyright.setup({})
 require("lspconfig").astro.setup({})
 
-local cmp = require("cmp")
+local cmp = require("blink.cmp")
 
-cmp.setup({
-	sources = {
-		{ name = "nvim_lsp" },
-		{ name = "luasnip", keyword_length = 2 },
-		{ name = "buffer", keyword_length = 3 },
-		{ name = "path" },
-	},
-	snippet = {
-		expand = function(args)
-			-- You need Neovim v0.10 to use vim.snippet
-			vim.snippet.expand(args.body)
-		end,
-	},
-	mapping = cmp.mapping.preset.insert({
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<C-u>"] = cmp.mapping.scroll_docs(-4),
-		["<C-d>"] = cmp.mapping.scroll_docs(4),
-	}),
-})
+cmp.setup()
 
 require("nvim-treesitter.configs").setup({
 	highlight = {
