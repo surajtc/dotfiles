@@ -19,10 +19,20 @@ in {
   boot = {
     kernelParams = ["i915.force_probe=46a6"];
     supportedFilesystems = ["ntfs"];
+    extraModprobeConfig = ''
+      options iwlwifi power_save=1 disable_11ax=1
+    '';
   };
 
-  boot.loader.systemd-boot.enable = true;
+  # boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    devices = ["nodev"];
+    default = "saved";
+    useOSProber = true;
+  };
 
   networking.hostName = "machine"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -129,6 +139,23 @@ in {
     extraPackages = with pkgs; [
       vpl-gpu-rt
     ];
+  };
+
+  services.xserver.videoDrivers = ["nvidia"];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+    prime = {
+      sync.enable = true;
+
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
   };
 
   virtualisation.docker.enable = true;

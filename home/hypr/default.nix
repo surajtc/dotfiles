@@ -47,6 +47,9 @@
         export XDG_CURRENT_DESKTOP=Hyprland
         export XDG_SESSION_TYPE=wayland
         export XDG_SESSION_DESKTOP=Hyprland
+
+        LIBVA_DRIVER_NAME,nvidia
+        __GLX_VENDOR_LIBRARY_NAME,nvidia
       '';
     };
   };
@@ -119,10 +122,10 @@
 
       bind =
         [
-          "$mod, Return, exec, uwsm app -- kitty.desktop"
-          "$mod, E, exec, uwsm app -- nautilus"
-          "$mod, B, exec, uwsm app -- firefox.desktop"
-          "$mod SHIFT, B, exec, uwsm app -- chromium"
+          "$mod, Return, exec, uwsm-app -- kitty.desktop"
+          "$mod, E, exec, uwsm-app -- nautilus"
+          "$mod, B, exec, uwsm-app -- firefox.desktop"
+          "$mod SHIFT, B, exec, uwsm-app -- chromium"
 
           "$mod, P, exec, anyrun"
           "$mod SHIFT, P, exec, grim -g \"$(slurp -d)\" - | wl-copy"
