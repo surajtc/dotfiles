@@ -21,10 +21,9 @@ vim.keymap.set({ "n", "v" }, "<leader>ft", function()
 	})
 end, { desc = "[F]orma[T] File" })
 
--- Neo-tree
--- vim.keymap.set("n", "<leader>ee", "<cmd>Neotree toggle reveal<CR>", { desc = "Toggle Neo Tr[E][E]" })
-
-vim.keymap.set("n", "<leader>ee", "<cmd>Oil --float .<CR>", { desc = "Toggle Neo Tr[E][E]" })
+vim.keymap.set("n", "<leader>ee", function()
+	require("oil").toggle_float()
+end, { desc = "Toggle Oil" })
 
 -- Buffer
 vim.keymap.set("n", "[b", "<cmd>bprev<CR>", { desc = "Previous buffer" })
