@@ -150,6 +150,11 @@ in {
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
+    # To test if prime is working use the following
+    # cat /sys/module/nvidia_drm/parameters/modeset
+    # Should output "Y"
+    # __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia glxinfo -B | grep "OpenGL renderer"
+    # NVIDIA GPU should show NVIDIA
     prime = {
       sync.enable = true;
 
