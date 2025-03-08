@@ -35,6 +35,8 @@
     p7zip
     unrar
     networkmanagerapplet
+
+    libwebp
   ];
 
   programs.firefox.enable = true;
