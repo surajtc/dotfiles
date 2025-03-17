@@ -134,6 +134,8 @@ in {
   };
 
   hardware.cpu.intel.updateMicrocode = true;
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [

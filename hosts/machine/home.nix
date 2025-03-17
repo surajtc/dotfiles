@@ -37,6 +37,7 @@
     networkmanagerapplet
 
     libwebp
+    vlc
   ];
 
   programs.firefox.enable = true;

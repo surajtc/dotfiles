@@ -3,10 +3,13 @@
     enable = true;
     # image = ../wallpapers/default.svg;
     polarity = "dark";
-    # base16Scheme = "${pkgs.base16-schemes}/share/themes/classic-dark.yaml";
     base16Scheme = "${pkgs.base16-schemes}/share/themes/classic-dark.yaml";
 
-    cursor.size = 24;
+    cursor = {
+      package = pkgs.vanilla-dmz;
+      name = "Vanilla-DMZ";
+      size = 24;
+    };
 
     fonts = {
       sizes = {
@@ -27,7 +30,6 @@
       };
 
       monospace = {
-        # package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
         package = pkgs.nerd-fonts.jetbrains-mono;
         name = "JetBrainsMono Nerd Font";
       };
