@@ -19,10 +19,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    anyrun = {
-      url = "github:anyrun-org/anyrun";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # anyrun = {
+    #   url = "github:anyrun-org/anyrun";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs = {
@@ -48,7 +48,7 @@
           home-manager.sharedModules = [
             inputs.stylix.homeManagerModules.stylix
             inputs.hyprpanel.homeManagerModules.hyprpanel
-            inputs.anyrun.homeManagerModules.default
+            # inputs.anyrun.homeManagerModules.default
           ];
           home-manager.backupFileExtension = "backup";
           home-manager.users.admin = import ./hosts/machine/home.nix;

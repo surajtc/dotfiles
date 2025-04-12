@@ -44,8 +44,7 @@ in {
   # Enable networking
   networking.networkmanager.enable = true;
   # networking.extraHosts = ''
-  #   10.10.95.13 www.ritis.org
-  #   10.10.95.13 ritis.org
+  #   127.0.0.1 tile.ritis.org
   # '';
 
   # Set your time zone.

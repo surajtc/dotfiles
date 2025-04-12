@@ -38,6 +38,9 @@
 
     libwebp
     vlc
+
+    usql
+    blender
   ];
 
   programs.firefox.enable = true;

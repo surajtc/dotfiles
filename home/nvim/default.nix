@@ -44,11 +44,10 @@
       }
 
       friendly-snippets
-      nvim-lspconfig
       blink-cmp
       {
-        plugin = lsp-zero-nvim;
-        config = builtins.readFile config/plugins/lsp-zero.lua;
+        plugin = nvim-lspconfig;
+        config = builtins.readFile config/plugins/nvim-lspconfig.lua;
         type = "lua";
       }
 

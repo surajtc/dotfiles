@@ -19,11 +19,15 @@
       showResultsImmediately = false;
       maxEntries = null;
 
+      # plugins = [
+      #   inputs.anyrun.packages.${pkgs.system}.applications
+      #   inputs.anyrun.packages.${pkgs.system}.rink
+      #   inputs.anyrun.packages.${pkgs.system}.dictionary
+      #   inputs.anyrun.packages.${pkgs.system}.websearch
+      # ];
+
       plugins = [
-        inputs.anyrun.packages.${pkgs.system}.applications
-        inputs.anyrun.packages.${pkgs.system}.rink
-        inputs.anyrun.packages.${pkgs.system}.dictionary
-        inputs.anyrun.packages.${pkgs.system}.websearch
+        "${pkgs.anyrun}/lib/libapplications.so"
       ];
     };
 
