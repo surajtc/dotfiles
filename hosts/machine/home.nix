@@ -52,8 +52,8 @@
 
   programs.git = {
     enable = true;
-    userName = "Suraj";
-    userEmail = "stelugar@umd.edu";
+    userName = "surajtc";
+    userEmail = "mail.surajtc@gmail.com";
   };
 
   # This value determines the home Manager release that your

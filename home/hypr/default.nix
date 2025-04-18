@@ -140,7 +140,13 @@
           "$mod, O, movewindow, mon:-1 silent"
           "$mod SHIFT, O, swapactiveworkspaces, eDP-1 DP-3"
           "$mod, S, togglespecialworkspace, magic"
-          "$mod SHIFT, S, movetoworkspace, special:magic"
+          "$mod, J, splitratio, -0.1"
+          "$mod, K, splitratio, +0.1"
+          "$mod, H, cyclenext, visible prev tiled"
+          "$mod, L, cyclenext, visible next tiled"
+          "$mod SHIFT, H, swapnext, prev"
+          "$mod SHIFT, L, swapnext"
+          "$mod, period, focuscurrentorlast"
 
           "$mod SHIFT, `, exec, hyprlock"
         ]
