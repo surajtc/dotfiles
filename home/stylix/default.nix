@@ -45,6 +45,8 @@
         main = true;
         signColumn = true;
       };
+
+      firefox.profileNames = ["default"];
     };
   };
 

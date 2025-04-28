@@ -45,6 +45,12 @@
 
   programs.firefox.enable = true;
 
+  # programs.firefox.profiles.default = {
+  #   id = 0;
+  #   name = "default";
+  #   isDefault = true;
+  # };
+
   programs.mpv.enable = true;
   programs.btop.enable = true;
 
