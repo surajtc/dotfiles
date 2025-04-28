@@ -35,7 +35,7 @@
       cattlabvpn = "sudo OPENSSL_CONF=/etc/openconnect/openssl.conf openconnect --user=stelugar --csd-wrapper=/etc/openconnect/csd-post.sh vpn.cattlab.umd.edu";
     };
 
-    initExtra = "fastfetch";
+    initContent = "fastfetch";
   };
 
   programs.starship.enable = true;

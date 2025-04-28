@@ -14,6 +14,8 @@
     pnpm
     yarn
     cypress
+    bun
+    turbo-unwrapped
 
     python3
     uv

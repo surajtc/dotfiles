@@ -19,10 +19,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # anyrun = {
-    #   url = "github:anyrun-org/anyrun";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -48,13 +48,19 @@
           home-manager.sharedModules = [
             inputs.stylix.homeManagerModules.stylix
             inputs.hyprpanel.homeManagerModules.hyprpanel
-            # inputs.anyrun.homeManagerModules.default
+            inputs.spicetify-nix.homeManagerModules.spicetify
           ];
+
           home-manager.backupFileExtension = "backup";
           home-manager.users.admin = import ./hosts/machine/home.nix;
         }
 
-        {nixpkgs.overlays = [inputs.hyprpanel.overlay];}
+        {
+          nixpkgs.overlays = [
+            inputs.hyprpanel.overlay
+            # (import ./overlays/spotify-spotx.nix)
+          ];
+        }
       ];
     };
   };

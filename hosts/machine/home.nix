@@ -13,6 +13,7 @@
     ../../home/kitty
     ../../home/tmux
     ../../home/development
+    ../../home/spicetify
   ];
 
   home.username = "admin";
@@ -41,6 +42,7 @@
 
     usql
     blender
+    # spotify
   ];
 
   programs.firefox.enable = true;
