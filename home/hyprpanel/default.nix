@@ -45,6 +45,10 @@ in {
       bar.customModules.netstat.leftClick = "menu:network";
       bar.customModules.hyprsunset.label = false;
 
+      bar.customModules.hyprsunset.temperature = "5200k";
+      bar.customModules.hyprsunset.rightClick = "hyprctl hyprsunset identity";
+      bar.customModules.hyprsunset.middleClick = "hyprctl hyprsunset gamma 75";
+
       theme.font.name = "Inter";
       theme.font.size = "0.96rem";
       theme.font.weight = 500;

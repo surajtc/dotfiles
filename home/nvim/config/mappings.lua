@@ -1,10 +1,10 @@
 -- Telescope
 local builtin = require("telescope.builtin")
 
-vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
+vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "[F]ind [F]iles" })
 vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind [W]ord under cursor" })
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind [G]rep" })
-vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind [B]uffers" })
+vim.keymap.set("n", "<leader>ff", builtin.buffers, { desc = "[F]ind [B]uffers" })
 
 vim.keymap.set("n", "<leader>f/", function()
 	builtin.live_grep({
@@ -21,14 +21,22 @@ vim.keymap.set({ "n", "v" }, "<leader>ft", function()
 	})
 end, { desc = "[F]orma[T] File" })
 
-vim.keymap.set("n", "<leader>ee", function()
+vim.keymap.set("n", "<leader>e", function()
 	require("oil").toggle_float()
 end, { desc = "Toggle Oil" })
 
 -- Buffer
-vim.keymap.set("n", "<leader>h", "<cmd>bprev<CR>", { desc = "Previous buffer" })
-vim.keymap.set("n", "<leader>l", "<cmd>bnext<CR>", { desc = "Next buffer" })
-vim.keymap.set("n", "<leader>b", "<cmd>b#<CR>", { desc = "Alt buffer" })
+-- vim.keymap.set("n", "<leader>h", "<cmd>bprev<CR>", { desc = "Previous buffer" })
+-- vim.keymap.set("n", "<leader>l", "<cmd>bnext<CR>", { desc = "Next buffer" })
+--
+for i = 1, 9 do
+	vim.keymap.set("n", "<leader>" .. i, "<cmd>LualineBuffersJump! " .. i .. "<CR>", { desc = "Jump to buffer " .. i })
+end
+
+vim.keymap.set("n", "<leader>0", "<cmd>LualineBuffersJump! $<CR>", { desc = "Jump to last buffer" })
+
+vim.keymap.set("n", "<leader>-", "<cmd>b#<CR>", { desc = "Alt buffer" })
+
 vim.keymap.set("n", "<leader>w", function()
 	require("snacks").bufdelete.delete()
 end, { desc = "[B]uffer Delete" })

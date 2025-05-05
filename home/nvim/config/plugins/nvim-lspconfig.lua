@@ -29,10 +29,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 require("lspconfig").lua_ls.setup({})
-require("lspconfig").ts_ls.setup({})
+-- require("lspconfig").ts_ls.setup({})
 require("lspconfig").tailwindcss.setup({})
 require("lspconfig").pyright.setup({})
 require("lspconfig").astro.setup({})
+require("lspconfig").biome.setup({})
 
 local blink_cmp = require("blink.cmp")
 
@@ -44,7 +45,7 @@ blink_cmp.setup({
 		menu = {
 			draw = {
 				columns = {
-					{ "kind_icon", "kind" },
+					{ "kind_icon" },
 					{ "label", "label_description", gap = 2 },
 					{ "source_name" },
 				},
@@ -62,5 +63,20 @@ require("nvim-treesitter.configs").setup({
 	highlight = {
 		enable = true,
 		additional_vim_regex_highlighting = false,
+	},
+})
+
+require("typescript-tools").setup({
+	on_attach = function(client, bufnr)
+		client.server_capabilities.documentFormattingProvider = false
+		client.server_capabilities.documentRangeFormattingProvider = false
+	end,
+	settings = {
+		separate_diagnostic_server = true,
+		publish_diagnostic_on = "insert_leave",
+		expose_as_code_action = "all",
+		tsserver_plugins = {},
+		complete_function_calls = true,
+		include_completions_with_insert_text = true,
 	},
 })

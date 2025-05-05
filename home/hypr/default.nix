@@ -48,8 +48,8 @@
         export XDG_SESSION_TYPE=wayland
         export XDG_SESSION_DESKTOP=Hyprland
 
-        LIBVA_DRIVER_NAME,nvidia
-        __GLX_VENDOR_LIBRARY_NAME,nvidia
+        export LIBVA_DRIVER_NAME=nvidia
+        export __GLX_VENDOR_LIBRARY_NAME=nvidia
       '';
     };
   };
@@ -81,7 +81,7 @@
         # drop_shadow = false;
 
         blur = {
-          enabled = true;
+          enabled = false;
           size = 4;
           passes = 2;
           vibrancy = 0.2;

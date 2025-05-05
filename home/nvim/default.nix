@@ -17,6 +17,12 @@
       snacks-nvim
 
       {
+        plugin = copilot-lua;
+        config = builtins.readFile config/plugins/copilot.lua;
+        type = "lua";
+      }
+
+      {
         plugin = lualine-nvim;
         config = builtins.readFile config/plugins/lualine.lua;
         type = "lua";
@@ -31,12 +37,6 @@
         type = "lua";
       }
 
-      # {
-      #   plugin = neo-tree-nvim;
-      #   config = builtins.readFile config/plugins/neo-tree.lua;
-      #   type = "lua";
-      # }
-
       {
         plugin = oil-nvim;
         config = builtins.readFile config/plugins/oil.lua;
@@ -45,6 +45,7 @@
 
       friendly-snippets
       blink-cmp
+      typescript-tools-nvim
       {
         plugin = nvim-lspconfig;
         config = builtins.readFile config/plugins/nvim-lspconfig.lua;
@@ -92,8 +93,9 @@
 
       nodePackages.prettier
       prettierd
-      nodePackages.typescript-language-server
+      # nodePackages.typescript-language-server
       tailwindcss-language-server
+      biome
 
       astro-language-server
 

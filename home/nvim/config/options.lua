@@ -65,6 +65,9 @@ vim.opt.smartindent = true
 vim.opt.list = true
 vim.opt.listchars = { tab = "⊣ ", trail = "∙", nbsp = "␣" }
 
+-- Hide tab
+vim.o.showtabline = 0
+
 -- Set cursor to block
 vim.opt.guicursor = {
 	"n-v-c:block-Cursor/lCursor-blinkwait1000-blinkon0-blinkoff0",
