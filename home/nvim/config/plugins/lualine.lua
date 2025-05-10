@@ -118,7 +118,7 @@ require("lualine").setup({
 				end,
 			},
 		},
-		lualine_x = { { "lsp_status", icon = "" } },
+		lualine_x = { "copilot" },
 		lualine_y = { "diff", "diagnostics", "searchcount", "selectioncount" },
 		lualine_z = { "branch" },
 	},

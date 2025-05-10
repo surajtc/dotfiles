@@ -41,7 +41,19 @@ blink_cmp.setup({
 	cmdline = {
 		enabled = false,
 	},
+	sources = {
+		default = { "copilot", "lsp", "path", "snippets", "buffer" },
+		providers = {
+			copilot = {
+				name = "copilot",
+				module = "blink-copilot",
+				score_offset = 100,
+				async = true,
+			},
+		},
+	},
 	completion = {
+		ghost_text = { enabled = true },
 		menu = {
 			draw = {
 				columns = {
@@ -80,3 +92,5 @@ require("typescript-tools").setup({
 		include_completions_with_insert_text = true,
 	},
 })
+
+require("nvim-ts-autotag").setup()

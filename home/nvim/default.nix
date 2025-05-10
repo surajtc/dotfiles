@@ -22,6 +22,7 @@
         type = "lua";
       }
 
+      copilot-lualine
       {
         plugin = lualine-nvim;
         config = builtins.readFile config/plugins/lualine.lua;
@@ -46,6 +47,8 @@
       friendly-snippets
       blink-cmp
       typescript-tools-nvim
+      nvim-ts-autotag
+      blink-copilot
       {
         plugin = nvim-lspconfig;
         config = builtins.readFile config/plugins/nvim-lspconfig.lua;
