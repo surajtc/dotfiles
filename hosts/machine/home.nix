@@ -23,7 +23,7 @@
     fastfetch
 
     chromium
-    microsoft-edge
+    # microsoft-edge
 
     vscodium-fhs
     slack
@@ -42,6 +42,7 @@
 
     usql
     blender
+    ffmpeg
     # spotify
   ];
 
