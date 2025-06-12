@@ -26,6 +26,7 @@
     # microsoft-edge
 
     vscodium-fhs
+    code-cursor
     slack
     postman
 

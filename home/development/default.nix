@@ -19,5 +19,6 @@
 
     python3
     uv
+    gcc
   ];
 }

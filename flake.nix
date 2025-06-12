@@ -46,7 +46,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.sharedModules = [
-            inputs.stylix.homeManagerModules.stylix
+            inputs.stylix.homeModules.stylix
             inputs.hyprpanel.homeManagerModules.hyprpanel
             inputs.spicetify-nix.homeManagerModules.spicetify
           ];
