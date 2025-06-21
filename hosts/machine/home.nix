@@ -25,7 +25,8 @@
     chromium
     # microsoft-edge
 
-    vscodium-fhs
+    # vscodium-fhs
+    vscode-fhs
     code-cursor
     slack
     postman
