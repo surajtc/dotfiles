@@ -8,8 +8,7 @@
 in {
   programs.hyprpanel = {
     enable = true;
-    overwrite.enable = true;
-    hyprland.enable = true;
+    # overwrite.enable = true;
 
     # layout = {
     #   "bar.layouts" = {
@@ -21,10 +20,10 @@ in {
     #   };
     # };
 
+    # settings = {
+    # };
+    #
     settings = {
-    };
-
-    override = {
       bar.layouts = {
         "*" = {
           left = ["dashboard" "workspaces" "windowtitle"];

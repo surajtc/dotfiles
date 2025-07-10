@@ -14,10 +14,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprpanel = {
-      url = "github:Jas-SinghFSU/HyprPanel";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # hyprpanel = {
+    #   url = "github:Jas-SinghFSU/HyprPanel";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
@@ -47,7 +47,7 @@
           home-manager.useUserPackages = true;
           home-manager.sharedModules = [
             inputs.stylix.homeModules.stylix
-            inputs.hyprpanel.homeManagerModules.hyprpanel
+            # inputs.hyprpanel.homeManagerModules.hyprpanel
             inputs.spicetify-nix.homeManagerModules.spicetify
           ];
 
@@ -57,7 +57,7 @@
 
         {
           nixpkgs.overlays = [
-            inputs.hyprpanel.overlay
+            # inputs.hyprpanel.overlay
             # (import ./overlays/spotify-spotx.nix)
           ];
         }

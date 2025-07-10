@@ -23,7 +23,7 @@
     fastfetch
 
     chromium
-    # microsoft-edge
+    brave
 
     # vscodium-fhs
     vscode-fhs
@@ -39,12 +39,16 @@
     unrar
     networkmanagerapplet
 
-    libwebp
+    # libwebp
     vlc
 
     usql
     blender
     ffmpeg
+    jellyfin-media-player
+    wireguard-tools
+    qbittorrent
+    # opencode
     # spotify
   ];
 
