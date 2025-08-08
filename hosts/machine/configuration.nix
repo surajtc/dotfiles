@@ -2,15 +2,7 @@
   config,
   pkgs,
   ...
-}: let
-  hyprlandConfig = pkgs.writeText "greetd-hyprland-config" ''
-    exec = sh -c "${config.programs.regreet.package}/bin/regreet; ${config.programs.hyprland.package}/bin/hyprctl dispatch exit"
-    misc {
-        disable_hyprland_logo = true
-        disable_splash_rendering = true
-    }
-  '';
-in {
+}: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -48,8 +40,8 @@ in {
   # '';
 
   # Set your time zone.
-  time.timeZone = "America/New_York";
-
+  # time.timeZone = "America/New_York";
+  time.timeZone = "Asia/Kolkata";
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -74,34 +66,14 @@ in {
   #   variant = "";
   # };
 
+  programs.regreet.enable = true;
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
-    withUWSM = true;
   };
 
   security.pam.services.hyprlock = {};
-
-  environment.loginShellInit = ''
-    if uwsm check may-start; then
-      exec uwsm start -S hyprland-uwsm.desktop
-    fi
-  '';
-
-  # programs.regreet = {
-  #   enable = true;
-  # };
-  #
-  # services.greetd = {
-  #   enable = true;
-  #   vt = 3;
-  #   settings = {
-  #     default_session = {
-  #       user = "admin";
-  #       command = "${config.programs.hyprland.package}/bin/Hyprland --config ${hyprlandConfig}";
-  #     };
-  #   };
-  # };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -127,8 +99,8 @@ in {
       CPU_MIN_PERF_ON_BAT = 0;
       CPU_MAX_PERF_ON_BAT = 20;
 
-      START_CHARGE_THRESH_BAT0 = 40;
-      STOP_CHARGE_THRESH_BAT0 = 80;
+      # START_CHARGE_THRESH_BAT0 = 40;
+      # STOP_CHARGE_THRESH_BAT0 = 80;
     };
   };
 

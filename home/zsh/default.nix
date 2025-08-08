@@ -31,8 +31,6 @@
 
       nixedit = "cd /etc/dotfiles && nvim";
       nixrebuild = "sudo nixos-rebuild switch --show-trace --flake .";
-
-      cattlabvpn = "sudo OPENSSL_CONF=/etc/openconnect/openssl.conf openconnect --user=stelugar --csd-wrapper=/etc/openconnect/csd-post.sh vpn.cattlab.umd.edu";
     };
 
     initContent = "fastfetch";

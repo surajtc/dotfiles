@@ -13,7 +13,7 @@
     ../../home/kitty
     ../../home/tmux
     ../../home/development
-    ../../home/spicetify
+    ../../home/spotify-player
   ];
 
   home.username = "admin";
@@ -28,8 +28,9 @@
     # vscodium-fhs
     vscode-fhs
     code-cursor
-    slack
-    postman
+    # slack
+    # postman
+    discord-canary
 
     nautilus
     loupe
@@ -43,13 +44,7 @@
     vlc
 
     usql
-    blender
     ffmpeg
-    jellyfin-media-player
-    wireguard-tools
-    qbittorrent
-    # opencode
-    # spotify
   ];
 
   programs.firefox.enable = true;

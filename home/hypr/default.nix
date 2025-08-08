@@ -27,33 +27,6 @@
     wl-clipboard
   ];
 
-  home.file = {
-    ".config/uwsm/env" = {
-      text = ''
-        export MOZ_ENABLE_WAYLAND=1
-        export GDK_BACKEND=wayland
-        export QT_QPA_PLATFORM=wayland
-        export SDL_VIDEODRIVER=wayland
-        export CLUTTER_BACKEND=wayland
-        export QT_AUTO_SCREEN_SCALE_FACTOR=1
-        export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-        export NIXOS_OZONE_WL=1
-        export ELECTRON_OZONE_PLATFORM_HINT=auto
-      '';
-    };
-
-    ".config/uwsm/env-hyprland" = {
-      text = ''
-        export XDG_CURRENT_DESKTOP=Hyprland
-        export XDG_SESSION_TYPE=wayland
-        export XDG_SESSION_DESKTOP=Hyprland
-
-        export LIBVA_DRIVER_NAME=nvidia
-        export __GLX_VENDOR_LIBRARY_NAME=nvidia
-      '';
-    };
-  };
-
   programs.hyprlock.enable = true;
 
   wayland.windowManager.hyprland = {
@@ -94,7 +67,26 @@
       };
 
       exec-once = [
-        # "uwsm app -- ${pkgs.hyprpanel}/bin/hyprpanel"
+        "${pkgs.hyprpanel}/bin/hyprpanel"
+        "nm-applet &"
+      ];
+
+      env = [
+        "MOZ_ENABLE_WAYLAND,1"
+        "GDK_BACKEND,wayland"
+        "QT_QPA_PLATFORM,wayland"
+        "SDL_VIDEODRIVER,wayland"
+        "CLUTTER_BACKEND,wayland"
+        "QT_AUTO_SCREEN_SCALE_FACTOR,1"
+        "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+        "NIXOS_OZONE_WL,1"
+        "ELECTRON_OZONE_PLATFORM_HINT,auto"
+
+        "XDG_CURRENT_DESKTOP,Hyprland"
+        "XDG_SESSION_TYPE,wayland"
+        "XDG_SESSION_DESKTOP,Hyprland"
+        "LIBVA_DRIVER_NAME,nvidia"
+        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
       ];
 
       monitor = [
@@ -122,16 +114,16 @@
 
       bind =
         [
-          "$mod, Return, exec, uwsm-app -- kitty.desktop"
-          "$mod, E, exec, uwsm-app -- nautilus"
-          "$mod, B, exec, uwsm-app -- firefox.desktop"
-          "$mod SHIFT, B, exec, uwsm-app -- chromium"
+          "$mod, Return, exec, kitty"
+          "$mod, E, exec, nautilus"
+          "$mod, B, exec, firefox"
+          "$mod SHIFT, B, exec, brave"
 
           "$mod, P, exec, anyrun"
           "$mod SHIFT, P, exec, grim -g \"$(slurp -d)\" - | wl-copy"
 
           "$mod SHIFT, C, killactive,"
-          "$mod SHIFT, Q, exec, uwsm stop"
+          "$mod SHIFT, Q, exec, hyprctl dispatch exit"
           "$mod CONTROL, R, exec, hyprctl reload"
           "$mod, M, fullscreen, 1"
           "$mod, F, fullscreen, 0"
