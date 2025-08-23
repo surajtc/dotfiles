@@ -13,16 +13,6 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # hyprpanel = {
-    #   url = "github:Jas-SinghFSU/HyprPanel";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
-    spicetify-nix = {
-      url = "github:Gerg-L/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
@@ -47,8 +37,6 @@
           home-manager.useUserPackages = true;
           home-manager.sharedModules = [
             inputs.stylix.homeModules.stylix
-            # inputs.hyprpanel.homeManagerModules.hyprpanel
-            inputs.spicetify-nix.homeManagerModules.spicetify
           ];
 
           home-manager.backupFileExtension = "backup";

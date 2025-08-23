@@ -9,11 +9,15 @@
 
   # Bootloader.
   boot = {
-    kernelParams = ["i915.force_probe=46a6"];
+    consoleLogLevel = 3;
+    initrd.verbose = false;
+    kernelParams = ["i915.force_probe=46a6" "quiet" "udev.log_level=3"];
     supportedFilesystems = ["ntfs"];
     extraModprobeConfig = ''
-      options iwlwifi power_save=1 disable_11ax=1
+      blacklist nouveau
+      options iwlwifi power_save=1 disable_11ax=1 nouveau modeset=0
     '';
+    blacklistedKernelModules = ["nouveau" "nvidia" "nvidia_drm" "nvidia_modeset"];
   };
 
   # boot.loader.systemd-boot.enable = true;
@@ -36,7 +40,7 @@
   # Enable networking
   networking.networkmanager.enable = true;
   # networking.extraHosts = ''
-  #   127.0.0.1 tile.ritis.org
+  #   0.0.0.0 apresolve.spotify.com
   # '';
 
   # Set your time zone.
@@ -57,16 +61,13 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  # Configure keymap in X11
-  # services.xserver.xkb = {
-  #   layout = "us";
-  #   variant = "";
-  # };
-
-  programs.regreet.enable = true;
+  services.displayManager.ly = {
+    enable = true;
+    settings = {
+      save = true;
+      load = true;
+    };
+  };
 
   programs.hyprland = {
     enable = true;
@@ -111,30 +112,40 @@
     enable = true;
     extraPackages = with pkgs; [
       vpl-gpu-rt
+      vaapiIntel
+      intel-media-driver
     ];
   };
 
-  services.xserver.videoDrivers = ["nvidia"];
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    open = true;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  # disable nvidia
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330", ATTR{power/control}="auto", ATTR{remove}="1"
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c8000", ATTR{power/control}="auto", ATTR{remove}="1"
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{power/control}="auto", ATTR{remove}="1"
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
+  '';
 
-    # To test if prime is working use the following
-    # cat /sys/module/nvidia_drm/parameters/modeset
-    # Should output "Y"
-    # __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia glxinfo -B | grep "OpenGL renderer"
-    # NVIDIA GPU should show NVIDIA
-    prime = {
-      sync.enable = true;
-
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
-  };
+  # services.xserver.videoDrivers = ["nvidia"];
+  # hardware.nvidia = {
+  #   modesetting.enable = true;
+  #   powerManagement.enable = false;
+  #   powerManagement.finegrained = false;
+  #   open = true;
+  #   nvidiaSettings = true;
+  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #
+  #   # To test if prime is working use the following
+  #   # cat /sys/module/nvidia_drm/parameters/modeset
+  #   # Should output "Y"
+  #   # __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia glxinfo -B | grep "OpenGL renderer"
+  #   # NVIDIA GPU should show NVIDIA
+  #   prime = {
+  #     sync.enable = true;
+  #
+  #     intelBusId = "PCI:0:2:0";
+  #     nvidiaBusId = "PCI:1:0:0";
+  #   };
+  # };
 
   virtualisation.docker.enable = true;
   virtualisation.containers.enable = true;

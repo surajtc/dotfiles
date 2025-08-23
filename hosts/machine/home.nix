@@ -27,7 +27,7 @@
 
     # vscodium-fhs
     vscode-fhs
-    code-cursor
+    code-cursor-fhs
     # slack
     # postman
     discord-canary
@@ -45,6 +45,7 @@
 
     usql
     ffmpeg
+    spotify
   ];
 
   programs.firefox.enable = true;

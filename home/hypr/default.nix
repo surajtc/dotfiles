@@ -85,8 +85,8 @@
         "XDG_CURRENT_DESKTOP,Hyprland"
         "XDG_SESSION_TYPE,wayland"
         "XDG_SESSION_DESKTOP,Hyprland"
-        "LIBVA_DRIVER_NAME,nvidia"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        # "LIBVA_DRIVER_NAME,nvidia"
+        # "__GLX_VENDOR_LIBRARY_NAME,nvidia"
       ];
 
       monitor = [
