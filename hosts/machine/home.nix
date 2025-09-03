@@ -46,6 +46,8 @@
     usql
     ffmpeg
     spotify
+    yt-dlp
+    svix-cli
   ];
 
   programs.firefox.enable = true;
