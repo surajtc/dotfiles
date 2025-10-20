@@ -62,7 +62,6 @@
       };
 
       animations = {
-        first_launch_animation = false;
         enabled = false;
       };
 
@@ -103,9 +102,9 @@
         };
       };
 
-      gestures = {
-        workspace_swipe = true;
-      };
+      gesture = [
+        "3, horizontal, workspace"
+      ];
 
       workspace = [
         "9,default:true,monitor:eDP-1"

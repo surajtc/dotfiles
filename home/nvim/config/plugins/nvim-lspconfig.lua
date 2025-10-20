@@ -4,9 +4,9 @@ vim.keymap.set("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
 vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
 vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
 
-local lspconfig_defaults = require("lspconfig").util.default_config
-lspconfig_defaults.capabilities =
-	vim.tbl_deep_extend("force", lspconfig_defaults.capabilities, require("blink.cmp").get_lsp_capabilities())
+-- local lspconfig_defaults = require("lspconfig").util.default_config
+-- lspconfig_defaults.capabilities =
+-- 	vim.tbl_deep_extend("force", lspconfig_defaults.capabilities, require("blink.cmp").get_lsp_capabilities())
 
 -- lsp_attach is where you enable features that only work
 -- if there is a language server active in the file
@@ -28,12 +28,26 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-require("lspconfig").lua_ls.setup({})
--- require("lspconfig").ts_ls.setup({})
-require("lspconfig").tailwindcss.setup({})
-require("lspconfig").pyright.setup({})
-require("lspconfig").astro.setup({})
-require("lspconfig").biome.setup({})
+local servers = {
+	lua_ls = {
+		settings = {
+			Lua = {
+				workspace = { checkThirdParty = false },
+				telemetry = { enable = false },
+			},
+		},
+	},
+	tailwindcss = {},
+	pyright = {},
+	astro = {},
+	biome = {},
+}
+
+for server_name, config in pairs(servers) do
+	vim.lsp.config(server_name, config)
+end
+
+vim.lsp.enable(vim.tbl_keys(servers))
 
 local blink_cmp = require("blink.cmp")
 
