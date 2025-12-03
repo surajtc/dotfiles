@@ -67,6 +67,8 @@
 
       exec-once = [
         "${pkgs.hyprpanel}/bin/hyprpanel"
+        # "${pkgs.noctalia-shell}/bin/noctalia-shell"
+        # "noctalia-shell"
         "nm-applet &"
       ];
 
@@ -89,7 +91,8 @@
       ];
 
       monitor = [
-        ",highres@highrr,0x0,1"
+        ",1920x1080@60,0x0,1"
+        # ",highres@highrr,0x0,1"
         "eDP-1,preferred,auto-right,1"
       ];
 
@@ -116,7 +119,7 @@
           "$mod, Return, exec, kitty"
           "$mod, E, exec, nautilus"
           "$mod, B, exec, firefox"
-          "$mod SHIFT, B, exec, brave"
+          "$mod SHIFT, B, exec, brave --ozone-platform=wayland --disable-features=WaylandWpColorManagerV1"
 
           "$mod, P, exec, anyrun"
           "$mod SHIFT, P, exec, grim -g \"$(slurp -d)\" - | wl-copy"

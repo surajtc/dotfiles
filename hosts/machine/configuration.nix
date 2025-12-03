@@ -83,9 +83,11 @@
   services.smartd.enable = true;
 
   services.upower.enable = true;
+  # services.power-profiles-daemon.enable = true;
+  services.tuned.enable = true;
   services.thermald.enable = true;
   services.tlp = {
-    enable = true;
+    enable = false;
     settings = {
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
@@ -110,7 +112,7 @@
     enable = true;
     extraPackages = with pkgs; [
       vpl-gpu-rt
-      vaapiIntel
+      intel-vaapi-driver
       intel-media-driver
     ];
   };
@@ -196,6 +198,8 @@
     lazygit
     btop
     fastfetch
+    nvtopPackages.nvidia
+    mesa-demos
 
     tldr
     busybox
@@ -215,7 +219,15 @@
     gtk3
     gtk4
     adwaita-qt
+    uv
   ];
+
+  programs.nix-ld = {
+    enable = true;
+    libraries = pkgs.steam-run.args.multiPkgs pkgs;
+  };
+
+  environment.localBinInPath = true;
 
   nixpkgs.config.allowUnfree = true;
 

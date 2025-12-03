@@ -4,10 +4,12 @@
   ...
 }: {
   imports = [
-    ../../home/hypr
+    # ../../home/noctalia
     ../../home/hyprpanel
+    ../../home/hypr
     ../../home/anyrun
     ../../home/nvim
+    ../../home/zed
     ../../home/stylix
     ../../home/zsh
     ../../home/kitty
@@ -48,6 +50,8 @@
     spotify
     yt-dlp
     svix-cli
+    # jellyfin-mpv-shim
+    delfin
   ];
 
   programs.firefox.enable = true;
