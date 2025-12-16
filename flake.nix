@@ -14,16 +14,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    quickshell = {
-      url = "github:outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.quickshell.follows = "quickshell"; # Use same quickshell version
-    };
+    # quickshell = {
+    #   url = "github:outfoxxed/quickshell";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    #
+    # noctalia = {
+    #   url = "github:noctalia-dev/noctalia-shell";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.quickshell.follows = "quickshell"; # Use same quickshell version
+    # };
   };
 
   outputs = {
@@ -48,7 +48,7 @@
           home-manager.useUserPackages = true;
           home-manager.sharedModules = [
             inputs.stylix.homeModules.stylix
-            inputs.noctalia.homeModules.default
+            # inputs.noctalia.homeModules.default
           ];
 
           home-manager.backupFileExtension = "backup";

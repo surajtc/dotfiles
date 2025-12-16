@@ -37,6 +37,8 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.firewall.checkReversePath = "loose";
+
   # networking.extraHosts = ''
   #   0.0.0.0 apresolve.spotify.com
   # '';
@@ -83,27 +85,27 @@
   services.smartd.enable = true;
 
   services.upower.enable = true;
-  # services.power-profiles-daemon.enable = true;
   services.tuned.enable = true;
   services.thermald.enable = true;
-  services.tlp = {
-    enable = false;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-
-      CPU_MIN_PERF_ON_AC = 0;
-      CPU_MAX_PERF_ON_AC = 100;
-      CPU_MIN_PERF_ON_BAT = 0;
-      CPU_MAX_PERF_ON_BAT = 20;
-
-      START_CHARGE_THRESH_BAT0 = 40;
-      STOP_CHARGE_THRESH_BAT0 = 80;
-    };
-  };
+  # services.power-profiles-daemon.enable = true;
+  # services.tlp = {
+  #   enable = false;
+  #   settings = {
+  #     CPU_SCALING_GOVERNOR_ON_AC = "performance";
+  #     CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+  #
+  #     CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+  #     CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+  #
+  #     CPU_MIN_PERF_ON_AC = 0;
+  #     CPU_MAX_PERF_ON_AC = 100;
+  #     CPU_MIN_PERF_ON_BAT = 0;
+  #     CPU_MAX_PERF_ON_BAT = 20;
+  #
+  #     START_CHARGE_THRESH_BAT0 = 40;
+  #     STOP_CHARGE_THRESH_BAT0 = 80;
+  #   };
+  # };
 
   hardware.cpu.intel.updateMicrocode = true;
   hardware.bluetooth.enable = true;
@@ -220,6 +222,7 @@
     gtk4
     adwaita-qt
     uv
+    wireguard-tools
   ];
 
   programs.nix-ld = {

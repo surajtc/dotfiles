@@ -14,7 +14,7 @@
     ../../home/zsh
     ../../home/kitty
     ../../home/tmux
-    ../../home/development
+    # ../../home/development
     ../../home/spotify-player
   ];
 
@@ -67,10 +67,17 @@
 
   programs.obs-studio.enable = true;
 
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
+
   programs.git = {
     enable = true;
-    userName = "surajtc";
-    userEmail = "mail.surajtc@gmail.com";
+    settings.user.name = "surajtc";
+    settings.user.email = "mail.surajtc@gmail.com";
   };
 
   # This value determines the home Manager release that your
