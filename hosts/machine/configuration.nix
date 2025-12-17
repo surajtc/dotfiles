@@ -63,17 +63,22 @@
   # Display manager
   # services.displayManager.ly = {
   #   enable = true;
-  #   settings = {
-  #     save = true;
-  #     load = true;
-  #   };
+  # settings = {
+  #   save = true;
+  #   load = true;
+  # };
   # };
 
-  environment.loginShellInit = ''
-    if uwsm check may-start && uwsm select; then
-    	exec uwsm start default
-    fi
-  '';
+  # environment.loginShellInit = ''
+  #   if uwsm check may-start && uwsm select; then
+  #   	exec uwsm start default
+  #   fi
+  # '';
+
+  services.displayManager.dms-greeter = {
+    enable = true;
+    compositor.name = "hyprland";
+  };
 
   # Window manager
   programs.hyprland = {
@@ -82,6 +87,11 @@
     withUWSM = true;
   };
   # programs.uwsm.enable = true;
+  programs.dms-shell = {
+    enable = true;
+    systemd.enable = true;
+    enableDynamicTheming = false;
+  };
 
   security.pam.services.hyprlock = {};
 

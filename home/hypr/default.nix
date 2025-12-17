@@ -3,18 +3,18 @@
   inputs,
   ...
 }: {
-  # xdg.portal = {
-  #   enable = true;
-  #   xdgOpenUsePortal = true;
-  #   config = {
-  #     common.default = ["gtk"];
-  #     hyprland.default = ["gtk" "hyprland"];
-  #   };
-  #   extraPortals = [
-  #     pkgs.xdg-desktop-portal-gtk
-  #     pkgs.xdg-desktop-portal-hyprland
-  #   ];
-  # };
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    config = {
+      common.default = ["gtk"];
+      hyprland.default = ["hyprland" "gtk"];
+    };
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
+    ];
+  };
 
   home.file = {
     ".config/uwsm/env" = {
@@ -28,13 +28,13 @@
         export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
         export NIXOS_OZONE_WL=1
         export ELECTRON_OZONE_PLATFORM_HINT=auto
-        export LIBVA_DRIVER_NAME=nvidia
-        export __GLX_VENDOR_LIBRARY_NAME=nvidia
       '';
     };
 
     # ".config/uwsm/env-hyprland" = {
     #   text = ''
+    #     export LIBVA_DRIVER_NAME=nvidia
+    #     export __GLX_VENDOR_LIBRARY_NAME=nvidia
     #   '';
     # };
   };
@@ -95,6 +95,7 @@
         # "${pkgs.noctalia-shell}/bin/noctalia-shell"
         # "noctalia-shell"
         "uwsm-terminal -- nm-applet &"
+        "uwsm-terminal -- wl-paste --watch cliphist store &"
       ];
 
       # env = [
@@ -134,11 +135,6 @@
         "3, horizontal, workspace"
       ];
 
-      workspace = [
-        "9,default:true,monitor:eDP-1"
-        "special:magic,gapsout:96"
-      ];
-
       bind =
         [
           "$mod, Return, exec, uwsm-app -- kitty.desktop"
@@ -146,11 +142,12 @@
           "$mod, B, exec, uwsm-app -- firefox.desktop"
           "$mod SHIFT, B, exec, uwsm-app -- brave --ozone-platform=wayland --disable-features=WaylandWpColorManagerV1"
 
-          "$mod, P, exec, fuzzel \"--launch-prefix=uwsm-app --\""
+          # "$mod, P, exec, fuzzel \"--launch-prefix=uwsm-app --\""
+          "$mod, P, exec, dms ipc call spotlight toggle"
           "$mod SHIFT, P, exec, grim -g \"$(slurp -d)\" - | wl-copy"
 
           "$mod SHIFT, C, killactive,"
-          "$mod SHIFT, Q, exec,loginctl terminate-user \"\""
+          "$mod SHIFT, Q, exec, uwsm stop"
           "$mod CONTROL, R, exec, hyprctl reload"
           "$mod, M, fullscreen, 1"
           "$mod, F, fullscreen, 0"
@@ -167,7 +164,9 @@
           "$mod SHIFT, L, swapnext"
           "$mod, period, focuscurrentorlast"
 
-          "$mod SHIFT, `, exec, hyprlock"
+          "$mod ALT, L, exec, dms ipc call lock lock"
+          "$mod, TAB, exec, dms ipc call hypr toggleOverview"
+          "$mod, V, exec, dms ipc call clipboard toggle"
         ]
         ++ (
           builtins.concatLists (builtins.genList (
@@ -182,12 +181,18 @@
         );
 
       bindl = [
-        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
-        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-        ", XF86MonBrightnessUp, exec, brightnessctl s 10%+"
-        ", XF86MonBrightnessDown, exec, brightnessctl s 10%-"
+        # ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+        # ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        # ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        # ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        ", XF86AudioRaiseVolume, exec, dms ipc call audio increment 3"
+        ", XF86AudioLowerVolume, exec, dms ipc call audio decrement 3"
+        ", XF86AudioMute, exec, dms ipc call audio mute"
+        ", XF86AudioMicMute, exec, dms ipc call audio micmute"
+        # ", XF86MonBrightnessUp, exec, brightnessctl s 10%+"
+        # ", XF86MonBrightnessDown, exec, brightnessctl s 10%-"
+        ", XF86MonBrightnessUp, exec, dms ipc call brightness increment 5"
+        ", XF86MonBrightnessDown, exec, dms ipc call brightness decrement 5"
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioPrev, exec, playerctl previous"
         ", XF86AudioNext, exec, playerctl next"
@@ -198,7 +203,26 @@
         "$mod, mouse:273, resizewindow"
       ];
 
+      layerrule = [
+        "noanim, ^(dms)$"
+      ];
+
+      workspace = [
+        "9,default:true,monitor:eDP-1"
+        "special:magic,gapsout:96"
+        "w[tv1]s[false], gapsout:0, gapsin:0"
+        "f[1]s[false], gapsout:0, gapsin:0"
+      ];
+
+      windowrule = [
+        "bordersize 0, floating:0, onworkspace:w[tv1]s[false]"
+        "rounding 0, floating:0, onworkspace:w[tv1]s[false]"
+        "bordersize 0, floating:0, onworkspace:f[1]s[false]"
+        "rounding 0, floating:0, onworkspace:f[1]s[false]"
+      ];
+
       windowrulev2 = [
+        "float, class:^(org.quickshell)$"
         "pin, initialTitle:^(Picture-in-Picture)$"
         "keepaspectratio, initialTitle:^(Picture-in-Picture)$"
         "size 25% 25%,initialTitle:^(Picture-in-Picture)$"

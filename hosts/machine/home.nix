@@ -5,9 +5,9 @@
 }: {
   imports = [
     # ../../home/noctalia
-    ../../home/hyprpanel
+    # ../../home/hyprpanel
     ../../home/hypr
-    # ../../home/anyrun
+    ../../home/dms-theme
     ../../home/fuzzel
     ../../home/nvim
     ../../home/zed
