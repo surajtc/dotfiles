@@ -7,7 +7,8 @@
     # ../../home/noctalia
     ../../home/hyprpanel
     ../../home/hypr
-    ../../home/anyrun
+    # ../../home/anyrun
+    ../../home/fuzzel
     ../../home/nvim
     ../../home/zed
     ../../home/stylix

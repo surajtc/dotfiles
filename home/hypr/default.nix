@@ -16,6 +16,29 @@
   #   ];
   # };
 
+  home.file = {
+    ".config/uwsm/env" = {
+      text = ''
+        export MOZ_ENABLE_WAYLAND=1
+        export GDK_BACKEND=wayland
+        export SDL_VIDEODRIVER=wayland
+        export CLUTTER_BACKEND=wayland
+        export QT_QPA_PLATFORM=wayland
+        export QT_AUTO_SCREEN_SCALE_FACTOR=1
+        export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+        export NIXOS_OZONE_WL=1
+        export ELECTRON_OZONE_PLATFORM_HINT=auto
+        export LIBVA_DRIVER_NAME=nvidia
+        export __GLX_VENDOR_LIBRARY_NAME=nvidia
+      '';
+    };
+
+    # ".config/uwsm/env-hyprland" = {
+    #   text = ''
+    #   '';
+    # };
+  };
+
   home.packages = with pkgs; [
     playerctl
     pwvucontrol
@@ -33,6 +56,8 @@
     enable = true;
     xwayland.enable = true;
     systemd.enable = false;
+    # set to null so hyprland package from nixos is used
+    package = null;
 
     settings = {
       "$mod" = "SUPER";
@@ -66,29 +91,29 @@
       };
 
       exec-once = [
-        "${pkgs.hyprpanel}/bin/hyprpanel"
+        # "${pkgs.hyprpanel}/bin/hyprpanel"
         # "${pkgs.noctalia-shell}/bin/noctalia-shell"
         # "noctalia-shell"
-        "nm-applet &"
+        "uwsm-terminal -- nm-applet &"
       ];
 
-      env = [
-        "MOZ_ENABLE_WAYLAND,1"
-        "GDK_BACKEND,wayland"
-        "QT_QPA_PLATFORM,wayland"
-        "SDL_VIDEODRIVER,wayland"
-        "CLUTTER_BACKEND,wayland"
-        "QT_AUTO_SCREEN_SCALE_FACTOR,1"
-        "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
-        "NIXOS_OZONE_WL,1"
-        "ELECTRON_OZONE_PLATFORM_HINT,auto"
-
-        "XDG_CURRENT_DESKTOP,Hyprland"
-        "XDG_SESSION_TYPE,wayland"
-        "XDG_SESSION_DESKTOP,Hyprland"
-        # "LIBVA_DRIVER_NAME,nvidia"
-        # "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-      ];
+      # env = [
+      #   "MOZ_ENABLE_WAYLAND,1"
+      #   "GDK_BACKEND,wayland"
+      #   "QT_QPA_PLATFORM,wayland"
+      #   "SDL_VIDEODRIVER,wayland"
+      #   "CLUTTER_BACKEND,wayland"
+      #   "QT_AUTO_SCREEN_SCALE_FACTOR,1"
+      #   "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+      #   "NIXOS_OZONE_WL,1"
+      #   "ELECTRON_OZONE_PLATFORM_HINT,auto"
+      #
+      #   "XDG_CURRENT_DESKTOP,Hyprland"
+      #   "XDG_SESSION_TYPE,wayland"
+      #   "XDG_SESSION_DESKTOP,Hyprland"
+      #   "LIBVA_DRIVER_NAME,nvidia"
+      #   "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+      # ];
 
       monitor = [
         ",1920x1080@60,0x0,1"
@@ -116,16 +141,16 @@
 
       bind =
         [
-          "$mod, Return, exec, kitty"
-          "$mod, E, exec, nautilus"
-          "$mod, B, exec, firefox"
-          "$mod SHIFT, B, exec, brave --ozone-platform=wayland --disable-features=WaylandWpColorManagerV1"
+          "$mod, Return, exec, uwsm-app -- kitty.desktop"
+          "$mod, E, exec, uwsm-app -- nautilus"
+          "$mod, B, exec, uwsm-app -- firefox.desktop"
+          "$mod SHIFT, B, exec, uwsm-app -- brave --ozone-platform=wayland --disable-features=WaylandWpColorManagerV1"
 
-          "$mod, P, exec, anyrun"
+          "$mod, P, exec, fuzzel \"--launch-prefix=uwsm-app --\""
           "$mod SHIFT, P, exec, grim -g \"$(slurp -d)\" - | wl-copy"
 
           "$mod SHIFT, C, killactive,"
-          "$mod SHIFT, Q, exec, hyprctl dispatch exit"
+          "$mod SHIFT, Q, exec,loginctl terminate-user \"\""
           "$mod CONTROL, R, exec, hyprctl reload"
           "$mod, M, fullscreen, 1"
           "$mod, F, fullscreen, 0"

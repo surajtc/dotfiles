@@ -8,15 +8,17 @@
 in {
   programs.hyprpanel = {
     enable = true;
+    systemd.enable = true;
+
     settings = {
       # layout = {
-        bar.layouts = {
-          "*" = {
-            left = ["dashboard" "workspaces" "windowtitle"];
-            middle = ["clock"];
-            right = ["netstat" "ram" "cpu" "volume" "bluetooth" "battery" "systray" "hyprsunset" "notifications"];
-          };
+      bar.layouts = {
+        "*" = {
+          left = ["dashboard" "workspaces" "windowtitle"];
+          middle = ["clock"];
+          right = ["netstat" "ram" "cpu" "volume" "bluetooth" "battery" "systray" "hyprsunset" "notifications"];
         };
+      };
       # };
 
       bar.workspaces.show_icons = false;
