@@ -51,6 +51,21 @@
   ];
 
   programs.hyprlock.enable = true;
+  programs.satty = {
+    enable = true;
+    settings = {
+      general = {
+        fullscreen = false;
+        early-exit = true;
+        copy-command = "wl-copy";
+        initial-tool = "arrow";
+        no-window-decoration = true;
+        actions-on-enter = ["save-to-clipboard" "exit"];
+        actions-on-escape = ["exit"];
+        annotation-size-factor = 0.5;
+      };
+    };
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -63,8 +78,8 @@
       "$mod" = "SUPER";
 
       general = {
-        gaps_in = 4;
-        gaps_out = 8;
+        gaps_in = 3;
+        gaps_out = "1,5,5,5";
         border_size = 2;
         layout = "dwindle";
         allow_tearing = false;
@@ -140,11 +155,12 @@
           "$mod, Return, exec, uwsm-app -- kitty.desktop"
           "$mod, E, exec, uwsm-app -- nautilus"
           "$mod, B, exec, uwsm-app -- firefox.desktop"
-          "$mod SHIFT, B, exec, uwsm-app -- brave --ozone-platform=wayland --disable-features=WaylandWpColorManagerV1"
+          "$mod SHIFT, B, exec, uwsm-app -- brave"
+          # "$mod SHIFT, B, exec, uwsm-app -- brave --ozone-platform=wayland --disable-features=WaylandWpColorManagerV1"
 
           # "$mod, P, exec, fuzzel \"--launch-prefix=uwsm-app --\""
           "$mod, P, exec, dms ipc call spotlight toggle"
-          "$mod SHIFT, P, exec, grim -g \"$(slurp -d)\" - | wl-copy"
+          "$mod SHIFT, P, exec, grim -g \"$(slurp -d)\" -t ppm - | satty --filename -"
 
           "$mod SHIFT, C, killactive,"
           "$mod SHIFT, Q, exec, uwsm stop"
@@ -219,22 +235,30 @@
         "rounding 0, floating:0, onworkspace:w[tv1]s[false]"
         "bordersize 0, floating:0, onworkspace:f[1]s[false]"
         "rounding 0, floating:0, onworkspace:f[1]s[false]"
-      ];
 
-      windowrulev2 = [
+        # Satty
+        "float, center, size 80% 80%, pin, stayfocused, class:^(com.gabm.satty)$"
+        "noborder, class:^(com.gabm.satty)$"
+        "noanim, class:^(com.gabm.satty)$"
+
+        # Quickshell (DMS-shell)
         "float, class:^(org.quickshell)$"
+
+        # Picture-in-Picture
         "pin, initialTitle:^(Picture-in-Picture)$"
         "keepaspectratio, initialTitle:^(Picture-in-Picture)$"
-        "size 25% 25%,initialTitle:^(Picture-in-Picture)$"
+        "size 25% 25%, initialTitle:^(Picture-in-Picture)$"
         "float, initialTitle:^(Picture-in-Picture)$"
         "bordersize 0, initialTitle:^(Picture-in-Picture)$"
 
-        "pin, class:mpv"
-        "keepaspectratio, class:mpv"
-        "size 60% 60%, class:mpv"
-        "float, class:mpv"
-        "bordersize 0, class:mpv"
+        # MPV
+        "pin, class:^(mpv)$"
+        "keepaspectratio, class:^(mpv)$"
+        "size 60% 60%, class:^(mpv)$"
+        "float, class:^(mpv)$"
+        "bordersize 0, class:^(mpv)$"
 
+        # Browser file dialogs
         "float, class:^([Ff]irefox.*|[Bb]rave.*), initialTitle:^(Save File|Enter name of file to save.*|Open File|File Upload)$"
         "center, class:^([Ff]irefox.*|[Bb]rave.*), initialTitle:^(Save File|Enter name of file to save.*|Open File|File Upload)$"
       ];

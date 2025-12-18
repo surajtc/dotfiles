@@ -4,7 +4,6 @@
   ...
 }: {
   imports = [
-    # ../../home/noctalia
     # ../../home/hyprpanel
     ../../home/hypr
     ../../home/dms-theme
@@ -15,7 +14,6 @@
     ../../home/zsh
     ../../home/kitty
     ../../home/tmux
-    # ../../home/development
     ../../home/spotify-player
   ];
 
@@ -28,12 +26,10 @@
     chromium
     brave
 
-    # vscodium-fhs
     vscode-fhs
     code-cursor-fhs
     # slack
-    # postman
-    discord-canary
+    # discord-canary
 
     nautilus
     loupe

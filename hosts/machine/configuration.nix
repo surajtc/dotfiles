@@ -78,6 +78,7 @@
   services.displayManager.dms-greeter = {
     enable = true;
     compositor.name = "hyprland";
+    configHome = "/home/admin";
   };
 
   # Window manager
@@ -90,7 +91,19 @@
   programs.dms-shell = {
     enable = true;
     systemd.enable = true;
-    enableDynamicTheming = false;
+    plugins = {
+      DankPomodoroTimer = {
+        enable = true;
+        src =
+          pkgs.fetchFromGitHub {
+            owner = "AvengeMedia";
+            repo = "dms-plugins";
+            rev = "master";
+            sha256 = "sha256-QaES61lAxUGpzXEgAcidOsi332Ee/2uBOFoXcCsDW88=";
+          }
+          + "/DankPomodoroTimer";
+      };
+    };
   };
 
   security.pam.services.hyprlock = {};

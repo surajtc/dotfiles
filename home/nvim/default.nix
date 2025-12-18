@@ -93,7 +93,7 @@
 
       # black
       # isort
-
+      nodejs
       nodePackages.prettier
       prettierd
       # nodePackages.typescript-language-server
