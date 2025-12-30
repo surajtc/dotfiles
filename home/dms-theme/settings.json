@@ -50,12 +50,27 @@
   "privacyShowScreenShareIcon": false,
   "controlCenterWidgets": [
     {
+      "id": "brightnessSlider",
+      "enabled": true,
+      "width": 100
+    },
+    {
       "id": "volumeSlider",
       "enabled": true,
       "width": 50
     },
     {
-      "id": "brightnessSlider",
+      "id": "inputVolumeSlider",
+      "enabled": true,
+      "width": 50
+    },
+    {
+      "id": "audioInput",
+      "enabled": true,
+      "width": 50
+    },
+    {
+      "id": "audioOutput",
       "enabled": true,
       "width": 50
     },
@@ -70,24 +85,19 @@
       "width": 50
     },
     {
-      "id": "audioOutput",
-      "enabled": true,
-      "width": 50
-    },
-    {
-      "id": "audioInput",
+      "id": "colorPicker",
       "enabled": true,
       "width": 50
     },
     {
       "id": "nightMode",
       "enabled": true,
-      "width": 50
+      "width": 25
     },
     {
-      "id": "darkMode",
+      "id": "doNotDisturb",
       "enabled": true,
-      "width": 50
+      "width": 25
     }
   ],
   "showWorkspaceIndex": true,

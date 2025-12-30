@@ -28,4 +28,7 @@ in {
     info = colors.base0D;
     matugen_type = "scheme-tonal-spot";
   };
+  home.file.".local/state/DankMaterialShell/session.json".text = builtins.toJSON {
+    wallpaperPath = colors.base00;
+  };
 }

@@ -31,10 +31,12 @@
     nixpkgs,
     home-manager,
     ...
-  } @ inputs: {
+  } @ inputs: let
+    vars = import ./hosts/machine/vars.nix;
+  in {
     nixosConfigurations.machine = nixpkgs.lib.nixosSystem {
       specialArgs = {
-        inherit inputs;
+        inherit inputs vars;
       };
       system = "x86_64-linux";
       modules = [
@@ -42,7 +44,7 @@
         home-manager.nixosModules.home-manager
         {
           home-manager.extraSpecialArgs = {
-            inherit inputs;
+            inherit inputs vars;
           };
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
@@ -52,7 +54,7 @@
           ];
 
           home-manager.backupFileExtension = "backup";
-          home-manager.users.admin = import ./hosts/machine/home.nix;
+          home-manager.users.${vars.userName} = import ./hosts/machine/home.nix;
         }
 
         {

@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  vars,
+  ...
+}: {
   home.packages = with pkgs; [
     openconnect
     wlrctl
@@ -30,7 +34,7 @@
       gs = "git status";
 
       nixedit = "cd /etc/dotfiles && nvim";
-      nixrebuild = "sudo nixos-rebuild switch --show-trace --flake .";
+      nixrebuild = "sudo nixos-rebuild switch --show-trace --flake path:$(pwd)#${vars.hostName}";
     };
 
     initContent = "fastfetch";

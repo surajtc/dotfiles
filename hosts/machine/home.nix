@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  vars,
   ...
 }: {
   imports = [
@@ -14,11 +15,12 @@
     ../../home/zsh
     ../../home/kitty
     ../../home/tmux
-    ../../home/spotify-player
+    # ../../home/spotify-player
+    ../../home/spotifyd
   ];
 
-  home.username = "admin";
-  home.homeDirectory = "/home/admin";
+  home.username = vars.userName;
+  home.homeDirectory = "/home/${vars.userName}";
 
   home.packages = with pkgs; [
     fastfetch
@@ -73,8 +75,8 @@
 
   programs.git = {
     enable = true;
-    settings.user.name = "surajtc";
-    settings.user.email = "mail.surajtc@gmail.com";
+    settings.user.name = vars.gitUser;
+    settings.user.email = vars.gitEmail;
   };
 
   # This value determines the home Manager release that your

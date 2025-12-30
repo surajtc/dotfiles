@@ -1,6 +1,8 @@
 {
   config,
+  lib,
   pkgs,
+  vars,
   ...
 }: {
   imports = [
@@ -29,7 +31,7 @@
   };
 
   # Networking
-  networking.hostName = "machine";
+  networking.hostName = vars.hostName;
   # networking.wireless.enable = true;  # To enable wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -78,8 +80,19 @@
   services.displayManager.dms-greeter = {
     enable = true;
     compositor.name = "hyprland";
-    configHome = "/home/admin";
+    configHome = "/home/${vars.userName}";
   };
+
+  system.activationScripts.dmsWallpaper = lib.stringAfter ["users"] ''
+    PATH=${pkgs.jq}/bin:$PATH
+    USER_SESSION="/home/${vars.userName}/.local/state/DankMaterialShell/session.json"
+    GREETER_SESSION="/var/lib/dms-greeter/session.json"
+
+    [[ -f "$GREETER_SESSION" && -f "$USER_SESSION" ]] && \
+    jq -s '.[0] * .[1]' "$GREETER_SESSION" "$USER_SESSION" > /tmp/session$$.json && \
+    mv /tmp/session$$.json "$GREETER_SESSION" && \
+    chown greeter:dms-greeter "$GREETER_SESSION"
+  '';
 
   # Window manager
   programs.hyprland = {
@@ -215,6 +228,7 @@
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
+    jq
     git
     lazygit
     btop
