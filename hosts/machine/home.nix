@@ -5,8 +5,9 @@
   ...
 }: {
   imports = [
-    # ../../home/hyprpanel
-    ../../home/hypr
+    ../../home/uwsm
+    ../../home/niri
+    # ../../home/hypr
     ../../home/dms-theme
     ../../home/fuzzel
     ../../home/nvim
@@ -16,7 +17,7 @@
     ../../home/kitty
     ../../home/tmux
     # ../../home/spotify-player
-    ../../home/spotifyd
+    # ../../home/spotifyd
   ];
 
   home.username = vars.userName;
@@ -25,8 +26,9 @@
   home.packages = with pkgs; [
     fastfetch
 
-    chromium
+    # chromium
     brave
+    google-chrome
 
     vscode-fhs
     code-cursor-fhs
@@ -49,7 +51,6 @@
     spotify
     yt-dlp
     svix-cli
-    # jellyfin-mpv-shim
     delfin
   ];
 

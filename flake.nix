@@ -14,11 +14,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # quickshell = {
     #   url = "github:outfoxxed/quickshell";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-    #
+
     # noctalia = {
     #   url = "github:noctalia-dev/noctalia-shell";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -50,6 +55,8 @@
           home-manager.useUserPackages = true;
           home-manager.sharedModules = [
             inputs.stylix.homeModules.stylix
+            inputs.niri.homeModules.stylix
+            inputs.niri.homeModules.config
             # inputs.noctalia.homeModules.default
           ];
 
@@ -59,7 +66,6 @@
 
         {
           nixpkgs.overlays = [
-            # inputs.hyprpanel.overlay
             # (import ./overlays/spotify-spotx.nix)
           ];
         }

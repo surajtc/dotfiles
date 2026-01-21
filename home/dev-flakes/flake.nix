@@ -29,6 +29,14 @@
 
         python3
         uv
+
+        gcc
+        go
+        gopls
+        gotools
+        air
+        goose
+        oapi-codegen
       ];
     };
   };

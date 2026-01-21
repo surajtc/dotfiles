@@ -28,7 +28,7 @@
       buffer_font_family = "JetBrainsMono Nerd Font";
       buffer_font_size = lib.mkForce 12.6;
 
-      theme = "Base16 Classic Dark";
+      # theme = "Base16 Classic Dark";
 
       ui_font_family = "Inter";
       ui_font_size = 12.0;

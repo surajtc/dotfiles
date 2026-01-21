@@ -4,6 +4,7 @@
     # image = ../wallpapers/default.svg;
     polarity = "dark";
     base16Scheme = "${pkgs.base16-schemes}/share/themes/classic-dark.yaml";
+    # base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
 
     cursor = {
       package = pkgs.vanilla-dmz;
@@ -47,6 +48,8 @@
       };
 
       firefox.profileNames = ["default"];
+
+      niri.enable = true;
     };
   };
 

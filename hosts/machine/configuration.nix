@@ -62,44 +62,28 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Display manager
-  # services.displayManager.ly = {
-  #   enable = true;
-  # settings = {
-  #   save = true;
-  #   load = true;
-  # };
-  # };
-
-  # environment.loginShellInit = ''
-  #   if uwsm check may-start && uwsm select; then
-  #   	exec uwsm start default
-  #   fi
-  # '';
-
-  services.displayManager.dms-greeter = {
-    enable = true;
-    compositor.name = "hyprland";
-    configHome = "/home/${vars.userName}";
-  };
-
-  system.activationScripts.dmsWallpaper = lib.stringAfter ["users"] ''
-    PATH=${pkgs.jq}/bin:$PATH
-    USER_SESSION="/home/${vars.userName}/.local/state/DankMaterialShell/session.json"
-    GREETER_SESSION="/var/lib/dms-greeter/session.json"
-
-    [[ -f "$GREETER_SESSION" && -f "$USER_SESSION" ]] && \
-    jq -s '.[0] * .[1]' "$GREETER_SESSION" "$USER_SESSION" > /tmp/session$$.json && \
-    mv /tmp/session$$.json "$GREETER_SESSION" && \
-    chown greeter:dms-greeter "$GREETER_SESSION"
-  '';
-
   # Window manager
-  programs.hyprland = {
+  # programs.hyprland = {
+  #   enable = true;
+  #   xwayland.enable = true;
+  #   withUWSM = true;
+  # };
+
+  programs.niri = {
     enable = true;
-    xwayland.enable = true;
-    withUWSM = true;
   };
+
+  # security.pam.services.hyprlock = {};
+
+  programs.uwsm = {
+    enable = true;
+    waylandCompositors.niri = {
+      prettyName = "Niri";
+      comment = "Niri scrollable-tiling Wayland compositor";
+      binPath = "${pkgs.niri}/bin/niri-session";
+    };
+  };
+
   # programs.uwsm.enable = true;
   programs.dms-shell = {
     enable = true;
@@ -119,7 +103,38 @@
     };
   };
 
-  security.pam.services.hyprlock = {};
+  # Display manager
+  # services.displayManager.ly = {
+  #   enable = true;
+  # settings = {
+  #   save = true;
+  #   load = true;
+  # };
+  # };
+
+  # environment.loginShellInit = ''
+  #   if uwsm check may-start && uwsm select; then
+  #   	exec uwsm start default
+  #   fi
+  # '';
+
+  system.activationScripts.dmsWallpaper = lib.stringAfter ["users"] ''
+    PATH=${pkgs.jq}/bin:$PATH
+    USER_SESSION="/home/${vars.userName}/.local/state/DankMaterialShell/session.json"
+    GREETER_SESSION="/var/lib/dms-greeter/session.json"
+
+    [[ -f "$GREETER_SESSION" && -f "$USER_SESSION" ]] && \
+    jq -s '.[0] * .[1]' "$GREETER_SESSION" "$USER_SESSION" > /tmp/session$$.json && \
+    mv /tmp/session$$.json "$GREETER_SESSION" && \
+    chown greeter:dms-greeter "$GREETER_SESSION"
+  '';
+
+  services.displayManager.dms-greeter = {
+    enable = true;
+    compositor.name = "niri";
+    # compositor.name = "hyprland";
+    configHome = "/home/${vars.userName}";
+  };
 
   # Extra services
   services.printing.enable = true;
@@ -228,6 +243,8 @@
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
+    # niri
+
     jq
     git
     lazygit
