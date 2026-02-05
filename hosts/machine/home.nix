@@ -52,6 +52,7 @@
     yt-dlp
     svix-cli
     delfin
+    jellyfin-media-player
   ];
 
   programs.firefox.enable = true;
