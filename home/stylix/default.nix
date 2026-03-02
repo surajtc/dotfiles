@@ -50,6 +50,8 @@
       firefox.profileNames = ["default"];
 
       niri.enable = true;
+      # TODO: remove kde line later
+      kde.enable = false;
     };
   };
 

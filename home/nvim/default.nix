@@ -76,7 +76,7 @@
       }
     ];
 
-    extraLuaConfig = ''
+    initLua = ''
       ${builtins.readFile config/options.lua}
       ${builtins.readFile config/mappings.lua}
       ${builtins.readFile config/debug.lua}

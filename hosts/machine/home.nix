@@ -20,7 +20,7 @@
     # ../../home/spotifyd
   ];
 
-  home.username = vars.userName;
+  home.username = "${vars.userName}";
   home.homeDirectory = "/home/${vars.userName}";
 
   home.packages = with pkgs; [
