@@ -7,6 +7,10 @@
 }: let
   colors = config.lib.stylix.colors.withHashtag;
 in {
+  home.packages = with pkgs; [
+    pwvucontrol
+  ];
+
   programs.niri = {
     package = pkgs.niri;
     settings = {
