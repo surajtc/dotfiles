@@ -135,6 +135,16 @@ in {
         };
       };
 
+      outputs = {
+        "Dell Inc. AW2725DM BJGMJ74" = {
+          mode = {
+            width = 2560;
+            height = 1440;
+            refresh = 120.0;
+          };
+        };
+      };
+
       # Screenshot Path
       screenshot-path = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
 

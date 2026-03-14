@@ -277,8 +277,6 @@
     gtk4
     adwaita-qt
     wireguard-tools
-
-    citrix_workspace
   ];
 
   programs.nix-ld = {
