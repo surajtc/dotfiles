@@ -261,7 +261,7 @@
     tldr
     busybox
     lazydocker
-    steam-run-free
+    # steam-run-free
 
     ntfs3g
 
@@ -278,6 +278,8 @@
     adwaita-qt
     wireguard-tools
   ];
+
+  programs.steam.enable = true;
 
   programs.nix-ld = {
     enable = true;

@@ -136,7 +136,7 @@ in {
       };
 
       outputs = {
-        "Dell Inc. AW2725DM BJGMJ74" = {
+        "DP-3" = {
           mode = {
             width = 2560;
             height = 1440;
