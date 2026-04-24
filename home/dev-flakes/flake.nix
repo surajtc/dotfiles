@@ -24,7 +24,7 @@
     devShells.${system}.default = pkgs.mkShellNoCC {
       packages = with pkgs; [
         nodejs
-        nodePackages.pnpm
+        pnpm
         bun
 
         python3

@@ -16,6 +16,7 @@
     ../../home/zsh
     ../../home/kitty
     ../../home/tmux
+    ../../home/opencode
     # ../../home/spotify-player
     # ../../home/spotifyd
   ];
@@ -55,7 +56,7 @@
     jellyfin-media-player
   ];
 
-  programs.firefox.enable = true;
+  # programs.firefox.enable = true;
 
   # programs.firefox.profiles.default = {
   #   id = 0;

@@ -94,7 +94,7 @@
       # black
       # isort
       nodejs
-      nodePackages.prettier
+      prettier
       prettierd
       # nodePackages.typescript-language-server
       tailwindcss-language-server

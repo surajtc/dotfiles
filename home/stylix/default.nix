@@ -47,7 +47,7 @@
         signColumn = true;
       };
 
-      firefox.profileNames = ["default"];
+      # firefox.profileNames = ["default"];
 
       niri.enable = true;
       # TODO: remove kde line later

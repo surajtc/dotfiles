@@ -29,7 +29,7 @@ in {
         # Apps
         "${mod}+Return".action.spawn = ["uwsm-app" "--" "kitty.desktop"];
         "${mod}+E".action.spawn = ["uwsm-app" "--" "nautilus"];
-        "${mod}+B".action.spawn = ["uwsm-app" "--" "firefox.desktop"];
+        # "${mod}+B".action.spawn = ["uwsm-app" "--" "firefox.desktop"];
         "${mod}+Shift+B".action.spawn = ["uwsm-app" "--" "brave"];
 
         # Launcher

@@ -251,6 +251,7 @@
     # niri
 
     jq
+    ripgrep
     git
     lazygit
     btop
