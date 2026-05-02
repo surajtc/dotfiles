@@ -27,7 +27,8 @@
         pnpm
         bun
 
-        python3
+        # python3
+        python311
         uv
 
         gcc

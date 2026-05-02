@@ -204,6 +204,9 @@ in {
             {
               app-id = "org.gnome.Loupe$";
             }
+            {
+              title = "Picture in picture";
+            }
           ];
 
           open-floating = true;
