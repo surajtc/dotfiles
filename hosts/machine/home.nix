@@ -2,6 +2,7 @@
   config,
   pkgs,
   vars,
+  inputs,
   ...
 }: {
   imports = [
@@ -16,7 +17,7 @@
     ../../home/zsh
     ../../home/kitty
     ../../home/tmux
-    ../../home/opencode
+    # ../../home/opencode
     # ../../home/spotify-player
     # ../../home/spotifyd
   ];
@@ -54,6 +55,13 @@
     svix-cli
     delfin
     jellyfin-media-player
+
+    llm-agents.claude-code
+    llm-agents.codex
+    llm-agents.gemini-cli
+
+    llm-agents.opencode
+    llm-agents.pi
   ];
 
   # programs.firefox.enable = true;
