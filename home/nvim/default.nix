@@ -13,6 +13,7 @@
 
       mini-base16
       mini-icons
+      mini-diff
 
       snacks-nvim
 
@@ -41,6 +42,12 @@
       {
         plugin = oil-nvim;
         config = builtins.readFile config/plugins/oil.lua;
+        type = "lua";
+      }
+
+      {
+        plugin = neo-tree-nvim;
+        config = builtins.readFile config/plugins/neo-tree.lua;
         type = "lua";
       }
 

@@ -25,6 +25,9 @@ vim.keymap.set("n", "<leader>e", function()
 	require("oil").toggle_float()
 end, { desc = "Toggle Oil" })
 
+-- Neo-tree
+vim.keymap.set("n", "<leader>t", "<cmd>Neotree toggle reveal<CR>", { desc = "Toggle Neo [T]ree" })
+
 -- Buffer
 -- vim.keymap.set("n", "<leader>h", "<cmd>bprev<CR>", { desc = "Previous buffer" })
 -- vim.keymap.set("n", "<leader>l", "<cmd>bnext<CR>", { desc = "Next buffer" })

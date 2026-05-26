@@ -25,6 +25,10 @@
       bind % split-window -h -c "#{pane_current_path}"
       bind c new-window -c "#{pane_current_path}"
 
+      set -s extended-keys on
+      set -g extended-keys-format csi-u
+      set -as terminal-features 'xterm*:extkeys'
+
       set -g status-style bg="${colors.base01}"
 
       set -g status-left "#{?client_prefix,#[bg=${colors.base0A}],#[bg=${colors.base0D}]}#[fg=${colors.base00}]  #S "

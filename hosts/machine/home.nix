@@ -37,6 +37,8 @@
     # slack
     # discord-canary
 
+    friction-graphics
+
     nautilus
     loupe
     rawtherapee
