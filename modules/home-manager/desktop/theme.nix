@@ -1,4 +1,4 @@
-{pkgs, inputs, ...}: {
+{config, pkgs, inputs, ...}: {
   stylix = {
     enable = true;
     polarity = "dark";
@@ -32,4 +32,7 @@
     targets.niri.enable = true;
     targets.noctalia.enable = true;
   };
+
+  programs.niri.settings.layout.background-color =
+    config.lib.stylix.colors.withHashtag.base00;
 }
