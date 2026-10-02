@@ -1,0 +1,35 @@
+{pkgs, inputs, ...}: {
+  stylix = {
+    enable = true;
+    polarity = "dark";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/classic-dark.yaml";
+    cursor = {
+      package = pkgs.vanilla-dmz;
+      name = "Vanilla-DMZ";
+      size = 24;
+    };
+    fonts = {
+      sizes = {
+        applications = 9;
+        desktop = 9;
+        popups = 9;
+        terminal = 10;
+      };
+      sansSerif = {
+        package = inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-pro-nerd;
+        name = "SFProDisplay Nerd Font";
+      };
+      monospace = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font";
+      };
+      emoji = {
+        package = pkgs.noto-fonts-color-emoji;
+        name = "Noto Color Emoji";
+      };
+    };
+    targets.kde.enable = false;
+    targets.niri.enable = true;
+    targets.noctalia.enable = true;
+  };
+}

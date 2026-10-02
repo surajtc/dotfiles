@@ -1,0 +1,5 @@
+vars.nix
+!hosts/laptop/vars.nix
+!users/admin/vars.nix
+result
+result-*
