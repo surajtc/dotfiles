@@ -5,6 +5,7 @@
     ../../modules/nixos/boot.nix
     ../../modules/nixos/desktop.nix
     ../../modules/nixos/greeter.nix
+    ../../modules/nixos/icons.nix
     ../../modules/nixos/audio.nix
     ../../modules/nixos/development.nix
   ];

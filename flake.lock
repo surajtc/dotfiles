@@ -396,6 +396,22 @@
         "type": "github"
       }
     },
+    "noctalia-community-plugins": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790982730,
+        "narHash": "sha256-s/i3FLJU+1cHGhO2I8Q3IztHmYq1Aoj0evOleMVubp4=",
+        "owner": "noctalia-dev",
+        "repo": "community-plugins",
+        "rev": "01c3ad4fc2da5d1c1ef03bff7cbfe44b759f2ce6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "repo": "community-plugins",
+        "type": "github"
+      }
+    },
     "nsticky": {
       "inputs": {
         "adios-flake": "adios-flake",
@@ -462,8 +478,10 @@
         "niri": "niri",
         "nixpkgs": "nixpkgs",
         "noctalia": "noctalia",
+        "noctalia-community-plugins": "noctalia-community-plugins",
         "nsticky": "nsticky",
-        "stylix": "stylix"
+        "stylix": "stylix",
+        "tela-circle-icons": "tela-circle-icons"
       }
     },
     "sf-arabic": {
@@ -596,6 +614,22 @@
         "owner": "nix-systems",
         "ref": "future-26.11",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tela-circle-icons": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786861612,
+        "narHash": "sha256-kvAJH/ptMvSCjk5Equi+8ZzHjSDKQUURUImNDZZXQcs=",
+        "owner": "vinceliuice",
+        "repo": "Tela-circle-icon-theme",
+        "rev": "ee3cf47bcb05c3d99a0860b54254d2ff3d1d2c69",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vinceliuice",
+        "repo": "Tela-circle-icon-theme",
         "type": "github"
       }
     },

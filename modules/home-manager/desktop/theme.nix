@@ -1,8 +1,18 @@
-{config, pkgs, inputs, ...}: {
+{config, pkgs, inputs, ...}: let
+  telaCircleIcons = pkgs.callPackage ../../../packages/tela-circle-icon-theme.nix {
+    src = inputs.tela-circle-icons;
+  };
+in {
   stylix = {
     enable = true;
     polarity = "dark";
     base16Scheme = "${pkgs.base16-schemes}/share/themes/classic-dark.yaml";
+    icons = {
+      enable = true;
+      package = telaCircleIcons;
+      dark = "Tela-circle-dark";
+      light = "Tela-circle-light";
+    };
     cursor = {
       package = pkgs.vanilla-dmz;
       name = "Vanilla-DMZ";

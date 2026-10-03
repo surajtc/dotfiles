@@ -13,6 +13,7 @@
     nix-edit = "cd /etc/dotfiles && nvim";
     nix-format = "nix fmt /etc/dotfiles";
     nix-rebuild = "sudo nixos-rebuild switch --show-trace --flake /etc/dotfiles#machine";
+    nix-cleanup = "sudo nix-collect-garbage -d && nix-collect-garbage -d && sleep 2 && sudo /run/current-system/bin/switch-to-configuration boot";
   };
 
   programs.bash = {

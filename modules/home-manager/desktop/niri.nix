@@ -1,11 +1,11 @@
-{pkgs, ...}: {
+{config, pkgs, ...}: {
   programs.niri.settings = {
     outputs = {
       "Dell Inc. AW2725DM BJGMJ74" = {
         mode = {
           width = 2560;
           height = 1440;
-          refresh = 59.951;
+          refresh = 119.998;
         };
         position = {x = 0; y = 0;};
         scale = 1;
@@ -28,6 +28,31 @@
 
     debug.honor-xdg-activation-with-invalid-serial = true;
 
+    recent-windows = {
+      debounce-ms = 750;
+      open-delay-ms = 150;
+      highlight = {
+        active-color = config.lib.stylix.colors.withHashtag.base0D;
+        urgent-color = config.lib.stylix.colors.withHashtag.base08;
+        padding = 12;
+        corner-radius = 2;
+      };
+      previews = {
+        max-height = 480;
+        max-scale = 0.8;
+      };
+      binds = {
+        "Alt+Tab".action.next-window = [];
+        "Alt+Shift+Tab".action.previous-window = [];
+        "Alt+grave".action.next-window = {filter = "app-id";};
+        "Alt+Shift+grave".action.previous-window = {filter = "app-id";};
+        "Mod+Tab".action.next-window = [];
+        "Mod+Shift+Tab".action.previous-window = [];
+        "Mod+grave".action.next-window = {filter = "app-id";};
+        "Mod+Shift+grave".action.previous-window = {filter = "app-id";};
+      };
+    };
+
     spawn-at-startup = [{argv = ["noctalia"]; }];
 
     binds = let
@@ -35,7 +60,8 @@
     in {
       # Applications and Noctalia surfaces
       "Mod+Return".action.spawn = ["kitty"];
-      "Mod+B".action.spawn = ["brave"];
+      "Mod+B".action.spawn = ["brave" "--profile-directory=Default"];
+      "Mod+Shift+B".action.spawn = ["brave" "--profile-directory=Profile 1"];
       "Mod+E".action.spawn = ["${pkgs.nautilus}/bin/nautilus"];
       "Mod+P".action.spawn = noctalia ["panel-toggle" "launcher"];
       "Mod+V".action.spawn = noctalia ["panel-toggle" "clipboard"];
@@ -153,12 +179,18 @@
         clip-to-geometry = true;
       }
       {
-        matches = [{app-id = "org.gnome.Loupe$";}];
+        matches = [
+          {app-id = "org.gnome.Loupe$";}
+          {app-id = "org.gnome.Nautilus$";}
+          {app-id = "org.gnome.NautilusPreviewer$";}
+        ];
         open-floating = true;
-        border.enable = false;
       }
       {
-        matches = [{title = "Picture in picture";}];
+        matches = [
+          {title = "Picture in picture";}
+          {title = "Enhancer for YouTube™";}
+        ];
         open-floating = true;
         border.enable = false;
       }

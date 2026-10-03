@@ -1,5 +1,8 @@
-{ ... }:
+{ inputs, ... }:
 {
+  xdg.dataFile."noctalia/plugins/niri-displays".source =
+    "${inputs.noctalia-community-plugins}/niri-displays";
+
   programs.noctalia = {
     enable = true;
     checkConfig = true;
@@ -24,8 +27,9 @@
           "volume"
           "brightness"
           "battery"
-          "notifications"
+          # "display-settings"
           "tray"
+          "notifications"
         ];
         margin_ends = 0;
         padding = 12;
@@ -41,6 +45,8 @@
       };
 
       location.auto_locate = true;
+
+      plugins.enabled = ["raycursive/niri-displays"];
 
       shell.corner_radius_scale = 0.5;
 
@@ -73,6 +79,11 @@
       shell.popup_shadows = false;
 
       widget.active_window.title_scroll = "on_hover";
+      widget."display-settings" = {
+        enable_scroll = false;
+        show_resolution = false;
+        type = "raycursive/niri-displays:bar";
+      };
       widget."control-center".glyph = "layout-grid";
       widget.media = {
         album_art_only = true;
@@ -95,7 +106,7 @@
         group_by_workspace = true;
         group_single_icon_per_app = true;
         hide_empty_workspaces = true;
-        icon_scale = 0.95;
+        icon_scale = 1.15;
         inactive_opacity = 0.7;
         minimal = true;
         occupied_color = "tertiary";

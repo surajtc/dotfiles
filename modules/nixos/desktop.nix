@@ -7,7 +7,20 @@
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [xdg-desktop-portal-gnome xdg-desktop-portal-gtk];
+    config.niri."org.freedesktop.impl.portal.FileChooser" = ["gnome"];
   };
+
+  environment.systemPackages = with pkgs; [
+    nautilus
+    file-roller
+    sushi
+    loupe
+    zip
+    unzip
+    p7zip
+    unrar
+    ffmpegthumbnailer
+  ];
 
   services.gnome.gnome-keyring.enable = true;
 
