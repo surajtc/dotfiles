@@ -3,6 +3,7 @@
     ../../modules/home-manager/common.nix
     ../../modules/home-manager/development.nix
     ../../modules/home-manager/desktop/niri.nix
+    ../../modules/home-manager/desktop/nsticky.nix
     ../../modules/home-manager/desktop/noctalia.nix
     ../../modules/home-manager/desktop/wayland.nix
     ../../modules/home-manager/desktop/theme.nix
@@ -15,6 +16,7 @@
     inputs.stylix.homeModules.stylix
     inputs.niri.homeModules.stylix
     inputs.noctalia.homeModules.default
+    inputs.nsticky.homeModules.default
   ];
 
   home.username = userVars.username;

@@ -1,5 +1,26 @@
 {pkgs, ...}: {
   programs.niri.settings = {
+    outputs = {
+      "Dell Inc. AW2725DM BJGMJ74" = {
+        mode = {
+          width = 2560;
+          height = 1440;
+          refresh = 59.951;
+        };
+        position = {x = 0; y = 0;};
+        scale = 1;
+      };
+      "Sharp Corporation 0x1515 Unknown" = {
+        mode = {
+          width = 1920;
+          height = 1200;
+          refresh = 59.950;
+        };
+        position = {x = 2560; y = 0;};
+        scale = 1;
+      };
+    };
+
     hotkey-overlay.skip-at-startup = true;
     prefer-no-csd = true;
     clipboard.disable-primary = true;
@@ -7,7 +28,7 @@
 
     debug.honor-xdg-activation-with-invalid-serial = true;
 
-    spawn-at-startup = [{argv = ["noctalia"];}];
+    spawn-at-startup = [{argv = ["noctalia"]; }];
 
     binds = let
       noctalia = command: ["noctalia" "msg"] ++ command;
@@ -28,6 +49,7 @@
       "Mod+Shift+M".action.maximize-column = [];
       "Mod+F".action.fullscreen-window = [];
       "Mod+Space".action.toggle-window-floating = [];
+      "Mod+G".action.spawn = ["nsticky" "sticky" "toggle-active"];
       "Mod+Shift+C".action.close-window = [];
       "Mod+Comma".action.consume-window-into-column = [];
       "Mod+Period".action.expel-window-from-column = [];
@@ -131,10 +153,12 @@
         clip-to-geometry = true;
       }
       {
-        matches = [
-          {app-id = "org.gnome.Loupe$";}
-          {title = "Picture in picture";}
-        ];
+        matches = [{app-id = "org.gnome.Loupe$";}];
+        open-floating = true;
+        border.enable = false;
+      }
+      {
+        matches = [{title = "Picture in picture";}];
         open-floating = true;
         border.enable = false;
       }

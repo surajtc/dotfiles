@@ -2,7 +2,9 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/common.nix
+    ../../modules/nixos/boot.nix
     ../../modules/nixos/desktop.nix
+    ../../modules/nixos/greeter.nix
     ../../modules/nixos/audio.nix
     ../../modules/nixos/development.nix
   ];

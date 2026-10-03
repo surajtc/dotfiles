@@ -10,6 +10,7 @@
         capsule_border_width = 0;
         capsule_radius = 4;
         capsule_thickness = 0.78;
+        font_scale = 0.94;
         center = ["clock" "weather" "media"];
         compositor_blur = false;
         concave_edge_corners = false;
@@ -43,6 +44,10 @@
 
       shell.corner_radius_scale = 0.5;
 
+      # Keep the login screen in sync with Noctalia's active appearance and
+      # output layout. Authorization remains governed by Polkit.
+      shell.greeter_sync.auto_sync = true;
+
       wallpaper.enabled = false;
 
       osd = {
@@ -74,12 +79,14 @@
         hide_when_no_media = true;
       };
       widget.cpu.visualization = "none";
+      widget.battery.hide_when_plugged = true;
       widget.network_rx = {
         glyph = "arrow-down";
         network_speed_compact = true;
         network_speed_unit = "mb";
         visualization = "none";
       };
+      widget.network.show_label = false;
       widget.ram.visualization = "none";
       widget.taskbar = {
         empty_color = "outline";
