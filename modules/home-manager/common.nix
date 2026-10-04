@@ -30,7 +30,6 @@
   home.packages = with pkgs; [
     brave
     vscodium
-    codex
     fastfetch
     btop
     ripgrep

@@ -46,6 +46,11 @@
 
       location.auto_locate = true;
 
+      lockscreen = {
+        transition = ["fade"];
+        transition_duration = 500;
+      };
+
       plugins.enabled = ["raycursive/niri-displays"];
 
       shell.corner_radius_scale = 0.5;

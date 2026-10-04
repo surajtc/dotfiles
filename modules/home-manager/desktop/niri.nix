@@ -53,7 +53,10 @@
       };
     };
 
-    spawn-at-startup = [{argv = ["noctalia"]; }];
+    spawn-at-startup = [
+      {argv = ["noctalia"];}
+      {argv = ["nsticky"];}
+    ];
 
     binds = let
       noctalia = command: ["noctalia" "msg"] ++ command;
@@ -189,7 +192,7 @@
       {
         matches = [
           {title = "Picture in picture";}
-          {title = "Enhancer for YouTube™";}
+          {app-id = "^brave-.*-Default$";}
         ];
         open-floating = true;
         border.enable = false;

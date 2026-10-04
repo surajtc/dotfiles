@@ -38,6 +38,10 @@ in {
         name = "Noto Color Emoji";
       };
     };
+    targets.neovim.transparentBackground = {
+      main = true;
+      signColumn = true;
+    };
     targets.kde.enable = false;
     targets.niri.enable = true;
     targets.noctalia.enable = true;

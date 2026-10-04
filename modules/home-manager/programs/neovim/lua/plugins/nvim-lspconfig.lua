@@ -1,0 +1,108 @@
+vim.keymap.set("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
+vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
+vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
+
+vim.diagnostic.config({
+	float = { border = "rounded" },
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	desc = "LSP actions",
+	callback = function(event)
+		local opts = { buffer = event.buf }
+		vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+		vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+		vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
+		vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+		vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
+		vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+		vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+		vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+		vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
+		vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+	end,
+})
+
+local servers = {
+	lua_ls = {
+		settings = {
+			Lua = {
+				workspace = { checkThirdParty = false },
+				telemetry = { enable = false },
+			},
+		},
+	},
+	tailwindcss = {},
+	pyright = {},
+	astro = {},
+	biome = {},
+}
+
+for server_name, config in pairs(servers) do
+	vim.lsp.config(server_name, config)
+end
+
+vim.lsp.enable(vim.tbl_keys(servers))
+
+local blink_cmp = require("blink.cmp")
+
+blink_cmp.setup({
+	cmdline = { enabled = false },
+	sources = {
+		default = { "copilot", "lsp", "path", "snippets", "buffer" },
+		providers = {
+			copilot = {
+				name = "copilot",
+				module = "blink-copilot",
+				score_offset = 100,
+				async = true,
+			},
+		},
+	},
+	completion = {
+		ghost_text = { enabled = true },
+		menu = {
+			border = "rounded",
+			draw = {
+				columns = {
+					{ "kind_icon" },
+					{ "label", "label_description", gap = 2 },
+					{ "source_name" },
+				},
+				treesitter = { "lsp" },
+			},
+		},
+		documentation = {
+			window = { border = "rounded" },
+		},
+	},
+	keymap = { preset = "default" },
+	signature = {
+		enabled = true,
+		window = { border = "rounded" },
+	},
+})
+
+require("nvim-treesitter").setup({
+	highlight = {
+		enable = true,
+		additional_vim_regex_highlighting = false,
+	},
+})
+
+require("typescript-tools").setup({
+	on_attach = function(client)
+		client.server_capabilities.documentFormattingProvider = false
+		client.server_capabilities.documentRangeFormattingProvider = false
+	end,
+	settings = {
+		separate_diagnostic_server = true,
+		publish_diagnostic_on = "insert_leave",
+		expose_as_code_action = "all",
+		tsserver_plugins = {},
+		complete_function_calls = true,
+		include_completions_with_insert_text = true,
+	},
+})
+
+require("nvim-ts-autotag").setup()
