@@ -1,4 +1,10 @@
-{config, pkgs, inputs, userVars, ...}: {
+{
+  config,
+  pkgs,
+  inputs,
+  userVars,
+  ...
+}: {
   imports = [
     ../../modules/home-manager/common.nix
     ../../modules/home-manager/development.nix

@@ -1,4 +1,9 @@
-{config, pkgs, inputs, ...}: let
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}: let
   telaCircleIcons = pkgs.callPackage ../../../packages/tela-circle-icon-theme.nix {
     src = inputs.tela-circle-icons;
   };

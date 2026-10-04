@@ -1,4 +1,8 @@
-{inputs, pkgs, ...}: let
+{
+  inputs,
+  pkgs,
+  ...
+}: let
   agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
 in {
   home.packages = [

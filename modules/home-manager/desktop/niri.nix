@@ -1,4 +1,8 @@
-{config, pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   programs.niri.settings = {
     outputs = {
       "Dell Inc. AW2725DM BJGMJ74" = {
@@ -7,7 +11,10 @@
           height = 1440;
           refresh = 119.998;
         };
-        position = {x = 0; y = 0;};
+        position = {
+          x = 0;
+          y = 0;
+        };
         scale = 1;
       };
       "Sharp Corporation 0x1515 Unknown" = {
@@ -16,7 +23,10 @@
           height = 1200;
           refresh = 59.950;
         };
-        position = {x = 2560; y = 0;};
+        position = {
+          x = 2560;
+          y = 0;
+        };
         scale = 1;
       };
     };
@@ -210,5 +220,4 @@
       }
     ];
   };
-
 }

@@ -1,4 +1,8 @@
-{inputs, lib, pkgs, ...}: let
+{
+  inputs,
+  pkgs,
+  ...
+}: let
   pi = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.pi;
   packages = [
     {
@@ -27,17 +31,24 @@ in {
     };
   };
 
-  # Pi manages third-party packages in ~/.pi/agent/settings.json and its
-  # package cache. Keep pi-openai-toolkit on the latest npm release whenever
-  # a Home Manager generation is activated.
-  home.activation.piPackages = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    export PATH="${pkgs.nodejs}/bin:$PATH"
-    ${lib.concatMapStringsSep "\n" (package: ''
-      if ${pi}/bin/pi list 2>/dev/null | ${pkgs.gnugrep}/bin/grep -Fq "${package.name}"; then
-        ${pi}/bin/pi update "${package.source}" || echo "warning: could not update ${package.name}"
-      else
-        ${pi}/bin/pi install "${package.source}" || echo "warning: could not install ${package.name}"
-      fi
-    '') packages}
-  '';
+  # Pi owns ~/.pi/agent/settings.json and its package cache. Keep package
+  # installation and updates explicit so Home Manager activation stays fast
+  # and does not perform network work during boot or rebuilds.
+  home.packages = [
+    (pkgs.writeShellScriptBin "pi-sync" ''
+      set -euo pipefail
+      export PATH="${pkgs.nodejs}/bin:$PATH"
+
+      ${builtins.concatStringsSep "\n" (map (package: ''
+          if ${pi}/bin/pi list 2>/dev/null | ${pkgs.gnugrep}/bin/grep -Fq "${package.name}"; then
+            ${pi}/bin/pi update "${package.source}"
+          else
+            ${pi}/bin/pi install "${package.source}"
+          fi
+        '')
+        packages)}
+
+      echo "Pi extensions synchronized."
+    '')
+  ];
 }

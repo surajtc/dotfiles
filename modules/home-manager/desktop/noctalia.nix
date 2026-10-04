@@ -1,7 +1,5 @@
-{ inputs, ... }:
-{
-  xdg.dataFile."noctalia/plugins/niri-displays".source =
-    "${inputs.noctalia-community-plugins}/niri-displays";
+{inputs, ...}: {
+  xdg.dataFile."noctalia/plugins/niri-displays".source = "${inputs.noctalia-community-plugins}/niri-displays";
 
   programs.noctalia = {
     enable = true;

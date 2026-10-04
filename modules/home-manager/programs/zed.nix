@@ -1,4 +1,8 @@
-{lib, pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs; [
     pyright
     rust-analyzer
@@ -30,10 +34,23 @@
       base_keymap = "VSCode";
 
       buffer_font_family = "JetBrainsMono Nerd Font";
-      buffer_font_size = lib.mkForce 12.6;
+      buffer_font_size = lib.mkForce 13.0;
 
       ui_font_family = "SFProDisplay Nerd Font";
-      ui_font_size = 12.0;
+      ui_font_size = lib.mkForce 15.0;
+
+      # Let Niri/compositor handle window decorations instead of Zed's
+      # client-side title bar and rounded window frame.
+      window_decorations = "server";
+
+      project_panel.dock = "left";
+      collaboration_panel.button = false;
+      agent.dock = "right";
+      agent.sidebar_side = "right";
+      terminal.dock = "right";
+      git_panel.dock = "left";
+      debugger.dock = "right";
+      outline_panel.dock = "left";
 
       format_on_save = "off";
 
