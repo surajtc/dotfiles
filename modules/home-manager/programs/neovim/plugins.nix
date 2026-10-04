@@ -9,13 +9,6 @@
     snacks-nvim
 
     {
-      plugin = copilot-lua;
-      config = builtins.readFile ./lua/plugins/copilot.lua;
-      type = "lua";
-    }
-
-    copilot-lualine
-    {
       plugin = lualine-nvim;
       config = builtins.readFile ./lua/plugins/lualine.lua;
       type = "lua";
@@ -46,7 +39,6 @@
     blink-cmp
     typescript-tools-nvim
     nvim-ts-autotag
-    blink-copilot
     {
       plugin = nvim-lspconfig;
       config = builtins.readFile ./lua/plugins/nvim-lspconfig.lua;

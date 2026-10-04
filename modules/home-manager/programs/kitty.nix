@@ -6,6 +6,7 @@
       window_padding_width = 10;
       shell = "${pkgs.zsh}/bin/zsh";
       enable_audio_bell = false;
+      clipboard_control = "write-clipboard write-primary read-clipboard-ask read-primary-ask";
     };
   };
 }

@@ -49,15 +49,7 @@ local blink_cmp = require("blink.cmp")
 blink_cmp.setup({
 	cmdline = { enabled = false },
 	sources = {
-		default = { "copilot", "lsp", "path", "snippets", "buffer" },
-		providers = {
-			copilot = {
-				name = "copilot",
-				module = "blink-copilot",
-				score_offset = 100,
-				async = true,
-			},
-		},
+		default = { "lsp", "path", "snippets", "buffer" },
 	},
 	completion = {
 		ghost_text = { enabled = true },

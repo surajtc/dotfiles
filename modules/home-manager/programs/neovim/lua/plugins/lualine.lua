@@ -79,7 +79,6 @@ require("lualine").setup({
 				return name
 			end,
 		}},
-		lualine_x = { "copilot" },
 		lualine_y = { "diff", "diagnostics", "searchcount", "selectioncount" },
 		lualine_z = { "branch" },
 	},

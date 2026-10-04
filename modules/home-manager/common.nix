@@ -29,7 +29,6 @@
 
   home.packages = with pkgs; [
     brave
-    vscodium
     fastfetch
     btop
     ripgrep
@@ -42,6 +41,7 @@
     wdisplays
     pwvucontrol
     qpwgraph
+    wl-clipboard
   ];
 
   home.sessionVariables = {
