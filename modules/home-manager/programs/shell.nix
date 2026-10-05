@@ -10,6 +10,11 @@
     gp = "git push -u origin";
     gs = "git status";
 
+    # Worktrunk: create/switch, inspect, and remove linked worktrees.
+    wtn = "wt switch --create";
+    wtl = "wt list";
+    wtr = "wt remove";
+
     nix-edit = "cd /etc/dotfiles && nvim";
     nix-format = "nix fmt /etc/dotfiles";
     nix-rebuild = "sudo nixos-rebuild switch --show-trace --flake /etc/dotfiles#machine";
@@ -40,6 +45,12 @@
     defaultKeymap = "emacs";
     cdpath = ["$HOME/Documents" "$HOME/Documents/CodeBase"];
     initContent = "fastfetch";
+  };
+
+  programs.worktrunk = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
   };
 
   programs.starship.enable = true;

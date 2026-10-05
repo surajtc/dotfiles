@@ -50,6 +50,7 @@ in {
     targets.kde.enable = false;
     targets.niri.enable = true;
     targets.noctalia.enable = true;
+    targets.rofi.enable = false;
   };
 
   programs.niri.settings.layout.background-color =
