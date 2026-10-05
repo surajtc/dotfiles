@@ -42,6 +42,7 @@
     pwvucontrol
     qpwgraph
     wl-clipboard
+    ccusage
   ];
 
   home.sessionVariables = {

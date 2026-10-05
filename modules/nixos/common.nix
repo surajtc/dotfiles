@@ -23,7 +23,7 @@
   users.users.admin = {
     isNormalUser = true;
     description = "Admin";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "docker"];
     shell = pkgs.bashInteractive;
   };
 

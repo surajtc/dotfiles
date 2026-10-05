@@ -112,7 +112,7 @@
         icon_scale = 1.15;
         inactive_opacity = 0.7;
         minimal = true;
-        occupied_color = "tertiary";
+        occupied_color = "outline";
         show_active_indicator = false;
         workspace_group_capsule = false;
         workspace_label_placement = "inside";

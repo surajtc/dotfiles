@@ -58,6 +58,17 @@ nix flake update /etc/dotfiles
 
 Review the changes, format, check, and rebuild before keeping the update.
 
+## Local Git identity
+
+`modules/home-manager/programs/git.nix` contains a machine-local Git identity
+and is marked `assume-unchanged` in this repository's local Git index so it is
+not included in commits. This index flag is local to this checkout and is not
+shared with other clones. To resume tracking edits to the file, run:
+
+```bash
+git update-index --no-assume-unchanged modules/home-manager/programs/git.nix
+```
+
 ## Garbage collection
 
 Remove old Nix store generations:
