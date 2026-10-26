@@ -4,6 +4,15 @@
     package = pkgs.niri;
   };
 
+  # Removable storage support for Nautilus and udiskie. GVfs supplies the
+  # desktop volume integration; UDisks2 provides safe per-user mount handling.
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+
+  # Include NTFS support for removable media. UDisks prefers the in-kernel
+  # ntfs3 driver and falls back to ntfs-3g when needed.
+  boot.supportedFilesystems = ["ntfs"];
+
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [xdg-desktop-portal-gnome xdg-desktop-portal-gtk];

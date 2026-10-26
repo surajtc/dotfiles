@@ -32,6 +32,10 @@
           cargo
           rustfmt
           clippy
+          wasm-pack
+          wasm-bindgen-cli
+          lld
+          watchexec
         ];
       };
     });

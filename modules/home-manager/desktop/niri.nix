@@ -196,6 +196,8 @@
           {app-id = "org.gnome.Loupe$";}
           {app-id = "org.gnome.Nautilus$";}
           {app-id = "org.gnome.NautilusPreviewer$";}
+          {app-id = "mpv$";}
+          {app-id = "vlc$";}
         ];
         open-floating = true;
       }

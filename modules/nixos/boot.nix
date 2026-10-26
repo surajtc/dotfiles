@@ -2,7 +2,6 @@
   # Keep the early boot path quiet while retaining normal logs in journald.
   boot.plymouth.enable = true;
   boot.consoleLogLevel = 3;
-  boot.initrd.verbose = false;
   boot.kernelParams = [
     "quiet"
     "splash"

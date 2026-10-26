@@ -10,6 +10,8 @@
 in {
   stylix = {
     enable = true;
+    # Home Manager shares the system package set, so HM cannot add overlays.
+    overlays.enable = false;
     polarity = "dark";
     base16Scheme = "${pkgs.base16-schemes}/share/themes/classic-dark.yaml";
     icons = {

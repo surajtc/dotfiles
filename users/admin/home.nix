@@ -17,6 +17,7 @@
     ../../modules/home-manager/programs/fastfetch.nix
     ../../modules/home-manager/programs/git.nix
     ../../modules/home-manager/programs/agents.nix
+    ../../modules/home-manager/programs/storage.nix
     ../../modules/home-manager/programs/pi.nix
     ../../modules/home-manager/programs/kitty.nix
     ../../modules/home-manager/programs/neovim.nix
